@@ -2,6 +2,7 @@ import {sign} from "jsonwebtoken";
 import config from "../../config/config";
 import * as express from "express";
 import userModel from '../../models/user.model';
+import { loginErrors, registerErrors } from "../errors/auth.errors";
 import log from "../../log";
 
 /**
@@ -26,8 +27,8 @@ export const signup = async (req: express.Request, res: express.Response) => {
         log(`New user created : ${user._id}`, "info")
         return res.status(201).json({user:user._id});
     } catch (error:any) {
-        // const errors = registerErrors(error);
-        // res.status(200).send({errors});
+        const errors = registerErrors(error);
+        res.status(200).send({errors});
     };
 };
 
@@ -41,8 +42,8 @@ export const signin = async (req: express.Request, res: express.Response) => {
         res.cookie('auth', token, {httpOnly: true, maxAge});
         return res.status(200).json({user});
     } catch (error) {
-        // const errors = loginErrors(error);
-        // res.status(201).send({errors});
+        const errors = loginErrors(error);
+        res.status(201).send({errors});
     };
 };
 
