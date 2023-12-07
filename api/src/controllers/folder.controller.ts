@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import folderModel from "../../models/folder.model";
 import log from "../../log";
+import { isValidObjectId } from "mongoose";
 
 export const createFolder = (req: Request, res: Response) => {
     try {
@@ -19,5 +20,27 @@ export const createFolder = (req: Request, res: Response) => {
 
     } catch (error) {
         return error
+    }
+}
+
+export const getAllFolders = async (req:Request, res:Response) => {
+    try {
+        const folders = await folderModel.find();
+        return res.status(201).send(folders);
+    } catch (error) {
+        // TODO : 
+    }
+}
+
+export const getFolder = async (req:Request, res:Response) => {
+    try {
+        const folderId = req.params;
+        
+        if (!isValidObjectId(folderId)) log('error not valid propertie `id` at getFolder', 0)
+
+        const folders = await folderModel.findById(folderId);
+        return res.status(201).send(folders);
+    } catch (error) {
+        // TODO : 
     }
 }
