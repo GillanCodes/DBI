@@ -34,11 +34,11 @@ export const getAllFolders = async (req:Request, res:Response) => {
 
 export const getFolder = async (req:Request, res:Response) => {
     try {
-        const folderId = req.params;
+        const id = req.params;
         
-        if (!isValidObjectId(folderId)) log('error not valid propertie `id` at getFolder', 0)
+        if (!isValidObjectId(id)) log('error not valid propertie `id` at getFolder', 0)
 
-        const folders = await folderModel.findById(folderId);
+        const folders = await folderModel.findById(id);
         return res.status(201).send(folders);
     } catch (error) {
         // TODO : 
