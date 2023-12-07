@@ -46,9 +46,11 @@ app.get('/api/jwtid', requireAuth, (req:express.Request, res:express.Response) =
 
 //import routes
 import authRoutes from "./src/routes/auth.routes";
+import folderRoutes from "./src/routes/folder.routes";
 
 //Routes init
-app.use('/api/auth', authRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/folder", folderRoutes);
 
 //Set up server listen
 app.listen(config.PORT, () : void => {
