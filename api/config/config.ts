@@ -22,6 +22,7 @@ interface Config
     DB_CONNECT_STRING   : string;
     APP_NAME            : string;
     LOG_FOLDER          : string;
+    CDN_PATH            : string;
 };
 
 //We get env file and format it
