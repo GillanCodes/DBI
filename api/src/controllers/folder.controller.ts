@@ -44,3 +44,28 @@ export const getFolder = async (req:Request, res:Response) => {
         // TODO : 
     }
 }
+
+export const editFolder = (req:Request, res:Response) => {
+    try {
+
+        const id = req.params;
+        if (!isValidObjectId(id)) log('error: Not Valid property `ID` at editFolder', 0);
+
+        const {name, description, tags} = req.body;
+
+        folderModel.findByIdAndUpdate(id, {
+            $set: {
+                name,
+                description,
+                tags
+            }
+        }, {upsert: true, new: true}).then((data) => {
+            return res.status(201).send(data);
+        }).catch((err) => {
+            // TODO : 
+        })
+
+    } catch (error) {
+        // TODO : 
+    }
+}

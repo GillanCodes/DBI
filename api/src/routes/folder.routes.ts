@@ -8,5 +8,4 @@ router.post('/', createFolder);
 router.get('/', getAllFolders);
 router.get('/:id', getFolder);
 
-
 export default router;
