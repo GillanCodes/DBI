@@ -50,7 +50,7 @@ import folderRoutes from "./src/routes/folder.routes";
 
 //Routes init
 app.use("/api/auth", authRoutes);
-app.use("/api/folder", folderRoutes);
+app.use("/api/folder", requireAuth, folderRoutes);
 
 //Set up server listen
 app.listen(config.PORT, () : void => {
