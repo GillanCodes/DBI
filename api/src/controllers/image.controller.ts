@@ -3,11 +3,9 @@ import { Document, Types, isValidObjectId } from "mongoose";
 import * as fs from "fs";
 import config from "../../config/config";
 import imageModel, { IImage } from "../../models/image.model";
-
-function genUId()
-{
-    return Date.now().toString(36) + Math.random().toString(36).substring(2);
-}
+import log from "../../log";
+import genUId from "../utils/genUID";
+import isEmpty from "../utils/isEmpty";
 
 export const createImages = async (req: any, res: Response) => {
     const files = req.files;
@@ -42,5 +40,20 @@ export const createImages = async (req: any, res: Response) => {
         
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const getImage = async (req:Request, res:Response) => {
+
+    try {
+        const { id } = req.params;
+        if (!isValidObjectId(id)) log('Error getImage : Invalid `id`', 0);
+        
+        const image = await imageModel.findById(id);
+        if (!isEmpty(image)) return res.status(201).send(image);
+        else return res.status(201).send('Image not found')
+
+    } catch (error) {
+        
     }
 }
