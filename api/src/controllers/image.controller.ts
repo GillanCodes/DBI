@@ -54,6 +54,6 @@ export const getImage = async (req:Request, res:Response) => {
         else return res.status(201).send('Image not found')
 
     } catch (error) {
-        
+        // TODO :        
     }
 }
