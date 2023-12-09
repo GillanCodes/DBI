@@ -90,7 +90,11 @@ export const deleteImage = async (req:Request, res:Response) => {
         const { id } = req.params;
         if(!isValidObjectId) log("Error: deleteImage : Invalid `id`", 0);
 
-        const image = await imageModel.findByIdAndDelete(id);
+        const image:any = await imageModel.findByIdAndDelete(id);
+
+        fs.unlink(`${config.CDN_PATH}/${image.filePath}`, (err) => {
+            if (err) console.log(err);
+        });
 
         return res.status(201).send(image);
 
