@@ -83,3 +83,19 @@ export const updateImage = (req:Request, res:Response) => {
     }
 
 }
+
+export const deleteImage = async (req:Request, res:Response) => {
+
+    try {
+        const { id } = req.params;
+        if(!isValidObjectId) log("Error: deleteImage : Invalid `id`", 0);
+
+        const image = await imageModel.findByIdAndDelete(id);
+
+        return res.status(201).send(image);
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
