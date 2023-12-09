@@ -57,3 +57,29 @@ export const getImage = async (req:Request, res:Response) => {
         // TODO :        
     }
 }
+
+export const updateImage = (req:Request, res:Response) => {
+
+    try {
+        const { id } = req.params;
+        if(!isValidObjectId) log("Error: updateImage : Invalid `id`", 0);
+
+        const {tags, category} = req.body;
+        const tagsArr = tags?.toLocaleString().split(',');
+
+        imageModel.findByIdAndUpdate(id,  {
+            $set: {
+                tags: tagsArr,
+                category
+            }
+        }, {upsert: true, new: true}).then((data) => {
+            return res.status(201).send(data);
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
