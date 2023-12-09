@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import imageModel from "../../models/image.model";
+import log from "../../log";
+import isEmpty from "../utils/isEmpty";
 
 export const getRandomImage = async (req:Request, res:Response) => {
     try {
@@ -10,5 +12,26 @@ export const getRandomImage = async (req:Request, res:Response) => {
 
     } catch (error) {
         console.log(error, 0);
+    }
+}
+
+export const getRandomWithParams = async (req:Request, res:Response) => {
+    try {
+        const { category, tags } = req.query;
+        const tagsArr = tags?.toLocaleString().split(',');
+        var query:any = {}
+
+        if (!isEmpty(category)) query.category = category;
+        if (!isEmpty(tagsArr)) query.tags = {
+            "$all" : tagsArr
+        }
+        
+        const image = await imageModel.find(query);
+        var rdm = Math.floor(Math.random() * image.length);
+
+        return res.status(201).send(image[rdm]);
+
+    } catch (error) {
+        // TODO :
     }
 }
