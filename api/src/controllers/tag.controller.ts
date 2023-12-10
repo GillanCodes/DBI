@@ -35,3 +35,12 @@ export const getTag = async (req:Request, res:Response) => {
     }
 }
 
+export const getTags = async (req:Request, res:Response) => {
+    try {
+        const tags = await tagModel.find();
+        return res.status(201).send(tags);
+    } catch (error) {
+        console.log(error);
+        // TODO : 
+    }
+}
