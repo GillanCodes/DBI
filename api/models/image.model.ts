@@ -6,17 +6,22 @@ export interface IProperty
     value: string
 }
 
+export interface IView {
+    date: string | Date,
+    viewer: string | ObjectId
+}
+
 export interface IImage extends Document
 {
-    _id: ObjectId,
+    _id: string | ObjectId,
     folderId: string,
     filePath:string,
     tags:[string],
     category:string,
     properties: [IProperty],
     views: [string],
-    createdAt: Date,
-    updatedAt: Date,
+    createdAt: Date | string,
+    updatedAt: Date | string,
 }
 
 const imageSchema = new Schema<IImage>({
@@ -27,6 +32,10 @@ const imageSchema = new Schema<IImage>({
     properties: {type: [{
         type: String,
         value: String
+    }]},
+    views:      {type: [{
+        date:   {type: String, required:true},
+        viewer: {type: String, required:true}
     }]}
 }, {timestamps: true});
 
