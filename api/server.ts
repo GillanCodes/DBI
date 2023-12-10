@@ -49,12 +49,15 @@ import authRoutes from "./src/routes/auth.routes";
 import folderRoutes from "./src/routes/folder.routes";
 import imageRoutes from "./src/routes/image.routes";
 import randomRoutes from "./src/routes/random.routes";
+import tagRoutes from "./src/routes/tag.routes";
 
 //Routes init
 app.use("/api/auth", authRoutes);
 app.use("/api/folder", requireAuth, folderRoutes);
 app.use("/api/image", requireAuth, imageRoutes);
 app.use("/api/random", requireAuth, randomRoutes);
+
+app.use("/api/tag", requireAuth, tagRoutes);
 
 //Set up server listen
 app.listen(config.PORT, () : void => {
