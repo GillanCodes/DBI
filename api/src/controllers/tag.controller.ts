@@ -44,3 +44,25 @@ export const getTags = async (req:Request, res:Response) => {
         // TODO : 
     }
 }
+
+export const updateTag = (req:Request, res:Response) => {
+    try {
+        const { id } = req.params;
+        const { name } = req.body;
+        if (!isValidObjectId(id)) log("Error updateTags : Invalid field `id`", 0);
+        if (isEmpty(name)) log('Error updateTag : Invalid or empty field `name`', 0);
+
+        tagModel.findByIdAndUpdate(id, {
+            $set: {
+                name
+            }
+        }, {upsert: true, new:true}).then((data) => {
+            return res.status(201).send(data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    } catch (error) {
+        console.log(error);
+        // TODO : 
+    }
+}
