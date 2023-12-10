@@ -1,8 +1,10 @@
-import { ObjectId, Schema, model } from "mongoose";
+import { Date, ObjectId, Schema, model } from "mongoose";
 
 export interface ITag extends Document{
-    _id:    ObjectId,
-    name:   string,
+    _id:        ObjectId,
+    name:       string,
+    createdAt:  Date,
+    updatedAt:  Date
 }
 
 const tagSchema = new Schema<ITag>({

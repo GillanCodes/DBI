@@ -1,10 +1,13 @@
-import { Schema, model } from "mongoose"
+import { Date, ObjectId, Schema, model } from "mongoose"
 
 export interface IFolder extends Document
 {
+    _id:            ObjectId,
     name:           string,
     description:    string,
-    icon:           string
+    icon:           string,
+    createdAt:      Date,
+    updatedAt:      Date,
 }
 
 const folderSchema = new Schema<IFolder>({
