@@ -85,7 +85,6 @@ export const updateImage = (req:Request, res:Response) => {
 }
 
 export const deleteImage = async (req:Request, res:Response) => {
-
     try {
         const { id } = req.params;
         if(!isValidObjectId) log("Error: deleteImage : Invalid `id`", 0);
@@ -101,5 +100,4 @@ export const deleteImage = async (req:Request, res:Response) => {
     } catch (error) {
         console.log(error)
     }
-
 }
