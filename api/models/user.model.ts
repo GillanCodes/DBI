@@ -5,12 +5,12 @@ import isEmail from "validator/lib/isEmail";
 
 // User Interface init
 export interface IUser extends Document {
-    _id:        ObjectId
+    _id:        ObjectId | string,
     username:   string,
     password:   string,
     email:      string,
-    createdAt:  Date,
-    updatedAt:  Date
+    createdAt:  Date | string,
+    updatedAt:  Date | string
 }
 
 // User Model interface init

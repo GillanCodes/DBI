@@ -2,12 +2,12 @@ import { Date, ObjectId, Schema, model } from "mongoose"
 
 export interface IFolder extends Document
 {
-    _id:            ObjectId,
+    _id:            ObjectId | string,
     name:           string,
     description:    string,
     icon:           string,
-    createdAt:      Date,
-    updatedAt:      Date,
+    createdAt:      Date | string,
+    updatedAt:      Date | string
 }
 
 const folderSchema = new Schema<IFolder>({

@@ -1,10 +1,10 @@
 import { Date, ObjectId, Schema, model } from "mongoose";
 
 export interface ITag extends Document{
-    _id:        ObjectId,
+    _id:        ObjectId | string,
     name:       string,
-    createdAt:  Date,
-    updatedAt:  Date
+    createdAt:  Date | string,
+    updatedAt:  Date | string
 }
 
 const tagSchema = new Schema<ITag>({
