@@ -24,7 +24,7 @@ const imageSchema = new Schema<IImage>({
         type: String,
         value: String
     }]}
-});
+}, {timestamps: true});
 
 const imageModel = model<IImage>('image', imageSchema);
 export default imageModel;

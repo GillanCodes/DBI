@@ -7,7 +7,7 @@ export interface ITag extends Document{
 
 const tagSchema = new Schema<ITag>({
     name: {type:String, required:true},
-});
+}, {timestamps: true});
 
 const tagModel = model<ITag>('tag', tagSchema);
 export default tagModel;
