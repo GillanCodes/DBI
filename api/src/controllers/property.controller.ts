@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import propertyModel from "../../models/property.model";
 import isEmpty from "../utils/isEmpty";
-import imageModel from "../../models/image.model";
+import imageModel, { IImage } from "../../models/image.model";
+import { isValidObjectId } from "mongoose";
 
 export const addProperty = (req: Request, res: Response) => {
 
@@ -51,3 +52,37 @@ export const addProperty = (req: Request, res: Response) => {
     }
 }
 
+export const deleteProperty = async (req: Request, res: Response) => {
+
+    var results:IImage[] = [];
+
+    try {
+        const { id } = req.params;
+        if (!isValidObjectId(id)) throw Error("invalid ID"); // TODO :
+
+        const prop = await propertyModel.findByIdAndDelete(id);
+
+        const images = await imageModel.find();
+        for (let i = 0; i < images.length; i++) {
+            await imageModel.findByIdAndUpdate(images[i]._id, {
+                $pull: {
+                    properties: {
+                        _id: id
+                    }
+                }
+            }, {upsert: true, new:true}).then((data) => {
+                results.push(data)
+            }).catch((err) => {
+                console.log(err);
+                // TODO :
+            })
+        }
+
+        return res.status(201).send(results);
+
+    } catch (error) {
+        console.log(error);
+        // TODO :
+    }
+
+}
