@@ -86,3 +86,29 @@ export const deleteProperty = async (req: Request, res: Response) => {
     }
 
 }
+
+export const updateValue = async (req: Request, res: Response) => {
+    try {
+        
+        const {pid, iid} = req.params;
+        const { value } = req.body;
+        if (!isValidObjectId(pid)) throw Error('Invalid ID `pid`')
+        if (!isValidObjectId(iid)) throw Error('Invalid ID `iid`')
+
+        imageModel.updateOne({_id: iid, "properties._id": pid}, {
+            $set: {
+                "properties.$.value": value
+            }
+        }, {upsert: true, new:true}).then((data) => {
+            return res.status(201).send(data);
+        }).catch((err) => {
+            console.log(err);
+            // TODO :
+        })
+
+
+    } catch (error) {
+        console.log(error)
+        // TODO :
+    }
+}
