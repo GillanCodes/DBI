@@ -32,14 +32,15 @@ export interface IProperty
     updatedAt: Date | string,
 }
 
-export interface ITag extends Document{
+export interface ITag
+{
     _id:        string,
     name:       string,
     createdAt:  Date | string,
     updatedAt:  Date | string
 }
 
-export interface IImage extends Document
+export interface IImage
 {
     _id: string,
     folderId: string,
@@ -50,4 +51,9 @@ export interface IImage extends Document
     views: [string],
     createdAt: Date | string,
     updatedAt: Date | string,
+}
+
+export interface IState
+{
+    userReducer: IUser
 }
