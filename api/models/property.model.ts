@@ -13,7 +13,7 @@ export interface IProperty extends Document
 export const propertySchema = new Schema<IProperty>({
     name: {type:String, required:true},
     type: {type:String, required:true, default:"string"},
-    value: {type: String, default: "default value", required: true}
+    value: {type: String, default: "default value"}
 }, {timestamps: true});
 
 const propertyModel = model<IProperty>("properties", propertySchema);
