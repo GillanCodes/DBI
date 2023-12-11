@@ -43,6 +43,16 @@ export const createImages = async (req: any, res: Response) => {
     }
 }
 
+export const getImages = async (req: Request, res:Response) => {
+    try {
+        const images = await imageModel.find();
+        return res.status(200).send(images);
+    } catch (error) {
+        console.log(error)
+        // TODO :
+    }
+}
+
 export const getImage = async (req:Request, res:Response) => {
 
     try {
