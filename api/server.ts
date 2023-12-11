@@ -46,6 +46,7 @@ app.get('/api/jwtid', requireAuth, (req:express.Request, res:express.Response) =
 
 //import routes
 import authRoutes from "./src/routes/auth.routes";
+import userRoutes from "./src/routes/user.router";
 import folderRoutes from "./src/routes/folder.routes";
 import imageRoutes from "./src/routes/image.routes";
 import randomRoutes from "./src/routes/random.routes";
@@ -55,6 +56,7 @@ import propertyRoutes from "./src/routes/property.routes";
 
 //Routes init
 app.use("/api/auth", authRoutes);
+app.use("/api/user", requireAuth, userRoutes);
 app.use("/api/folder", requireAuth, folderRoutes);
 app.use("/api/image", requireAuth, imageRoutes);
 app.use("/api/random", requireAuth, randomRoutes);
