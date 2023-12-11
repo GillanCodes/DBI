@@ -1,10 +1,5 @@
 import { Date, ObjectId, Schema, model } from "mongoose";
-
-export interface IProperty
-{
-    type: string,
-    value: string
-}
+import { IProperty, propertySchema } from "./property.model";
 
 export interface IView {
     date: string | Date,
@@ -29,10 +24,7 @@ const imageSchema = new Schema<IImage>({
     filePath:   {type:String, required:true},
     tags:       {type:[String]},
     category:   {type:String},
-    properties: {type: [{
-        type: String,
-        value: String
-    }]},
+    properties: {type: [propertySchema]},
     views:      {type: [{
         date:   {type: String, required:true},
         viewer: {type: String, required:true}
