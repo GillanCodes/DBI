@@ -1,0 +1,58 @@
+.auth-box-container
+{
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $text;
+
+    .app-container {
+        background-color: $background;
+        border-radius: 10px;
+        height: 250px;
+        width: 500px;
+    }
+
+    .tabs {
+        width: calc(100% - (16px * 2));
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+
+        margin: 1em;
+
+        .tab
+        {
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tab.active
+        {
+            text-decoration: underline;
+        }
+    }
+
+    .auth-container
+    {
+        height: calc(100% - (22px + (16px * 2)));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .content form
+        {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
