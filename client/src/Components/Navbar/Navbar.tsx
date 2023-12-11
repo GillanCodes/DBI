@@ -1,39 +1,55 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { IState } from '../../types'
+import { isEmpty } from '../../Utils';
 
 export default function Navbar() {
-  return (
-    <nav className='main-nav'>
-        <div className="nav-buttons">
 
-            <NavLink className={"nav-button"} to={"/"}>
-                <i>Icon</i>
-                <p>Home</p>
-            </NavLink> 
+    const [loaded, setLoaded] = useState(false);
+    const user = useSelector((state:IState) => state.userReducer);
 
-            <NavLink className={"nav-button"} to={"/"}>
-                <i>Icon</i>
-                <p>Research</p>
-            </NavLink> 
+    useEffect(() => {
+        if(!isEmpty(user)) setLoaded(true);
+    }, [user]);
 
-            <NavLink className={"nav-button"} to={"/"}>
-                <i>Icon</i>
-                <p>Discorver</p>
-            </NavLink> 
+    return (
+        <nav className='main-nav'>
+            <div className="nav-buttons">
 
-            <NavLink className={"nav-button"} to={"/"}>
-                <i>Icon</i>
-                <p>Random</p>
-            </NavLink> 
+                <NavLink className={"nav-button"} to={"/"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Home</p>
+                </NavLink> 
 
-            <NavLink className={"nav-button"} to={"/"}>
-                <i>Icon</i>
-                <p>Add</p>
-            </NavLink> 
+                <NavLink className={"nav-button"} to={"/explore"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Research</p>
+                </NavLink> 
 
+                <NavLink className={"nav-button"} to={"/discorver"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Discorver</p>
+                </NavLink> 
 
+                <NavLink className={"nav-button"} to={"/random"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Random</p>
+                </NavLink> 
 
-        </div>
-    </nav>
-  )
+                <NavLink className={"nav-button"} to={"/create"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Add</p>
+                </NavLink> 
+
+                {loaded && (
+                    <NavLink className={"nav-button"} to={"/profile"}>
+                        <i className='nav-icon'>Icon</i>
+                        <p className='nav-text'>{user.username}</p>
+                    </NavLink>
+                )}
+
+            </div>
+        </nav>
+    )
 }

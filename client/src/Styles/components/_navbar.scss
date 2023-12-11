@@ -1,6 +1,56 @@
 .main-nav
 {
-    width: 250px;
+    width: $nav-width;
+    height: 100%;
 
     background-color: $background;
+    border-right: 1px $secondary solid;
+
+    .nav-buttons
+    {
+
+        padding: $default-space;
+
+        display: flex;
+        flex-direction: column;
+
+
+        .nav-button
+        {
+
+            font-size: 20px;
+            padding: 0.5em 0;
+            margin: 0.5em 0;
+
+            border-radius: 5px;
+
+            &:hover
+            {
+                background-color: $accent;
+            }
+
+            &.active
+            {
+                background-color: $secondary;
+            }
+
+            .nav-icon
+            {
+                margin: 0 1em;
+            }
+
+            .nav-icon, .nav-text
+            {
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+            }
+
+            display: flex;
+            
+            width: 100%;
+
+        }
+    }
+
 }
