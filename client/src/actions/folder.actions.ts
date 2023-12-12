@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_FOLDERS = "GET_FOLDERS";
+export const UPDATE_FOLDER = "UPDATE_FOLDER";
 
 export const getFolders = () => {
     return (dispatch:any) => {
@@ -15,3 +16,21 @@ export const getFolders = () => {
         });
     };
 };
+
+export const updateFolder = (id:string, name:string, description:string) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"patch",
+            url:`${process.env.REACT_APP_API_URL}/folder/${id}`,
+            withCredentials:true,
+            data: {
+                name,
+                description
+            }
+        }).then((res) => {
+            dispatch({type: UPDATE_FOLDER, payload: res.data});
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}
