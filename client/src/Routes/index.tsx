@@ -3,6 +3,7 @@ import Home from "../Components/Home";
 import Auth from "../Components/Auth/Auth";
 import ProtectedRoute from "./ProtectedRoute";
 import Navbar from "../Components/Navbar/Navbar";
+import Add from "../Components/Add/Add";
 
 export default function index()
 {
@@ -16,6 +17,11 @@ export default function index()
                         <Home />
                     </ProtectedRoute>
                 }/>
+                <Route path="/create" element={
+                    <ProtectedRoute>
+                        <Add />
+                    </ProtectedRoute>
+                } />
             </Routes>
         </BrowserRouter>
     ) 
