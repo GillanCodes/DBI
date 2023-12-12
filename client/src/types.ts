@@ -56,4 +56,5 @@ export interface IImage
 export interface IState
 {
     userReducer: IUser
+    imagesReducer: IImage[]
 }

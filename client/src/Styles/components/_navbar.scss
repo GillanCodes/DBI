@@ -1,7 +1,9 @@
 .main-nav
 {
+    position: fixed;
     width: $nav-width;
-    height: 100%;
+    height: 100dvh;
+
 
     background-color: $background;
     border-right: 1px $secondary solid;

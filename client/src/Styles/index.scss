@@ -13,13 +13,13 @@
 .App
 {
     background-color: $background;
-    height: 100dvh;
+    min-height: 100dvh;
     width: 100dvw;
-    overflow: hidden;
     display: flex;
 }
 
 .container
 {
     width: calc(100dvw - $nav-width);
+    margin-left: $nav-width;
 }

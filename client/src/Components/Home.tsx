@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { isEmpty } from '../Utils';
 import Auth from './Auth/Auth';
+import Feed from './Feed/Feed';
 
 
 export default function Home() {
@@ -10,7 +11,9 @@ export default function Home() {
   return (
     <>
       {!isEmpty(userData) ? (
-        <div>App</div>
+        <div className='container'>
+          <Feed />
+        </div>
       ) : (
         <Auth />
       )}
