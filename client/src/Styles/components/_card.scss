@@ -1,118 +1,56 @@
-.card:first-child {
-    margin-top: 0;
-}
+$card-height: 800px;
+$card-width: 500px;
 
-.card:last-child {
-    margin-bottom: 0;
-}
+$card-head: 50px;
+$card-footer: 50px;
 
 .card
 {
+    height: $card-height;
+    width: $card-width;
 
-    height: 80px;
-    background-color: $secondary;
+    overflow: hidden;
 
-    margin: 10px 5px;
-    border-radius: 10px;
-
-    display: flex;
+    margin: $default-space 0 ;
 
     .card-head
     {
+        height: $card-head;
+        background-color: $accent;
 
-        width: 200px;
-
-        padding: 5px 10px;
-
-        .card-title {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .card-description {
-            font-style: italic;
-            max-width: 190px;
-
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
+        border-radius: 10px 10px 0 0;
     }
 
     .card-body
     {
-        width: calc(100% - 200px);
+        height: calc(100% - $card-head - $card-footer);
+        width: auto;
 
         display: flex;
-        justify-content: space-between;
-
-        .buttons 
-        {
-            width: calc(100% - 100px);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
-
-            p {
-                width: 60px;
-                height: 30px;
-                border-radius: 10px;
-                background-color: $primary;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 20px;
-                margin: 5px 10px 5px 0px;
-                cursor: pointer;
-            }
-            
-            p:hover {
-                background-color: $accent;
-            }
-
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        
+        .card-image{
+            object-fit: cover;
         }
 
-        .counter
-        {
+        .card-image.full-height{
             height: 100%;
-            width: 100px;
+            width: 100%;
 
-            background-color: $primary;
-            border-radius: 10px;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            cursor: pointer;
-
-            p {
-                font-size: 40px;
-                font-weight: 600;
-            }
         }
 
-        .timer
-        {
-            height: 100%;
-            width: 200px;
-
-            background-color: $primary;
-            border-radius: 10px;
-
-            display: flex;
-
-            justify-content: center;
-            align-items: center;
-
-            .timer-text
-            {
-                font-size: 16px;
-                font-weight: 600;
-
-            }
+        .card-image.full-width{
+            height: auto;
+            width: 100%;
         }
+    }
+
+    .card-footer
+    {
+        height: $card-footer;
+        background-color: $accent;
+        border-radius: 0 0 10px 10px;
     }
 }
