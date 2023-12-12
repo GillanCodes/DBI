@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_FOLDERS = "GET_FOLDERS";
 export const UPDATE_FOLDER = "UPDATE_FOLDER";
+export const CREATE_FOLDER = "CREATE_FOLDER";
 
 export const getFolders = () => {
     return (dispatch:any) => {
@@ -29,6 +30,24 @@ export const updateFolder = (id:string, name:string, description:string) => {
             }
         }).then((res) => {
             dispatch({type: UPDATE_FOLDER, payload: res.data});
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}
+
+export const createFolder = (name:string, description:string) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"POST",
+            url:`${process.env.REACT_APP_API_URL}/folder/`,
+            withCredentials:true,
+            data: {
+                name,
+                description
+            }
+        }).then((res) => {
+            dispatch({type: CREATE_FOLDER, payload: res.data});
         }).catch((err) => {
             console.log(err);
         });

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IFolder, IState } from '../../types'
 import { isEmpty } from '../../Utils';
-import { updateFolder } from '../../actions/folder.actions';
+import { createFolder, updateFolder } from '../../actions/folder.actions';
 
 export default function Folders() {
 
@@ -25,12 +25,22 @@ export default function Folders() {
         }
     }
 
+    const createHandle = () => {
+        dispatch(createFolder(state.name, state.description));
+    }
+
     return (
         <div className='folders'>
 
             <div className="new-folder folder">
                 <div className="body">
-                    
+                    <div className="text">
+                        <input type="text" placeholder='Name' onChange={(e) => setState({...state, name:e.target.value})} />
+                        <input type="text" placeholder='Description' onChange={(e) => setState({...state, description:e.target.value})}/>
+                    </div>
+                </div>
+                <div className="buttons">
+                    <button className="button" onClick={createHandle}>Create</button>
                 </div>
             </div>
 
