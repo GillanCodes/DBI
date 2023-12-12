@@ -6,6 +6,7 @@ import axios from "axios";
 import { getUser } from "./actions/user.actions";
 import { UIdContext } from "./App.context";
 import { getImages } from "./actions/image.actions";
+import { getFolders } from "./actions/folder.actions";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
     if (UId)
     {
       dispatch(getUser(UId));
+      dispatch(getFolders());
     }
   }, [UId, dispatch]);
 
