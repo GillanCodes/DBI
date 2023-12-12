@@ -25,7 +25,7 @@ export const createFolder = (req: Request, res: Response) => {
 
 export const getAllFolders = async (req:Request, res:Response) => {
     try {
-        const folders = await folderModel.find();
+        const folders = await folderModel.find().sort({createdAt: -1});
         return res.status(201).send(folders);
     } catch (error) {
         // TODO : 
