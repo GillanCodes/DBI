@@ -33,11 +33,11 @@ export default function Feed() {
 
     return (
       <div className="feed">
-        <ul>
+        <div className="cards">
             {!isEmpty(images) && images.map((image:IImage) => {
                 return <Card image={image} key={image._id} />
             })}
-        </ul>
+        </div>
       </div>
     )
 }
