@@ -1,15 +1,25 @@
 import React, { useState } from 'react'
-import { IImage } from '../../types'
-import { convertDatetoTime, dateConverter } from '../../Utils';
+import { IImage, IState } from '../../types'
+import { convertDatetoTime, dateConverter, isEmpty } from '../../Utils';
+import { useSelector } from 'react-redux';
 
 export default function Card({image} : {image:IImage}) {
 
   const [clicked, setClicked] = useState(false);
+  const folders = useSelector((state:IState) => state.foldersReducer);
 
   return (
     <div className='card'>
         <div className="card-head">
-
+          {!isEmpty(folders) && folders.map((folder) => {
+              if (folder._id === image.folderId)
+                return (
+                  <>
+                    <img src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="icon" />
+                    <p>{folder.name}</p>
+                  </>
+                )
+          })}
         </div>
         <div className="card-body">
           <img 
