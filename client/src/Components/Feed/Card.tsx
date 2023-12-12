@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { IImage } from '../../types'
+import { convertDatetoTime, dateConverter } from '../../Utils';
 
 export default function Card({image} : {image:IImage}) {
 
@@ -19,7 +20,8 @@ export default function Card({image} : {image:IImage}) {
           />
         </div>
         <div className="card-footer">
-          
+          <p>{image.views.length}</p>
+          <p>{dateConverter(convertDatetoTime(image.createdAt))}</p>
         </div>
     </div>
   )

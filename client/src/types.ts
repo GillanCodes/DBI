@@ -49,8 +49,8 @@ export interface IImage
     category:string,
     properties: [IProperty],
     views: [string],
-    createdAt: Date | string,
-    updatedAt: Date | string,
+    createdAt: string,
+    updatedAt:  string,
 }
 
 export interface IState
