@@ -1,24 +1,44 @@
 $card-height: 800px;
 $card-width: 500px;
 
-$card-head: 50px;
+$card-head: 60px;
 $card-footer: 50px;
 
 .card
 {
-    height: $card-height;
+    height: calc( $card-height + 10px );
     width: $card-width;
 
     overflow: hidden;
 
-    margin: $default-space 0 ;
+    margin: $default-space 0;
+
+    border: 2px solid $accent;
+    border-radius: 10px;
 
     .card-head
     {
         height: $card-head;
-        background-color: $accent;
 
-        border-radius: 10px 10px 0 0;
+        display: flex;
+        align-items: center;
+
+        .icon
+        {
+            height: 48px;
+            width: 48px;
+            border-radius: 100%;
+
+            object-fit: cover;
+            margin: 0 .5em;
+        }
+
+        .folder_name
+        {
+            font-size: 20px;
+            font-weight: 600;
+            
+        }
     }
 
     .card-body
@@ -50,7 +70,5 @@ $card-footer: 50px;
     .card-footer
     {
         height: $card-footer;
-        background-color: $accent;
-        border-radius: 0 0 10px 10px;
     }
 }

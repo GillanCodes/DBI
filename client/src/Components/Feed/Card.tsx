@@ -15,8 +15,8 @@ export default function Card({image} : {image:IImage}) {
               if (folder._id === image.folderId)
                 return (
                   <>
-                    <img src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="icon" />
-                    <p>{folder.name}</p>
+                    <img className='icon' src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="icon" />
+                    <p className='folder_name'>{folder.name}</p>
                   </>
                 )
           })}
