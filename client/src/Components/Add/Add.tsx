@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Folders from './Folders'
 
 export default function Add() {
 
@@ -22,7 +23,17 @@ export default function Add() {
                     </div>
                 </div>
 
-            
+                <div className="content">
+                    {tab === 0 && (
+                        <p></p>
+                    )}
+
+                    {tab === 1 && (
+                        <Folders />
+                    )}
+                </div>
+
+               
 
 
             </div>
