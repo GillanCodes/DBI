@@ -68,6 +68,26 @@ export const getImage = async (req:Request, res:Response) => {
     }
 }
 
+export const getImagesWithParams = async (req:Request, res:Response) => {
+    try {
+        const { category, tags, folderId} = req.query;
+        const tagsArr = tags?.toLocaleString().split(',');
+        var query:any = {}
+
+        if (!isEmpty(folderId)) query.folderId = folderId;
+        if (!isEmpty(category)) query.category = category;
+        if (!isEmpty(tagsArr)) query.tags = {
+            "$all" : tagsArr
+        }
+        
+        const images = await imageModel.find(query);
+        return res.status(201).send(images);
+
+    } catch (error) {
+        // TODO :
+    }
+}
+
 export const updateImage = (req:Request, res:Response) => {
 
     try {
