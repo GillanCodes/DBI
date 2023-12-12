@@ -22,7 +22,7 @@ export const createImages = async (req: any, res: Response) => {
             if (file.size > 5000000) throw Error('user_patch_file_max_size');
 
             var filename = `${genUId()}.png`;
-            fs.writeFile(`${config.CDN_PATH}/${filename}`, file.buffer, (err:any) => {
+            fs.writeFile(`${config.CDN_PATH}/uploads/${filename}`, file.buffer, (err:any) => {
                 if (err) throw Error(err);
             });
 
