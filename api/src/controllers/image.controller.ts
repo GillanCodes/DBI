@@ -45,7 +45,7 @@ export const createImages = async (req: any, res: Response) => {
 
 export const getImages = async (req: Request, res:Response) => {
     try {
-        const images = await imageModel.find();
+        const images = await imageModel.find().sort({createdAt: -1});
         return res.status(200).send(images);
     } catch (error) {
         console.log(error)
@@ -80,7 +80,7 @@ export const getImagesWithParams = async (req:Request, res:Response) => {
             "$all" : tagsArr
         }
         
-        const images = await imageModel.find(query);
+        const images = await imageModel.find(query).sort({createdAt: -1});
         return res.status(201).send(images);
 
     } catch (error) {
