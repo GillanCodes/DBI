@@ -1,26 +1,52 @@
 @import './settings.scss';
-@import './components/components.scss';
-
-@import './pages/auth';
-@import "./pages/feed";
-@import "./pages/add";
 
 * {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: $text;
 }
 
 .App
 {
-    background-color: $background;
     min-height: 100dvh;
     width: 100dvw;
     display: flex;
+
+    .container
+    {
+        width: calc(100dvw - $nav-width);
+        margin-left: $nav-width;
+    }
+
+
 }
 
-.container
-{
-    width: calc(100dvw - $nav-width);
-    margin-left: $nav-width;
+.App {
+
+    @import "./colors/default.scss";
+
+    @import './components/components.scss';
+    @import './pages/page.scss';
+
+    color: $text;
+    background-color: $background;
+    
+    p{ color: $text; }
+
+    a{ color: $text; }
+    
+}
+
+.App.theme-pink {
+
+    @import "./colors/pink.scss";
+
+    @import './components/components.scss';
+    @import './pages/page.scss';
+
+    color: $text;
+    background-color: $background;
+
+    p{ color: $text; }
+
+    a{ color: $text; }   
 }

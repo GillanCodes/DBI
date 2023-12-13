@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import Routes from "./Routes";
 import './Styles/index.scss';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getUser } from "./actions/user.actions";
 import { UIdContext } from "./App.context";
-import { getImages } from "./actions/image.actions";
 import { getFolders } from "./actions/folder.actions";
 
 function App() {
