@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Folders from './Folders'
+import Images from './Images'
 
 export default function Add() {
 
@@ -25,7 +26,7 @@ export default function Add() {
 
                 <div className="content">
                     {tab === 0 && (
-                        <p></p>
+                       <Images /> 
                     )}
 
                     {tab === 1 && (

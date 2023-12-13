@@ -120,6 +120,53 @@
                 }
             }
         }
+
+        .images
+        {
+
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .head
+            {
+
+                .title
+                {
+                    text-align: center;
+                    margin: $default-space;
+                }
+                
+                .head-content
+                {
+                    display: flex;
+                    justify-content: center;
+                }
+                
+            }
+
+            .body
+            {
+
+                .images-display
+                {
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    justify-content: center;
+                                         
+                    overflow: hidden;
+
+                    .img-preview
+                    {
+                        height: 400px;
+                        width: 400px;
+                        object-fit: cover;
+                        margin: $default-space;
+                    }
+                }
+            }
+        }
     }
 
     
