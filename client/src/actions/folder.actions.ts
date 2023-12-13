@@ -53,3 +53,18 @@ export const createFolder = (name:string, description:string) => {
         });
     }
 }
+
+export const updateIconFolder = (id:string, data:any) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"patch",
+            url:`${process.env.REACT_APP_API_URL}/folder/icon/${id}`,
+            withCredentials:true,
+            data
+        }).then((res) => {
+            dispatch({type: UPDATE_FOLDER, payload: res.data});
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+}

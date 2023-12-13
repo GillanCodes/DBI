@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IFolder, IState } from '../../types'
 import { isEmpty } from '../../Utils';
-import { createFolder, updateFolder } from '../../actions/folder.actions';
+import { createFolder, updateFolder, updateIconFolder } from '../../actions/folder.actions';
 
 export default function Folders() {
 
@@ -29,6 +29,13 @@ export default function Folders() {
         dispatch(createFolder(state.name, state.description));
     }
 
+    const iconChangeHandle = (id:string, f:any) => {
+        var data = new FormData();
+        data.append('file', f);
+
+        dispatch(updateIconFolder(id, data));
+    }
+
     return (
         <div className='folders'>
 
@@ -48,7 +55,10 @@ export default function Folders() {
                 return (
                     <div className="folder" key={folder._id}>
                         <div className="body">
-                            <img className='icon' src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="" />
+                            <input type="file" name="img" id={folder._id} hidden onChange={(e) => iconChangeHandle(folder._id, e.target.files![0])} />
+                            <label htmlFor={folder._id}>
+                                <img className='icon' src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="" />
+                            </label>
                             <div className="text">
                                 {edit === folder._id ? <input type="text" value={state.name} onChange={(e) => setState({...state, name: e.target.value})} /> : <p>{folder.name}</p>}
                                 {edit === folder._id ? <input type="text" value={state.description} onChange={(e) => setState({...state, description: e.target.value})} /> : <p>{folder.description}</p>}
