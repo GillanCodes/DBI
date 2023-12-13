@@ -20,6 +20,7 @@ export default function Images() {
 
     useEffect(() => {
         if (!isEmpty(folders)) {
+            foldersItem = [];
             folders.map((folder:IFolder) => {
                 return foldersItem.push({name: folder.name, value:folder._id});
             });
