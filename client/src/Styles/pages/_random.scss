@@ -1,0 +1,47 @@
+$top-bar-height: 70px;
+
+.random
+{
+
+    overflow: hidden;
+    height: 100dvh;
+
+    .top-bar
+    {
+        height: $top-bar-height;
+        margin: 1em;
+
+        display: flex;
+
+        .button
+        {
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $secondary;
+
+            &:hover
+            {
+                background-color: $accent;
+            }
+        }
+        
+
+    }
+
+    .display
+    {
+        height: calc(100dvh - $top-bar-height);
+        overflow: hidden;
+
+        display: flex;
+        justify-content: center;
+        
+        img
+        {
+            height: 90%;
+            width: auto;
+        }
+    }
+}

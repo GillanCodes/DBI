@@ -4,6 +4,7 @@ import Auth from "../Components/Auth/Auth";
 import ProtectedRoute from "./ProtectedRoute";
 import Navbar from "../Components/Navbar/Navbar";
 import Add from "../Components/Add/Add";
+import Random from "../Components/Random/Random";
 
 export default function index()
 {
@@ -22,6 +23,13 @@ export default function index()
                         <Add />
                     </ProtectedRoute>
                 } />
+                <Route path="/random" element={
+                    <ProtectedRoute>
+                        <Random />
+                    </ProtectedRoute>
+                }>
+                    
+                </Route>
             </Routes>
         </BrowserRouter>
     ) 
