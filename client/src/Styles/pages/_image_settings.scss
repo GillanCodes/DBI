@@ -1,0 +1,84 @@
+.image-settings
+{
+
+    background-color: $background;
+    border-radius: 5px;
+    border: 2px solid $primary;
+
+    padding: $default-space;
+
+    height: 500px;
+    width: 1000px;
+
+    box-shadow: 0px 0px 50px 10px $accent;
+
+    .head
+    {
+        display: flex;
+        align-items: center;
+
+        padding-bottom: 1em;
+        border-bottom: 1px $primary solid;
+
+        .title
+        {
+            flex-grow: 10;
+        }
+
+        .close
+        {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover
+            {
+                text-decoration: underline;
+                color: $accent;
+            }
+        }
+    }
+
+    .body
+    {
+
+        .fields.inline
+        {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .fields
+        {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fields
+        {
+
+            border-bottom: dotted 1px $primary;
+
+            .field
+            {
+                display: flex;
+                flex-direction: column;
+                margin: $default-space;
+                span
+                {
+                    text-align: center;
+                }
+
+                input:disabled
+                {
+                    color: $text;
+                    background-color: $background;
+                    width: 250px;
+                }
+            }
+        }
+
+    }
+
+}
