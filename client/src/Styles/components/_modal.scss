@@ -1,0 +1,15 @@
+.modal
+{
+    position: fixed;
+    top: 0;
+    height: 100dvh;
+    width: calc(100dvw - $nav-width);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0000009a;
+
+    z-index: 10;
+}
