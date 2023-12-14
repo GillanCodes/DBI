@@ -5,7 +5,7 @@ import { isEmpty } from '../../Utils';
 import { useParams } from 'react-router-dom';
 import ImageSettings from './ImageSettings';
 import { useDispatch, useSelector } from 'react-redux';
-import { getImage } from '../../actions/image.actions';
+import { deleteImage, getImage } from '../../actions/image.actions';
 
 export default function Image() {
 
@@ -38,6 +38,11 @@ export default function Image() {
         }
     }, [imageReducer ,img])
 
+    const deleteHandle = () => {
+        dispatch(deleteImage(img!._id));
+        window.location.assign('/');
+    }
+
     return (
         <div className='container'>
             {load && (
@@ -45,6 +50,7 @@ export default function Image() {
                     <div className="image">
                         <div className="top-bar">
                             <p className='button' onClick={() => setModal(!modal)}>Settings</p>
+                            <p className='button' onClick={deleteHandle}>DELETE</p>
                         </div>
                         <div className="single-view">
                             <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img?.filePath}`} alt="img" />

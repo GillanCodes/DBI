@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const GET_IMAGES = "GET_IMAGES";
-export const GET_IMAGE = "GET_IMAGE";
 export const CREATE_IMAGES = "CREATE_IMAGES";
 export const UPDATE_IMAGE = "UPDATE_IMAGE";
+export const DELETE_IMAGE = "DELETE_IMAGE";
 
 export const getImages = (count:number) => {
     return (dispatch:any) => {
@@ -61,6 +61,20 @@ export const updateImage = (id:string, tags:string, category:string) => {
             }
         }).then((res) => {
             dispatch({type: UPDATE_IMAGE, payload: res.data});
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+}
+
+export const deleteImage = (id:string) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"DELETE",
+            url:`${process.env.REACT_APP_API_URL}/image/${id}`,
+            withCredentials:true,
+        }).then((res) => {
+            dispatch({type: DELETE_IMAGE, payload: res.data});
         }).catch((err) => {
             console.log(err);
         });

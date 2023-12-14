@@ -32,6 +32,7 @@ export default function Card({image} : {image:IImage}) {
         <div className="card-footer">
           <p>{image.views.length}</p>
           <p>{dateConverter(convertDatetoTime(image.createdAt))}</p>
+          <p className='button' onClick={() => window.location.assign(`/i/${image._id}`)}>View</p>
         </div>
     </div>
   )
