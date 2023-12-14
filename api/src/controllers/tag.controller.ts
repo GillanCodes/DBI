@@ -66,3 +66,19 @@ export const updateTag = (req:Request, res:Response) => {
         // TODO : 
     }
 }
+
+export const deleteTag = (req:Request, res:Response) => {
+    try {
+        const { id } = req.params;
+        if (!isValidObjectId(id)) log("Error updateTags : Invalid field `id`", 0);
+        
+        tagModel.findByIdAndDelete(id).then((data) => {
+            return res.status(201).send(data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    } catch (error) {
+        console.log(error);
+        // TODO : 
+    }
+}
