@@ -6,6 +6,7 @@ import axios from "axios";
 import { getUser } from "./actions/user.actions";
 import { UIdContext } from "./App.context";
 import { getFolders } from "./actions/folder.actions";
+import { getTags } from "./actions/tag.actions";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
     {
       dispatch(getUser(UId));
       dispatch(getFolders());
+      dispatch(getTags());
     }
   }, [UId, dispatch]);
 

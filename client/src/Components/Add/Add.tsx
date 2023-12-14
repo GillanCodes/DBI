@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Folders from './Folders'
 import Images from './Images'
+import Tag from './Tag'
 
 export default function Add() {
 
@@ -31,6 +32,10 @@ export default function Add() {
 
                     {tab === 1 && (
                         <Folders />
+                    )}
+
+                    {tab === 2 && (
+                        <Tag />
                     )}
                 </div>
 

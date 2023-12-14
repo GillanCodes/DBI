@@ -167,6 +167,88 @@
                 }
             }
         }
+
+        .tags
+        {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            width: 80%;
+
+            .head
+            {
+
+                .title
+                {
+                    text-align: center;
+                    margin: $default-space;
+                }
+                
+                .head-content
+                {
+                    display: flex;
+                    justify-content: center;
+                }
+                
+            }
+
+            .body
+            {
+
+                border-top: solid 1px $primary;
+                margin: $default-space 0;
+                padding: $default-space 0;
+
+                .tags {
+
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: row;
+
+                    width: 100%;
+
+                    .tag
+                    {
+                        height: 70px;
+                        width: 250px;
+                        border: 2px solid $accent;
+                        border-radius: 5px;
+                        margin: .5em;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        p
+                        {
+                            flex-grow: 6;
+                            text-align: center;
+                        }
+
+                        .buttons
+                        {
+                            flex-grow: 2;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            flex-direction: column;
+
+                            .button
+                            {
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                            }
+                        }
+
+                    }
+                }
+                
+            }
+        }
+
     }
 
     

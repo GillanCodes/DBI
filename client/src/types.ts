@@ -58,4 +58,5 @@ export interface IState
     userReducer: IUser
     imagesReducer: IImage[]
     foldersReducer: IFolder[]
+    tagsReducer: ITag[]
 }
