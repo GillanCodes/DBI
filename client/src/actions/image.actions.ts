@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_IMAGES = "GET_IMAGES";
+export const GET_IMAGE = "GET_IMAGE";
 export const CREATE_IMAGES = "CREATE_IMAGES";
 export const UPDATE_IMAGE = "UPDATE_IMAGE";
 
@@ -13,6 +14,20 @@ export const getImages = (count:number) => {
         }).then((res) => {
             const array = res.data.slice(0, count)
             dispatch({type: GET_IMAGES, payload: array});
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+};
+
+export const getImage = (id:string) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"get",
+            url:`${process.env.REACT_APP_API_URL}/image/${id}`,
+            withCredentials:true
+        }).then((res) => {
+            dispatch({type: GET_IMAGES, payload: [res.data]});
         }).catch((err) => {
             console.log(err);
         });

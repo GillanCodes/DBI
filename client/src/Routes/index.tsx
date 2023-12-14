@@ -5,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Navbar from "../Components/Navbar/Navbar";
 import Add from "../Components/Add/Add";
 import Random from "../Components/Random/Random";
+import Image from "../Components/Image/Image";
 
 export default function index()
 {
@@ -27,9 +28,13 @@ export default function index()
                     <ProtectedRoute>
                         <Random />
                     </ProtectedRoute>
-                }>
+                } />
+                <Route path="/i/:id" element={
+                    <ProtectedRoute>
+                        <Image />
+                    </ProtectedRoute>
+                } />
                     
-                </Route>
             </Routes>
         </BrowserRouter>
     ) 
