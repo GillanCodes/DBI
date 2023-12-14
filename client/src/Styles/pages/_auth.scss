@@ -7,10 +7,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $text;
+    background-color: $background;
 
     .app-container {
         background-color: $background;
+        border: 2px solid $primary;
         border-radius: 10px;
         height: 250px;
         width: 500px;
