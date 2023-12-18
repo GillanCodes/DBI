@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../../Utils";
-import { IFolder, IImage, IState } from "../../types";
+import { IFolder, IImage, IState, ITag } from "../../types";
 import { useEffect, useState } from "react";
 import { updateImage } from "../../actions/image.actions";
 
@@ -9,6 +9,7 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
     const dispatch:any = useDispatch();
 
     const folders = useSelector((state:IState) => state.foldersReducer);
+    const tags = useSelector((state:IState) => state.tagsReducer);
 
     const [load, setLoad] = useState(false);
 
@@ -19,9 +20,27 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
         if (!isEmpty(folders) && !isEmpty(image)) setLoad(true);
     }, [folders])
 
-    const saveHandle = () => {
-        dispatch(updateImage(image!._id, "", imgState.category));
+    const tagHandle = (tag:ITag) => {
+        if (!isEmpty(imgState) && !isEmpty(imgState.tags)) {
+            const index = imgState.tags.findIndex((e:string) => e === tag._id)
+            if (index >= 0)
+            {
+                const tArray:string[] = imgState.tags.filter((t:string) => {
+                    return t !== tag._id
+                });
+                setImgState({...imgState, tags:tArray});
+            } else {
+                const tArray:string[] = imgState.tags
+                tArray.push(tag._id);
+                setImgState({...imgState, tags: tArray});
+            }
+        }
+        return
     }
+
+    const saveHandle = () => {
+        dispatch(updateImage(image!._id, imgState.tags.toLocaleString(), imgState.category));
+    }    
 
     return (
         <div className="image-settings">
@@ -55,7 +74,17 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
                         </div>
 
                         <div className="fields">
-
+                            <div className="field tags">
+                                <span>Tags</span>
+                                {tags.map((tag:ITag) => {
+                                    return (
+                                        <div className="tag" onClick={() => tagHandle(tag)}>
+                                            <input type="checkbox" checked={imgState.tags.includes(tag._id) ? true : false} />
+                                            <p>{tag.name}</p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
 
                     </div>
