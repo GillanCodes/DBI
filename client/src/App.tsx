@@ -7,6 +7,7 @@ import { getUser } from "./actions/user.actions";
 import { UIdContext } from "./App.context";
 import { getFolders } from "./actions/folder.actions";
 import { getTags } from "./actions/tag.actions";
+import { getProperties } from "./actions/property.actions";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       dispatch(getUser(UId));
       dispatch(getFolders());
       dispatch(getTags());
+      dispatch(getProperties());
     }
   }, [UId, dispatch]);
 

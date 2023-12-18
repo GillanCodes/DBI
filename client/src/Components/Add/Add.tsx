@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Folders from './Folders'
 import Images from './Images'
 import Tag from './Tag'
+import Properties from './Properties'
 
 export default function Add() {
 
@@ -22,6 +23,9 @@ export default function Add() {
                         <div className={tab === 2 ? "tab active" : "tab"} onClick={() => setTab(2)}>
                             <p>Tags</p>
                         </div>
+                        <div className={tab === 3 ? "tab active" : "tab"} onClick={() => setTab(3)}>
+                            <p>Properties</p>
+                        </div>
                     </div>
                 </div>
 
@@ -36,6 +40,10 @@ export default function Add() {
 
                     {tab === 2 && (
                         <Tag />
+                    )}
+                    
+                    {tab === 3 && (
+                        <Properties />
                     )}
                 </div>
 
