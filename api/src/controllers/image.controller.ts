@@ -75,7 +75,7 @@ export const getImagesWithParams = async (req:Request, res:Response) => {
         var query:any = {}
 
         if (!isEmpty(folderId)) query.folderId = folderId;
-        if (!isEmpty(category)) query.category = category;
+        if (!isEmpty(category)) query.category = category?.toLocaleString().toLocaleLowerCase();
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
         }
@@ -100,7 +100,7 @@ export const updateImage = (req:Request, res:Response) => {
         imageModel.findByIdAndUpdate(id,  {
             $set: {
                 tags: tagsArr,
-                category
+                category: category.toLocaleString().toLocaleLowerCase()
             }
         }, {upsert: true, new: true}).then((data) => {
             return res.status(201).send(data);

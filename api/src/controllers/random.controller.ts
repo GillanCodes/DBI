@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import imageModel from "../../models/image.model";
-import log from "../../log";
 import isEmpty from "../utils/isEmpty";
 
 export const getRandomImage = async (req:Request, res:Response) => {
@@ -21,7 +20,7 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         const tagsArr = tags?.toLocaleString().split(',');
         var query:any = {}
 
-        if (!isEmpty(category)) query.category = category;
+        if (!isEmpty(category)) query.category = category!.toLocaleString().toLowerCase();
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
         }
