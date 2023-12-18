@@ -14,6 +14,7 @@ export default function Tag() {
 
     const addTag = () => {
         dispatch(createTag(tag))
+        setTag("");
     }
 
     return (
@@ -26,7 +27,7 @@ export default function Tag() {
                 </div>
                 <div className="head-content">
                     <div className="input">
-                        <input className='input' type="text" onChange={(e) => setTag(e.target.value)}  />
+                        <input className='input' type="text" value={tag} onChange={(e) => setTag(e.target.value)}  />
                         <button className='button' onClick={addTag}>Add</button>
                     </div>
                 </div>
