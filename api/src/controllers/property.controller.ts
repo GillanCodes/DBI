@@ -112,3 +112,14 @@ export const updateValue = async (req: Request, res: Response) => {
         // TODO :
     }
 }
+
+export const getProperties = async (req: Request, res: Response) => {
+    try {
+        var properties = await propertyModel.find();
+        return res.status(200).send(properties);
+            
+    } catch (error) {
+        console.log(error)
+        // TODO :
+    }
+}
