@@ -74,16 +74,18 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
                         </div>
 
                         <div className="fields">
-                            <div className="field tags">
+                            <div className="field">
                                 <span>Tags</span>
-                                {tags.map((tag:ITag) => {
-                                    return (
-                                        <div className="tag" onClick={() => tagHandle(tag)}>
-                                            <input type="checkbox" checked={imgState.tags.includes(tag._id) ? true : false} />
-                                            <p>{tag.name}</p>
-                                        </div>
-                                    )
-                                })}
+                                <div className="tags">
+                                    {tags.map((tag:ITag) => {
+                                        return (
+                                            <div className="tag" onClick={() => tagHandle(tag)}>
+                                                <input type="checkbox" checked={imgState.tags.includes(tag._id) ? true : false} />
+                                                <p>{tag.name}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                             </div>
                         </div>
 

@@ -76,7 +76,38 @@
                     background-color: $background;
                     width: 250px;
                 }
+                
+                .tags
+                {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    height: 120px;
+                    overflow: scroll;
+                    align-items: center;
+
+                    .tag
+                    {
+                        display: flex;
+                        align-items: center;
+                        margin: 1em;
+                        cursor: pointer;
+                        
+                        -webkit-user-select: none; /* Safari */
+                        -ms-user-select: none; /* IE 10 and IE 11 */
+                        user-select: none; /* Standard syntax */
+
+                        input
+                        {
+                            margin: 5px;
+                        }
+                    }
+
+                }
             }
+        
+
+            
         }
 
     }
