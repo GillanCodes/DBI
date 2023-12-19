@@ -1,0 +1,38 @@
+$square-size: 250px;
+
+.discover
+{
+
+    width: calc(100dvw - $nav-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .images
+    {
+
+        width: 80%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-wrap: wrap;
+
+        .image
+        {
+            height: $square-size;
+            width: $square-size;
+            margin: 5px;
+
+            img
+            {
+                height: $square-size;
+                width: $square-size;
+                object-fit: cover;
+            }
+
+        }
+
+    }
+}
