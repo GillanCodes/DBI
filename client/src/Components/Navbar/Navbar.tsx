@@ -27,9 +27,9 @@ export default function Navbar() {
                     <p className='nav-text'>Research</p>
                 </NavLink> 
 
-                <NavLink className={"nav-button"} to={"/discorver"}>
+                <NavLink className={"nav-button"} to={"/discover"}>
                     <i className='nav-icon'>Icon</i>
-                    <p className='nav-text'>Discorver</p>
+                    <p className='nav-text'>Discover</p>
                 </NavLink> 
 
                 <NavLink className={"nav-button"} to={"/random"}>
