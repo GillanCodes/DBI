@@ -248,7 +248,55 @@
                 
             }
         }
+        
+        .properties
+        {
+            width: 80%;
 
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            .property{
+
+                width: 400px;
+                display: flex;
+                margin: $default-space;
+                padding: 1em;
+                border: 2px solid $primary;
+                border-radius: 10px;
+
+                &:hover
+                {
+                    border-color: $accent;
+                    cursor: pointer;
+                }
+
+                .fields
+                {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    
+                    .field
+                    {
+                        height: 40px;
+                        width: 250px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+
+                .buttons .button
+                {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                }
+            }
+        }
     }
 
     
