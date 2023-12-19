@@ -6,6 +6,7 @@ import Navbar from "../Components/Navbar/Navbar";
 import Add from "../Components/Add/Add";
 import Random from "../Components/Random/Random";
 import Image from "../Components/Image/Image";
+import Discover from "../Components/Discover/Discover";
 
 export default function index()
 {
@@ -27,6 +28,11 @@ export default function index()
                 <Route path="/random" element={
                     <ProtectedRoute>
                         <Random />
+                    </ProtectedRoute>
+                } />
+                <Route path="/discover" element={
+                    <ProtectedRoute>
+                        <Discover />
                     </ProtectedRoute>
                 } />
                 <Route path="/i/:id" element={
