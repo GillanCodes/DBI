@@ -125,5 +125,32 @@
             
         }
 
+
+        .tags 
+        {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: scroll;
+
+            .tag
+            {
+                display: flex;
+                // justify-content: space-between;
+                align-items: center;
+                width: 150px;
+                margin: .5em;
+
+                p
+                {
+                    margin-left: 5px;
+                }
+
+                -webkit-user-select: none; /* Safari */
+                -ms-user-select: none; /* IE 10 and IE 11 */
+                user-select: none; /* Standard syntax */
+            }
+        }
+
     }
 }
