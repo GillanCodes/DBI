@@ -5,6 +5,7 @@ import Dropdown from "../Utils/Dropdown";
 import { useSelector } from "react-redux";
 import { IFolder, IImage, IState } from "../../types";
 import ImageSettings from "../Image/ImageSettings";
+import TagModal from "./TagModal";
 
 export default function Random() {
 
@@ -16,11 +17,14 @@ export default function Random() {
     const [imgData, setImgData] = useState();
     const [previus, setPrevius] = useState('');
 
+    const [params, setParams] = useState({category: "", tags: ""});
+
     //Store all the previus pic
     const [history, setHistory]:any = useState([]);
 
     //Open modal
     const [modal, setModal] = useState(false);
+    const [tagModal, setTagModal] = useState(false);
 
     //folder selector
     const folders = useSelector((state:IState) => state.foldersReducer);
@@ -29,7 +33,7 @@ export default function Random() {
     const getImage = () => {
         axios({
             method: "GET",
-            url: `${process.env.REACT_APP_API_URL}/random/`,
+            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}`,
             withCredentials:true
         }).then((res) => {
             setImgData(res.data);
@@ -76,6 +80,8 @@ export default function Random() {
                         {!isEmpty(history) && (
                             <Dropdown id="his" title="history" setCurrentValue={setImg} currentValue={img} items={history} />
                         )}
+                        <input type="text" className="input" placeholder="Category" onChange={(e) => setParams({...params, category:e.target.value})}  />
+                        <p className="button" onClick={() => setTagModal(!tagModal)}>Tag</p>
                     </div>
 
                     <div className="display">
@@ -90,6 +96,14 @@ export default function Random() {
                         <ImageSettings image={imgData} close={setModal} />
                     </div>
                 )}
+
+                {tagModal && (
+                    <div className="modal">
+                        <TagModal close={setTagModal} />
+                    </div>
+                )}
+
+                
             </>
 
         </div>
