@@ -17,7 +17,9 @@ export default function Random() {
     const [imgData, setImgData] = useState();
     const [previus, setPrevius] = useState('');
 
+    const [FTags, setFTags] = useState<string>("");
     const [params, setParams] = useState({category: "", tags: ""});
+    
 
     //Store all the previus pic
     const [history, setHistory]:any = useState([]);
@@ -69,6 +71,10 @@ export default function Random() {
         }
     }, [load])
 
+    useEffect(() => {
+        setParams({...params, tags:FTags});
+    }, [FTags]);
+
     return (
         <div className="container">
             <>
@@ -99,7 +105,7 @@ export default function Random() {
 
                 {tagModal && (
                     <div className="modal">
-                        <TagModal close={setTagModal} />
+                        <TagModal close={setTagModal} FTags={FTags} setFTags={setFTags} />
                     </div>
                 )}
 
