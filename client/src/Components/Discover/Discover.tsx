@@ -26,7 +26,7 @@ export default function Discover() {
 
     const dispatch:any = useDispatch();
     const [loadImg, setLoadImg] = useState(true);
-    const [count, setCount] = useState(25)
+    const [count, setCount] = useState(20)
 
     const [imgs, setImgs]     = useState<IImage[]>();
     const [suffle, setShuffle]= useState<IImage[]>();
@@ -49,7 +49,7 @@ export default function Discover() {
         {
             setLoadImg(false);
             setImgs(suffle!.slice(0, count));
-            setCount(count + 25)
+            setCount(count + 10)
         }
 
         window.addEventListener('scroll', loadMore);
