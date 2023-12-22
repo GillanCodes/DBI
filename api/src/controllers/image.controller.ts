@@ -88,6 +88,20 @@ export const getImagesWithParams = async (req:Request, res:Response) => {
     }
 }
 
+export const getImagesFromFolder = async (req:Request, res:Response) => {
+    try {
+        const { folderId } = req.params;
+        console.log(folderId)
+        if(isEmpty(folderId)) throw Error('id is invalid at getimagesfromfolder')
+        
+        const images = await imageModel.find({folderId: folderId}).sort({createdAt: -1});
+        return res.status(201).send(images);
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export const updateImage = (req:Request, res:Response) => {
 
     try {
