@@ -7,6 +7,7 @@ import Add from "../Components/Add/Add";
 import Random from "../Components/Random/Random";
 import Image from "../Components/Image/Image";
 import Discover from "../Components/Discover/Discover";
+import Explore from "../Components/Explore/Explore";
 
 export default function index()
 {
@@ -33,6 +34,11 @@ export default function index()
                 <Route path="/discover" element={
                     <ProtectedRoute>
                         <Discover />
+                    </ProtectedRoute>
+                } />
+                <Route path="/explore" element={
+                    <ProtectedRoute>
+                        <Explore />
                     </ProtectedRoute>
                 } />
                 <Route path="/i/:id" element={
