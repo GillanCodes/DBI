@@ -2,7 +2,7 @@ import { IFolder } from "../../types";
 
 export default function FolderCard({folder} : {folder:IFolder}) {
   return (
-    <div className="folder-card">
+    <div className="folder-card" onClick={() => window.location.assign(`/f/${folder._id}`)}>
 
         <div className="content">
 
