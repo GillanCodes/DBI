@@ -1,0 +1,25 @@
+.explore
+{
+
+    .head
+    {
+        height: 100px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content
+    {
+
+        .folders
+        {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+}
