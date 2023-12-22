@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { IFolder, IState } from '../../types';
 import { isEmpty } from '../../Utils';
+import FolderCard from './FolderCard';
 
 export default function Explore() {
 
@@ -14,60 +15,38 @@ export default function Explore() {
             <div className="explore">
 
                 <div className="head">
-                    <input type="text" placeholder='search' onChange={(e) => setSearch(e.target.value)} />
+                    <input type="text" className='input' placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
                 </div>
 
                 <div className="content">
-                    {!isEmpty(folders) && (
-                        <>
-                            {!isEmpty(folders) && (
-                                <>
-                                    {folders.map((folder:IFolder) => {
-                                        if (!isEmpty(search))
-                                        {
-                                            if (folder.name.toLowerCase().includes(search.toLocaleLowerCase()) || folder.description.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+                    <div className="folders">
+                        {!isEmpty(folders) && (
+                            <>
+                                {!isEmpty(folders) && (
+                                    <>
+                                        {folders.map((folder:IFolder) => {
+                                            if (!isEmpty(search))
+                                            {
+                                                if (folder.name.toLowerCase().includes(search.toLocaleLowerCase()) || folder.description.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+                                                {
+                                                    return (
+                                                        <FolderCard folder={folder} />
+                                                    )
+                                                }
+                                                return;
+                                            } 
+                                            else
                                             {
                                                 return (
-                                                    <div className="folder">
-                                                        <p>{folder.name}</p>
-                                                        <p>{folder.description}</p>
-                                                    </div>
+                                                    <FolderCard folder={folder} />
                                                 )
                                             }
-                                            return;
-                                        } 
-                                        else
-                                        {
-                                            return (
-                                                <div className="folder">
-                                                    <p>{folder.name}</p>
-                                                    <p>{folder.description}</p>
-                                                </div>
-                                            )
-                                        }
-                                    })}
-                                </>
-                            )}
-
-                            {/* {isEmpty(search) && (
-                                <>
-                                    {folders.map((folder:IFolder) => {
-                                        return(
-                                            <div className="folder">
-                                                <p>{folder.name}</p>
-                                            </div>
-                                        )
-                                    })}
-                                </>
-                            )}
-
-                            {!isEmpty(search) && (
-                                <>
-                                   
-                                </>
-                            )} */}
-                        </>
-                    )}
+                                        })}
+                                    </>
+                                )}
+                            </>
+                        )}
+                    </div>
                 </div>
 
             </div>
