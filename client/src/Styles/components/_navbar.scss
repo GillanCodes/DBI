@@ -53,6 +53,26 @@
             width: 100%;
 
         }
+
+        .to-top
+        {
+            position: absolute;
+
+            bottom: 10px;
+            left: 10px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: calc($nav-width - 1em);
+
+            cursor: pointer;
+            
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+        }
     }
 
 }

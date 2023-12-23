@@ -49,6 +49,10 @@ export default function Navbar() {
                     </NavLink>
                 )}
 
+                <p className="to-top nav-button" onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+                    ToTop
+                </p>
+
             </div>
         </nav>
     )
