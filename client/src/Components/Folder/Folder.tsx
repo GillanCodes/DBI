@@ -11,7 +11,7 @@ export default function Folder() {
 
     const [load, setLoad] = useState<boolean>(false);
     const [images, setImages] = useState<IImage[]>();
-    const [current, setCurrent] = useState<string>();
+    const [current, setCurrent] = useState<IFolder>();
 
     const folders = useSelector((state:IState) => state.foldersReducer);
 
@@ -19,14 +19,14 @@ export default function Folder() {
         if (!isEmpty(folders)) {
             folders.map((folder:IFolder) => {
                 if (folder._id === params.id){
-                    return setCurrent(folder._id)
+                    return setCurrent(folder)
                 }
             })
             if (!isEmpty(current)){
-                var imgs = axios({
+               axios({
                     method:"GET",
                     withCredentials:true,
-                    url: `${process.env.REACT_APP_API_URL}/image/folder/${current}`
+                    url: `${process.env.REACT_APP_API_URL}/image/folder/${current?._id}`
                 }).then((res) => {
                     setImages(res.data);
                 }).catch((err) => console.log(err));
@@ -34,17 +34,26 @@ export default function Folder() {
         }
 
         if (!isEmpty(images)) setLoad(true);
-    }, [folders, current])
+    }, [folders, current, images])
 
     return (
         <div className='container'>
             {load && (
                 <div className="folder">
-                    {images!.map((image:IImage) => {
-                        return (
-                            <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" />
-                        )
-                    })}
+                    <div className="content">
+                        <div className="head">
+                            <h1>{current?.name}</h1>
+                        </div>
+                        <div className="images">
+                            {images!.map((image:IImage) => {
+                                return (
+                                    <img className="image" src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" />
+                                )
+                            })}
+                        </div>
+                    </div>
+                    
+                    
                 </div>
             )}
         </div>
