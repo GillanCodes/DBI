@@ -9,8 +9,13 @@ export default function Folder() {
 
     const params = useParams();
 
+    const [loadedImg, setLoadedImg] = useState<IImage[]>();
+    const [count, setCount] = useState<number>(20);
+    const [loadImg, setLoadImg] = useState<boolean>(true);
+
     const [load, setLoad] = useState<boolean>(false);
     const [images, setImages] = useState<IImage[]>();
+    
     const [current, setCurrent] = useState<IFolder>();
 
     const folders = useSelector((state:IState) => state.foldersReducer);
@@ -33,8 +38,27 @@ export default function Folder() {
             }
         }
 
-        if (!isEmpty(images)) setLoad(true);
-    }, [folders, current, images])
+        if (!isEmpty(loadedImg)) setLoad(true);
+    }, [folders, current, loadedImg])
+
+    useEffect(() => {
+        if(loadImg && !isEmpty(images)) 
+        {
+            setLoadImg(false);
+            setLoadedImg(images!.slice(0, count));
+            setCount(count + 10)
+        }
+
+        window.addEventListener('scroll', loadMore);
+        return () => window.removeEventListener('scroll', loadMore);
+    }, [loadImg, count, loadedImg, images])
+
+    const loadMore = () => {
+        if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement!.scrollHeight) 
+        {
+            setLoadImg(true);
+        }
+    }
 
     return (
         <div className='container'>
@@ -45,7 +69,7 @@ export default function Folder() {
                             <h1>{current?.name}</h1>
                         </div>
                         <div className="images">
-                            {images!.map((image:IImage) => {
+                            {loadedImg!.map((image:IImage) => {
                                 return (
                                     <img className="image" src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" />
                                 )
