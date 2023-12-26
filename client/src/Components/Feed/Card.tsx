@@ -16,7 +16,7 @@ export default function Card({image} : {image:IImage}) {
                 return (
                   <>
                     <img className='icon' src={`${process.env.REACT_APP_CDN_URL}/icons/${folder.icon}`} alt="icon" />
-                    <p className='folder_name'>{folder.name}</p>
+                    <p className='folder_name' onClick={() => window.location.assign(`/f/${image.folderId}`)}>{folder.name}</p>
                   </>
                 )
           })}
