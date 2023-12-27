@@ -7,16 +7,18 @@ import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
 
-export async function addView(id:string | ObjectId, userId:string)
+export function addView(id:string | ObjectId, userId:string)
 {
-    await imageModel.findByIdAndUpdate(id, {
+    imageModel.findByIdAndUpdate(id, {
         $addToSet: {
             views: {
                 date: Date.now(),
                 viewer: userId
             }
         }
-    }, {upsert: true, new:true})
+    }, {upsert: true, new:true}).then((data) => {
+        return;
+    }).catch((err) => console.log(err))
 }
 
 export const createImages = async (req: any, res: Response) => {
