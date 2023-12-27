@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Document, Types, isValidObjectId } from "mongoose";
+import { Document, ObjectId, Types, isValidObjectId } from "mongoose";
 import * as fs from "fs";
 import config from "../../config/config";
 import imageModel, { IImage } from "../../models/image.model";
@@ -7,7 +7,7 @@ import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
 
-async function addView(id:string, userId:string)
+export async function addView(id:string | ObjectId, userId:string)
 {
     await imageModel.findByIdAndUpdate(id, {
         $addToSet: {

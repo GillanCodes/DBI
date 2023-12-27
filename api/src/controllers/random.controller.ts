@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import imageModel from "../../models/image.model";
+import imageModel, { IImage } from "../../models/image.model";
 import isEmpty from "../utils/isEmpty";
+import { addView } from "./image.controller";
 
 export const getRandomImage = async (req:Request, res:Response) => {
     try {
@@ -27,8 +28,11 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         
         const image = await imageModel.find(query);
         var rdm = Math.floor(Math.random() * image.length);
+        var FImage:IImage = image[rdm];
 
-        return res.status(201).send(image[rdm]);
+        addView(FImage._id, res.locals.user._id);
+
+        return res.status(201).send(FImage);
 
     } catch (error) {
         // TODO :
