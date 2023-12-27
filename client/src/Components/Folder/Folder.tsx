@@ -68,10 +68,10 @@ export default function Folder() {
                         <div className="head">
                             <h1>{current?.name}</h1>
                         </div>
-                        <div className="images">
+                        <div className="images" >
                             {loadedImg!.map((image:IImage) => {
                                 return (
-                                    <img className="image" src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" />
+                                    <img className="image" src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" onClick={() => window.location.assign(`/i/${image._id}`)}/>
                                 )
                             })}
                         </div>
