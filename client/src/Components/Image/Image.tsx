@@ -51,6 +51,8 @@ export default function Image() {
                         <div className="top-bar">
                             <p className='button' onClick={() => setModal(!modal)}>Settings</p>
                             <p className='button' onClick={deleteHandle}>DELETE</p>
+                            <p className="button" onClick={() => window.location.assign(`/f/${img?.folderId}`)}>View Folder</p>
+                            <p>{img?.views.length} views</p>
                         </div>
                         <div className="single-view">
                             <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img?.filePath}`} alt="img" />
