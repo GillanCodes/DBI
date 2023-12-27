@@ -7,6 +7,18 @@ import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
 
+async function addView(id:string, userId:string)
+{
+    await imageModel.findByIdAndUpdate(id, {
+        $addToSet: {
+            views: {
+                date: Date.now(),
+                viewer: userId
+            }
+        }
+    }, {upsert: true, new:true})
+}
+
 export const createImages = async (req: any, res: Response) => {
     const files = req.files;
     const { folderId } = req.body;
@@ -36,6 +48,8 @@ export const createImages = async (req: any, res: Response) => {
                 console.log(err);
             })   
         }
+
+        addView(results._id, res.locals.user._id);
         return res.status(201).send(results); 
         
     } catch (error) {
@@ -60,6 +74,7 @@ export const getImage = async (req:Request, res:Response) => {
         if (!isValidObjectId(id)) log('Error getImage : Invalid `id`', 0);
         
         const image = await imageModel.findById(id);
+        addView(id, res.locals.user._id);
         if (!isEmpty(image)) return res.status(201).send(image);
         else return res.status(201).send('Image not found')
 
@@ -79,6 +94,7 @@ export const getImagesWithParams = async (req:Request, res:Response) => {
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
         }
+        
         
         const images = await imageModel.find(query).sort({createdAt: -1});
         return res.status(201).send(images);
