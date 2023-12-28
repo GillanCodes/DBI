@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../../Utils";
-import { IFolder, IImage, IState, ITag } from "../../types";
+import { IFolder, IImage, IProperty, IState, ITag } from "../../types";
 import { useEffect, useState } from "react";
 import { updateImage } from "../../actions/image.actions";
 
@@ -82,6 +82,35 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
                                             <div className="tag" onClick={() => tagHandle(tag)}>
                                                 <input type="checkbox" checked={imgState.tags.includes(tag._id) ? true : false} />
                                                 <p>{tag.name}</p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="fields">
+                            <div className="field">
+                                <div className="properties">
+                                    {image?.properties.map((prop:IProperty) => {
+                                        return (
+                                            <div className="property">
+                                                <p className="name">{prop.name}</p>
+                                                {prop.type === "number" && (
+                                                    <input type="number" value={prop.value} />
+                                                )}
+                                                {prop.type === "count" && (
+                                                    <div>
+                                                        <p>{prop.value}</p>
+                                                        <div>
+                                                            <p>+</p>
+                                                            <p>-</p>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {prop.type === "text" && (
+                                                    <input type="text" value={prop.value} />
+                                                )}
                                             </div>
                                         )
                                     })}
