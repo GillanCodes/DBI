@@ -6,6 +6,7 @@ import imageModel, { IImage } from "../../models/image.model";
 import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
+import propertyModel from "../../models/property.model";
 
 export function addView(id:string | ObjectId, userId:string)
 {
@@ -40,10 +41,13 @@ export const createImages = async (req: any, res: Response) => {
                 if (err) throw Error(err);
             });
 
+            var properties = await propertyModel.find();
+
             await imageModel.create({
                 folderId,
                 filePath: filename,
-                tags: [""]
+                tags: [""],
+                properties
             }).then((data) => {
                 results.push(data);
             }).catch((err) => {
