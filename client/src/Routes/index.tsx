@@ -9,6 +9,7 @@ import Image from "../Components/Image/Image";
 import Discover from "../Components/Discover/Discover";
 import Explore from "../Components/Explore/Explore";
 import Folder from "../Components/Folder/Folder";
+import Research from "../Components/Research/Research";
 
 export default function index()
 {
@@ -42,6 +43,13 @@ export default function index()
                         <Explore />
                     </ProtectedRoute>
                 } />
+
+                <Route path="/research" element={
+                    <ProtectedRoute>
+                        <Research />
+                    </ProtectedRoute>
+                } />
+
                 <Route path="/i/:id" element={
                     <ProtectedRoute>
                         <Image />
