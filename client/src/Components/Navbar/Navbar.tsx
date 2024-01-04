@@ -24,14 +24,19 @@ export default function Navbar() {
 
                 <NavLink className={"nav-button"} to={"/explore"}>
                     <i className='nav-icon'>Icon</i>
-                    <p className='nav-text'>Research</p>
+                    <p className='nav-text'>Explore</p>
                 </NavLink> 
 
                 <NavLink className={"nav-button"} to={"/discover"}>
                     <i className='nav-icon'>Icon</i>
                     <p className='nav-text'>Discover</p>
+                </NavLink>
+                
+                <NavLink className={"nav-button"} to={"/research"}>
+                    <i className='nav-icon'>Icon</i>
+                    <p className='nav-text'>Research</p>
                 </NavLink> 
-
+                 
                 <NavLink className={"nav-button"} to={"/random"}>
                     <i className='nav-icon'>Icon</i>
                     <p className='nav-text'>Random</p>
