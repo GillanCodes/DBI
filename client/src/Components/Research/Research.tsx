@@ -24,6 +24,7 @@ export default function Research() {
             withCredentials: true
         }).then((res) => {
             setQuery(res.data)
+            setImages(res.data.slice(0,count))
         })
     }, [tags, category]);
     
@@ -57,7 +58,7 @@ export default function Research() {
                 <div className="body">
                     {!isEmpty(images) && images!.map((image:IImage) => {
                         return (
-                            <img style={{height:'500px', width:"500px", objectFit:"cover"}} src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="image" />
+                            <img style={{height:'300px', width:"300px", objectFit:"cover"}} src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="image" />
                         )
                     })}
                 </div>
