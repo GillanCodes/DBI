@@ -19,20 +19,9 @@ $square-size: 250px;
 
         flex-wrap: wrap;
 
-        .image
-        {
-            height: $square-size;
-            width: $square-size;
-            margin: 5px;
-
-            img
-            {
-                height: $square-size;
-                width: $square-size;
-                object-fit: cover;
-            }
-
-        }
+        column-gap: .5em;
+        row-gap: .5em;
+        
 
     }
 }
