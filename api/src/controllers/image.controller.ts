@@ -33,7 +33,17 @@ export const createImages = async (req: any, res: Response) => {
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             
-            if (file.mimetype !==  "image/jpg" && file.mimetype !== "image/png" && file.mimetype !== "image/jpeg") throw Error('user_patch_invalid_type_file');
+            if (
+                file.mimetype !==  "image/jpg" && 
+                file.mimetype !== "image/png" &&
+                file.mimetype !== "image/jpeg" &&
+                file.mimetype !== "video/webm" &&
+                file.mimetype !== "video/webp" &&
+                file.mimetype !== "video/x-msvideo" &&
+                file.mimetype !== "video/mpeg" &&
+                file.mimetype !== "video/ogg")
+                
+                throw Error('user_patch_invalid_type_file');
             if (file.size > 5000000) throw Error('user_patch_file_max_size');
 
             var filename = `${genUId()}.png`;
