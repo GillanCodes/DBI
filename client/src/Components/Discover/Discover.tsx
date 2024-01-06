@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IImage, IState } from "../../types";
 import { isEmpty } from "../../Utils";
 import { getAllImages } from "../../actions/image.actions";
+import MediaGrid from "../Utils/MediaGrid";
 
 export default function Discover() {
 
@@ -66,9 +67,7 @@ export default function Discover() {
                 <div className="images">
                     {!isEmpty(imgs) && imgs!.map((image:IImage) => {
                         return (
-                            <div className="image" onClick={() => window.location.assign(`/i/${image._id}`)}>
-                                <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="img" />
-                            </div>
+                            <MediaGrid media={image} />
                         ) 
                     })}
                 </div>

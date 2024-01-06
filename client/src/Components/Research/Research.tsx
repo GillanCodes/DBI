@@ -4,6 +4,7 @@ import TagModal from '../Random/TagModal';
 import axios from 'axios';
 import { IImage } from '../../types';
 import { isEmpty } from '../../Utils';
+import MediaGrid from '../Utils/MediaGrid';
 
 export default function Research() {
 
@@ -60,7 +61,7 @@ export default function Research() {
                     <div className="images">
                         {!isEmpty(images) && images!.map((image:IImage) => {
                             return (
-                                <img className='image' src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="image" />
+                                <MediaGrid media={image} />
                             )
                         })}
                     </div>
