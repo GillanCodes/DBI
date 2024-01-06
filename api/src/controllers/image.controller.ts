@@ -22,6 +22,25 @@ export function addView(id:string | ObjectId, userId:string)
     }).catch((err) => console.log(err))
 }
 
+function checkType(type:any) {
+    if (
+        type === "image/jpg" ||
+        type === "image/png" ||
+        type === "image/jpeg" ||
+        type === "image/gif" ||
+        type === "image/x-icon"
+    ) return "img"
+
+    if (
+        type === "video/webm" ||
+        type === "video/webp" ||
+        type === "video/x-msvideo" ||
+        type === "video/mpeg" ||
+        type === "video/mp4" ||
+        type === "video/ogg"
+    ) return "video"
+}
+
 export const createImages = async (req: any, res: Response) => {
     const files = req.files;
     const { folderId } = req.body;
@@ -43,6 +62,7 @@ export const createImages = async (req: any, res: Response) => {
                 file.mimetype !== "video/webp" &&
                 file.mimetype !== "video/x-msvideo" &&
                 file.mimetype !== "video/mpeg" &&
+                file.mimetype !== "video/mp4" &&
                 file.mimetype !== "video/ogg")
 
                 throw Error('image_upload_invalid_type_file');
@@ -59,6 +79,7 @@ export const createImages = async (req: any, res: Response) => {
                 folderId,
                 filePath: filename,
                 tags: [""],
+                type: checkType(file.mimetype),
                 properties
             }).then((data) => {
                 results.push(data);
