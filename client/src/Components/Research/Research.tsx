@@ -11,7 +11,7 @@ export default function Research() {
     const [tags, setTags] = useState<string[]>([]);
     const [category, setCategory] = useState<string>("");
     
-    const [count, setCount]     = useState(20);
+    const [count, setCount]     = useState(24);
     const [loadImg, setLoadImg] = useState(true);
 
     const [query, setQuery] = useState<IImage[]>();
@@ -40,7 +40,7 @@ export default function Research() {
         {
             setLoadImg(false);
             setImages(query!.slice(0, count));
-            setCount(count + 10)
+            setCount(count + 12)
         }
 
         window.addEventListener('scroll', loadMore);
@@ -52,7 +52,7 @@ export default function Research() {
         <div className='container'>
             <div className="research">
                 <div className="head">
-                    <input type="text" onChange={(e) => setCategory(e.target.value)} />
+                    <input type="text" className='input' onChange={(e) => setCategory(e.target.value)} />
                     <p className='button' onClick={() => setModal(!modal)}>Tags</p>
                 </div>
                 <div className="body">
