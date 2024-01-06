@@ -45,8 +45,8 @@ export const createImages = async (req: any, res: Response) => {
                 file.mimetype !== "video/mpeg" &&
                 file.mimetype !== "video/ogg")
 
-                throw Error('user_patch_invalid_type_file');
-            if (file.size > 5000000) throw Error('user_patch_file_max_size');
+                throw Error('image_upload_invalid_type_file');
+            if (file.size > 5000000) throw Error('image_upload_file_max_size');
 
             var filename = `${genUId()}.png`;
             fs.writeFile(`${config.CDN_PATH}/uploads/${filename}`, file.buffer, (err:any) => {
