@@ -56,11 +56,13 @@ export default function Research() {
                     <p className='button' onClick={() => setModal(!modal)}>Tags</p>
                 </div>
                 <div className="body">
-                    {!isEmpty(images) && images!.map((image:IImage) => {
-                        return (
-                            <img style={{height:'300px', width:"300px", objectFit:"cover"}} src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="image" />
-                        )
-                    })}
+                    <div className="images">
+                        {!isEmpty(images) && images!.map((image:IImage) => {
+                            return (
+                                <img className='image' src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="image" />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
             {modal && (

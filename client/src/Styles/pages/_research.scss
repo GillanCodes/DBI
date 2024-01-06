@@ -1,0 +1,35 @@
+.research
+{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    .body {
+        .images
+        {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+
+            column-gap: .5em;
+            row-gap: .5em;
+            
+            .image
+            {
+                height: 250px;
+                width: 250px;
+                object-fit: cover;
+                border-radius: 8px;
+                cursor: pointer;
+            }
+        }
+    }
+    
+
+
+}
