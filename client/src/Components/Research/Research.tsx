@@ -23,6 +23,7 @@ export default function Research() {
             url: `${process.env.REACT_APP_API_URL}/image/params?tags=${tags}&category=${category}`,
             withCredentials: true
         }).then((res) => {
+            setCount(24);
             setQuery(res.data)
             setImages(res.data.slice(0,count))
         })
