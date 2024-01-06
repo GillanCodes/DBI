@@ -14,7 +14,7 @@ export default function Random() {
 
     //Pics
     const [img, setImg] = useState('');
-    const [imgData, setImgData] = useState();
+    const [imgData, setImgData] = useState<IImage>();
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
@@ -91,8 +91,16 @@ export default function Random() {
                     </div>
 
                     <div className="display">
-                        {!isEmpty(img) && (
-                            <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="image"></img>
+                        {!isEmpty(img) && !isEmpty(imgData) && (
+                            <>
+                                {imgData?.type === "img" && (
+                                    <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="img" />
+                                )}
+                                {imgData?.type === "video" && (
+                                    <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
+                                )}
+                            </>
+                            // <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="image"></img>
                         )}
                         
                     </div>
