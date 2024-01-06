@@ -13,6 +13,7 @@ export interface IImage extends Document
     filePath:string,
     tags:[string],
     category:string,
+    type:string,
     properties: [IProperty],
     views: [string],
     createdAt: Date | string,
@@ -24,6 +25,7 @@ const imageSchema = new Schema<IImage>({
     filePath:   {type:String, required:true},
     tags:       {type:[String]},
     category:   {type:String},
+    type:       {type: String, required:true, default:'img'},
     properties: {type: [propertySchema]},
     views:      {type: [{
         date:   {type: String, required:true},
