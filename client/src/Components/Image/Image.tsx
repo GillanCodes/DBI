@@ -55,7 +55,12 @@ export default function Image() {
                             <p>{img?.views.length} views</p>
                         </div>
                         <div className="single-view">
-                            <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img?.filePath}`} alt="img" />
+                            {img?.type === "img" && (
+                                <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img?.filePath}`} alt="img" />
+                            )}
+                            {img?.type === "video" && (
+                                <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img?.filePath}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
+                            )}
                         </div>
                     </div>
                     {modal && (
