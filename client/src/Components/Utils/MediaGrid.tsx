@@ -1,4 +1,6 @@
 import { IImage } from '../../types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faVideo} from "@fortawesome/free-solid-svg-icons"
 
 export default function MediaGrid({media} : {media:IImage}) {
 
@@ -15,6 +17,7 @@ export default function MediaGrid({media} : {media:IImage}) {
             )}
             
             {media.type === "video" && (
+                <div>
                 <video 
                     src={`${process.env.REACT_APP_CDN_URL}/uploads/${media.filePath}`} 
                     muted 
@@ -24,6 +27,8 @@ export default function MediaGrid({media} : {media:IImage}) {
                     className='media'
                     onClick={() => window.location.assign(`/i/${media._id}`)}
                 />
+                <FontAwesomeIcon icon={faVideo} style={{position:"relative", marginLeft: "-240px", bottom: 10, fontSize: "24px"}} />
+                </div>
             )}
         </>
     )
