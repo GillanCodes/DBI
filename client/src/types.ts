@@ -47,6 +47,7 @@ export interface IImage
     filePath:string,
     tags:[string],
     category:string,
+    type: string,
     properties: [IProperty],
     views: [string],
     createdAt: string,
