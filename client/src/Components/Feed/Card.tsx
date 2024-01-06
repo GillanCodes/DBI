@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { IImage, IState } from '../../types'
 import { convertDatetoTime, dateConverter, isEmpty } from '../../Utils';
 import { useSelector } from 'react-redux';
+import Media from './Media';
 
 export default function Card({image} : {image:IImage}) {
 
@@ -22,12 +23,7 @@ export default function Card({image} : {image:IImage}) {
           })}
         </div>
         <div className="card-body">
-          <img 
-            className={clicked ? "card-image full-width" : "card-image full-height"} 
-            src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} 
-            alt="" 
-            onClick={() => setClicked(!clicked)}
-          />
+          <Media media={image} />
         </div>
         <div className="card-footer">
           <p>{image.views.length}</p>
