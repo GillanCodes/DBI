@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { IImage } from '../../types'
+import { IMedia } from '../../types'
 
-export default function Media({media} : {media:IImage}) {
+export default function Media({media} : {media:IMedia}) {
 
     const [clicked, setClicked] = useState(false);
 

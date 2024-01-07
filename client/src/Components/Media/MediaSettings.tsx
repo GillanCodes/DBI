@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../../Utils";
-import { IFolder, IImage, IProperty, IState, ITag } from "../../types";
+import { IFolder, IMedia, IProperty, IState, ITag } from "../../types";
 import { useEffect, useState } from "react";
-import { updateImage } from "../../actions/image.actions";
+import { updateMedia } from "../../actions/media.actions";
 
-export default function ImageSettings({image, close}: {image:IImage | undefined, close:any}) {
+export default function MediaSettings({media, close}: {media:IMedia | undefined, close:any}) {
     
     const dispatch:any = useDispatch();
 
@@ -16,8 +16,8 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
     const [imgState, setImgState]:any = useState();
 
     useEffect(() => {
-        if(!isEmpty(image)) setImgState(image);
-        if (!isEmpty(folders) && !isEmpty(image)) setLoad(true);
+        if(!isEmpty(media)) setImgState(media);
+        if (!isEmpty(folders) && !isEmpty(media)) setLoad(true);
     }, [folders])
 
     const tagHandle = (tag:ITag) => {
@@ -39,15 +39,15 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
     }
 
     const saveHandle = () => {
-        dispatch(updateImage(image!._id, imgState.tags.toLocaleString(), imgState.category));
+        dispatch(updateMedia(media!._id, imgState.tags.toLocaleString(), imgState.category));
     }    
 
     return (
-        <div className="image-settings">
+        <div className="media-settings">
             {load && (
                 <>
                     <div className="head">
-                        <h2 className="title">{image?._id} - {folders.find((folder:IFolder) => folder._id === image?.folderId)?.name}</h2>
+                        <h2 className="title">{media?._id} - {folders.find((folder:IFolder) => folder._id === media?.folderId)?.name}</h2>
                         <p className="close" onClick={saveHandle}>Save</p>
                         
                         {!isEmpty(close) && (
@@ -57,12 +57,12 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
                     <div className="body">
                         <div className="fields inline">
                             <div className="field">
-                                <span>Image Full Path</span>
-                                <input className="input" type="text" disabled value={`${process.env.REACT_APP_CDN_URL}/uploads/${image?.filePath}`} />
+                                <span>Media Full Path</span>
+                                <input className="input" type="text" disabled value={`${process.env.REACT_APP_CDN_URL}/uploads/${media?.filePath}`} />
                             </div>
                             <div className="field">
-                                <span>Image Path</span>
-                                <input className="input" type="text" disabled value={`${image?.filePath}`} />
+                                <span>Media Path</span>
+                                <input className="input" type="text" disabled value={`${media?.filePath}`} />
                             </div>
                         </div>
 
@@ -92,7 +92,7 @@ export default function ImageSettings({image, close}: {image:IImage | undefined,
                         <div className="fields">
                             <div className="field">
                                 <div className="properties">
-                                    {image?.properties.map((prop:IProperty) => {
+                                    {media?.properties.map((prop:IProperty) => {
                                         return (
                                             <div className="property">
                                                 <p className="name">{prop.name}</p>

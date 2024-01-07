@@ -40,7 +40,7 @@ export interface ITag
     updatedAt:  Date | string
 }
 
-export interface IImage
+export interface IMedia
 {
     _id: string,
     folderId: string,
@@ -57,7 +57,7 @@ export interface IImage
 export interface IState
 {
     userReducer: IUser
-    imagesReducer: IImage[]
+    mediasReducer: IMedia[]
     foldersReducer: IFolder[]
     tagsReducer: ITag[]
     propertiesReducer: IProperty[]

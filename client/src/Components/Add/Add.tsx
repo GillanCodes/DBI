@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Folders from './Folders'
-import Images from './Images'
+import Images from './Medias'
 import Tag from './Tag'
 import Properties from './Properties'
 

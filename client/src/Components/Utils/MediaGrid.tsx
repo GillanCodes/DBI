@@ -1,8 +1,8 @@
-import { IImage } from '../../types'
+import { IMedia } from '../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faVideo} from "@fortawesome/free-solid-svg-icons"
 
-export default function MediaGrid({media} : {media:IImage}) {
+export default function MediaGrid({media} : {media:IMedia}) {
 
     return (
         <>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { IImage, IState } from "../../types";
+import { IMedia, IState } from "../../types";
 import { isEmpty } from "../../Utils";
-import { getAllImages } from "../../actions/image.actions";
+import { getAllMedias } from "../../actions/media.actions";
 import MediaGrid from "../Utils/MediaGrid";
 
 export default function Discover() {
@@ -29,10 +29,10 @@ export default function Discover() {
     const [loadImg, setLoadImg] = useState(true);
     const [count, setCount] = useState(20)
 
-    const [imgs, setImgs]     = useState<IImage[]>();
-    const [suffle, setShuffle]= useState<IImage[]>();
+    const [imgs, setImgs]     = useState<IMedia[]>();
+    const [suffle, setShuffle]= useState<IMedia[]>();
 
-    const images = useSelector((state:IState) => state.imagesReducer);    
+    const medias = useSelector((state:IState) => state.mediasReducer);    
 
     const loadMore = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement!.scrollHeight) 
@@ -42,8 +42,8 @@ export default function Discover() {
     }
 
     useEffect(() => {
-        if (!isEmpty(images)) shuffleArr(images);
-    }, [images])
+        if (!isEmpty(medias)) shuffleArr(medias);
+    }, [medias])
 
     useEffect(() => {
         if(loadImg && !isEmpty(suffle)) 
@@ -58,16 +58,16 @@ export default function Discover() {
     }, [loadImg, count, imgs, suffle])
 
     useEffect(() =>{
-        dispatch(getAllImages());
+        dispatch(getAllMedias());
     }, [])
 
     return (
         <div className="container">
             <div className="discover">
-                <div className="images">
-                    {!isEmpty(imgs) && imgs!.map((image:IImage) => {
+                <div className="medias">
+                    {!isEmpty(imgs) && imgs!.map((media:IMedia) => {
                         return (
-                            <MediaGrid media={image} />
+                            <MediaGrid media={media} />
                         ) 
                     })}
                 </div>

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { IFolder, IImage, IState } from "../../types"
+import { IFolder, IMedia, IState } from "../../types"
 import { useEffect, useState } from "react";
 import { isEmpty } from "../../Utils";
 import axios from "axios";
@@ -9,12 +9,12 @@ export default function Folder() {
 
     const params = useParams();
 
-    const [loadedImg, setLoadedImg] = useState<IImage[]>();
+    const [loadedImg, setLoadedImg] = useState<IMedia[]>();
     const [count, setCount] = useState<number>(20);
     const [loadImg, setLoadImg] = useState<boolean>(true);
 
     const [load, setLoad] = useState<boolean>(false);
-    const [images, setImages] = useState<IImage[]>();
+    const [medias, setMedias] = useState<IMedia[]>();
     
     const [current, setCurrent] = useState<IFolder>();
 
@@ -31,9 +31,9 @@ export default function Folder() {
                axios({
                     method:"GET",
                     withCredentials:true,
-                    url: `${process.env.REACT_APP_API_URL}/image/folder/${current?._id}`
+                    url: `${process.env.REACT_APP_API_URL}/media/folder/${current?._id}`
                 }).then((res) => {
-                    setImages(res.data);
+                    setMedias(res.data);
                 }).catch((err) => console.log(err));
             }
         }
@@ -42,16 +42,16 @@ export default function Folder() {
     }, [folders, current, loadedImg])
 
     useEffect(() => {
-        if(loadImg && !isEmpty(images)) 
+        if(loadImg && !isEmpty(medias)) 
         {
             setLoadImg(false);
-            setLoadedImg(images!.slice(0, count));
+            setLoadedImg(medias!.slice(0, count));
             setCount(count + 10)
         }
 
         window.addEventListener('scroll', loadMore);
         return () => window.removeEventListener('scroll', loadMore);
-    }, [loadImg, count, loadedImg, images])
+    }, [loadImg, count, loadedImg, medias])
 
     const loadMore = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement!.scrollHeight) 
@@ -68,10 +68,10 @@ export default function Folder() {
                         <div className="head">
                             <h1>{current?.name}</h1>
                         </div>
-                        <div className="images" >
-                            {loadedImg!.map((image:IImage) => {
+                        <div className="medias" >
+                            {loadedImg!.map((media:IMedia) => {
                                 return (
-                                    <img className="image" src={`${process.env.REACT_APP_CDN_URL}/uploads/${image.filePath}`} alt="" onClick={() => window.location.assign(`/i/${image._id}`)}/>
+                                    <img className="media" src={`${process.env.REACT_APP_CDN_URL}/uploads/${media.filePath}`} alt="" onClick={() => window.location.assign(`/i/${media._id}`)}/>
                                 )
                             })}
                         </div>

@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { isEmpty } from "../../Utils";
 import Dropdown from "../Utils/Dropdown";
 import { useSelector } from "react-redux";
-import { IFolder, IImage, IState } from "../../types";
-import ImageSettings from "../Image/ImageSettings";
+import { IFolder, IMedia, IState } from "../../types";
+import MediaSettings from "../Media/MediaSettings";
 import TagModal from "./TagModal";
 
 export default function Random() {
@@ -14,7 +14,7 @@ export default function Random() {
 
     //Pics
     const [img, setImg] = useState('');
-    const [imgData, setImgData] = useState<IImage>();
+    const [imgData, setImgData] = useState<IMedia>();
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
@@ -32,7 +32,7 @@ export default function Random() {
     const folders = useSelector((state:IState) => state.foldersReducer);
 
     //to get a pic
-    const getImage = () => {
+    const getMedia = () => {
         axios({
             method: "GET",
             url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}`,
@@ -47,7 +47,7 @@ export default function Random() {
     //To call next pic
     const nextHandle = () => {
         setPrevius(img);
-        getImage();
+        getMedia();
     }
 
     //Handle previus pic
@@ -66,7 +66,7 @@ export default function Random() {
     useEffect(() =>{
         if (load)
         {
-            getImage();
+            getMedia();
             setPrevius(img);
         }
     }, [load])
@@ -100,14 +100,14 @@ export default function Random() {
                                     <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
                                 )}
                             </>
-                            // <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="image"></img>
+                            // <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="media"></img>
                         )}
                         
                     </div>
                 </div>
                 {modal && (
                     <div className="modal">
-                        <ImageSettings image={imgData} close={setModal} />
+                        <MediaSettings media={imgData} close={setModal} />
                     </div>
                 )}
 

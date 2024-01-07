@@ -60,7 +60,7 @@ import propertyRoutes from "./src/routes/property.routes";
 app.use("/api/auth", authRoutes);
 app.use("/api/user", requireAuth, userRoutes);
 app.use("/api/folder", requireAuth, folderRoutes);
-app.use("/api/image", requireAuth, mediaRoutes);
+app.use("/api/media", requireAuth, mediaRoutes);
 app.use("/api/random", requireAuth, randomRoutes);
 
 app.use("/api/tag", requireAuth, tagRoutes);

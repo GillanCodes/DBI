@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import userReducer from "./userReducer";
-import imagesReducer from "./imagesReducer";
+import mediasReducer from "./mediasReducer";
 import foldersReducer from "./foldersReducer";
 import tagsReducer from "./tagsReducer";
 import propertiesReducer from "./propertiesReducer";
 
 export default combineReducers({
     userReducer,    
-    imagesReducer,
+    mediasReducer,
     foldersReducer,
     tagsReducer,
     propertiesReducer

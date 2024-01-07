@@ -3,11 +3,11 @@ import { isEmpty } from "../../Utils";
 import { useDispatch, useSelector } from "react-redux";
 import { IFolder, IState } from "../../types";
 import Dropdown from "../Utils/Dropdown";
-import { uploadImages } from "../../actions/image.actions";
+import { uploadMedias } from "../../actions/media.actions";
 
 var foldersItem:any[] = [];
 
-export default function Images() {
+export default function Medias() {
 
     const dispatch:any = useDispatch()
 
@@ -36,7 +36,7 @@ export default function Images() {
         }
         data.append("folderId", useFolder)
 
-        dispatch(uploadImages(data));
+        dispatch(uploadMedias(data));
 
         setUseFolder("");
         setFiles();
@@ -44,11 +44,11 @@ export default function Images() {
     }
 
     return (
-        <div className="images">
+        <div className="medias">
 
             <div className="head">
                     <div className="title">
-                        <h1>Add Images</h1>
+                        <h1>Add Medias</h1>
                     </div>
                 <div className="head-content">
                     
@@ -71,7 +71,7 @@ export default function Images() {
 
                 
 
-                <div className="images-display">
+                <div className="medias-display">
                     {!isEmpty(files) && Array.from(files).map((file:any) => {
                         var url = URL.createObjectURL(file);
                         if (file.type.includes("video"))
