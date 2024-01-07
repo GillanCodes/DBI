@@ -124,11 +124,12 @@ export const getImage = async (req:Request, res:Response) => {
 
 export const getImagesWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags, folderId} = req.query;
+        const { category, tags, folderId, type} = req.query;
         const tagsArr = tags?.toLocaleString().split(',');
         var query:any = {}
 
         if (!isEmpty(folderId)) query.folderId = folderId;
+        if (!isEmpty(type)) query.type = type;
         if (!isEmpty(category)) query.category = category?.toLocaleString().toLocaleLowerCase();
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
