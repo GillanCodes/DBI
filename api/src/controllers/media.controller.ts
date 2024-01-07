@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Document, ObjectId, Types, isValidObjectId } from "mongoose";
+import { ObjectId, isValidObjectId } from "mongoose";
 import * as fs from "fs";
 import config from "../../config/config";
-import imageModel, { IImage } from "../../models/image.model";
+import mediaModel from "../../models/media.model";
 import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
@@ -10,7 +10,7 @@ import propertyModel from "../../models/property.model";
 
 export function addView(id:string | ObjectId, userId:string)
 {
-    imageModel.findByIdAndUpdate(id, {
+    mediaModel.findByIdAndUpdate(id, {
         $addToSet: {
             views: {
                 date: Date.now(),
@@ -41,7 +41,7 @@ function checkType(type:any) {
     ) return "video"
 }
 
-export const createImages = async (req: any, res: Response) => {
+export const createMedias = async (req: any, res: Response) => {
     const files = req.files;
     const { folderId } = req.body;
 
@@ -75,7 +75,7 @@ export const createImages = async (req: any, res: Response) => {
 
             var properties = await propertyModel.find();
 
-            await imageModel.create({
+            await mediaModel.create({
                 folderId,
                 filePath: filename,
                 tags: [""],
@@ -96,25 +96,25 @@ export const createImages = async (req: any, res: Response) => {
     }
 }
 
-export const getImages = async (req: Request, res:Response) => {
+export const getMedias = async (req: Request, res:Response) => {
     try {
-        const images = await imageModel.find().sort({createdAt: -1});
-        return res.status(200).send(images);
+        const medias = await mediaModel.find().sort({createdAt: -1});
+        return res.status(200).send(medias);
     } catch (error) {
         console.log(error)
         // TODO :
     }
 }
 
-export const getImage = async (req:Request, res:Response) => {
+export const getMedia = async (req:Request, res:Response) => {
 
     try {
         const { id } = req.params;
         if (!isValidObjectId(id)) log('Error getImage : Invalid `id`', 0);
         
-        const image = await imageModel.findById(id);
+        const media = await mediaModel.findById(id);
         addView(id, res.locals.user._id);
-        if (!isEmpty(image)) return res.status(201).send(image);
+        if (!isEmpty(media)) return res.status(201).send(media);
         else return res.status(201).send('Image not found')
 
     } catch (error) {
@@ -122,7 +122,7 @@ export const getImage = async (req:Request, res:Response) => {
     }
 }
 
-export const getImagesWithParams = async (req:Request, res:Response) => {
+export const getMediasWithParams = async (req:Request, res:Response) => {
     try {
         const { category, tags, folderId, type} = req.query;
         const tagsArr = tags?.toLocaleString().split(',');
@@ -136,38 +136,38 @@ export const getImagesWithParams = async (req:Request, res:Response) => {
         }
         
         
-        const images = await imageModel.find(query).sort({createdAt: -1});
-        return res.status(201).send(images);
+        const medias = await mediaModel.find(query).sort({createdAt: -1});
+        return res.status(201).send(medias);
 
     } catch (error) {
         // TODO :
     }
 }
 
-export const getImagesFromFolder = async (req:Request, res:Response) => {
+export const getMediasFromFolder = async (req:Request, res:Response) => {
     try {
         const { folderId } = req.params;
         console.log(folderId)
-        if(isEmpty(folderId)) throw Error('id is invalid at getimagesfromfolder')
+        if(isEmpty(folderId)) throw Error('id is invalid at getmediasfromfolder')
         
-        const images = await imageModel.find({folderId: folderId}).sort({createdAt: -1});
-        return res.status(201).send(images);
+        const medias = await mediaModel.find({folderId: folderId}).sort({createdAt: -1});
+        return res.status(201).send(medias);
 
     } catch (error) {
         console.log(error)
     }
 }
 
-export const updateImage = (req:Request, res:Response) => {
+export const updateMedia = (req:Request, res:Response) => {
 
     try {
         const { id } = req.params;
-        if(!isValidObjectId) log("Error: updateImage : Invalid `id`", 0);
+        if(!isValidObjectId) log("Error: updateMedia : Invalid `id`", 0);
 
         const {tags, category} = req.body;
         const tagsArr = tags?.toLocaleString().split(',');
 
-        imageModel.findByIdAndUpdate(id,  {
+        mediaModel.findByIdAndUpdate(id,  {
             $set: {
                 tags: tagsArr,
                 category: category.toLocaleString().toLocaleLowerCase()
@@ -184,18 +184,18 @@ export const updateImage = (req:Request, res:Response) => {
 
 }
 
-export const deleteImage = async (req:Request, res:Response) => {
+export const deleteMedia = async (req:Request, res:Response) => {
     try {
         const { id } = req.params;
         if(!isValidObjectId) log("Error: deleteImage : Invalid `id`", 0);
 
-        const image:any = await imageModel.findByIdAndDelete(id);
+        const media:any = await mediaModel.findByIdAndDelete(id);
 
-        fs.unlink(`${config.CDN_PATH}/${image.filePath}`, (err) => {
+        fs.unlink(`${config.CDN_PATH}/${media.filePath}`, (err) => {
             if (err) console.log(err);
         });
 
-        return res.status(201).send(image);
+        return res.status(201).send(media);
 
     } catch (error) {
         console.log(error)

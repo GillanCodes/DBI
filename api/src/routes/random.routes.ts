@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getRandomWithParams, getRandomImage } from "../controllers/random.controller";
+import { getRandomWithParams, getRandomMedia } from "../controllers/random.controller";
 
 let router:Router = Router();
 
-router.get('/all', getRandomImage);
+router.get('/all', getRandomMedia);
 router.get('/', getRandomWithParams);
 
 export default router;

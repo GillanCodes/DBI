@@ -50,7 +50,7 @@ app.use('/cdn', express.static(config.CDN_PATH))
 import authRoutes from "./src/routes/auth.routes";
 import userRoutes from "./src/routes/user.router";
 import folderRoutes from "./src/routes/folder.routes";
-import imageRoutes from "./src/routes/image.routes";
+import mediaRoutes from "./src/routes/media.routes";
 import randomRoutes from "./src/routes/random.routes";
 
 import tagRoutes from "./src/routes/tag.routes";
@@ -60,7 +60,7 @@ import propertyRoutes from "./src/routes/property.routes";
 app.use("/api/auth", authRoutes);
 app.use("/api/user", requireAuth, userRoutes);
 app.use("/api/folder", requireAuth, folderRoutes);
-app.use("/api/image", requireAuth, imageRoutes);
+app.use("/api/image", requireAuth, mediaRoutes);
 app.use("/api/random", requireAuth, randomRoutes);
 
 app.use("/api/tag", requireAuth, tagRoutes);

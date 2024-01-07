@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import imageModel, { IImage } from "../../models/image.model";
+import mediaModel, { IMedia } from "../../models/media.model";
 import isEmpty from "../utils/isEmpty";
-import { addView } from "./image.controller";
+import { addView } from "./media.controller";
 
-export const getRandomImage = async (req:Request, res:Response) => {
+export const getRandomMedia = async (req:Request, res:Response) => {
     try {
-        const images = await imageModel.find();
-        var rdm = Math.floor(Math.random() * images.length);
+        const medias = await mediaModel.find();
+        var rdm = Math.floor(Math.random() * medias.length);
 
-        return res.status(201).send(images[rdm]);
+        return res.status(201).send(medias[rdm]);
 
     } catch (error) {
         console.log(error, 0);
@@ -26,13 +26,15 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
             "$all" : tagsArr
         }
         
-        const image = await imageModel.find(query);
-        var rdm = Math.floor(Math.random() * image.length);
-        var FImage:IImage = image[rdm];
+        const media = await mediaModel.find(query);
+        var rdm = Math.floor(Math.random() * media.length);
+        var FMedia:IMedia = media[rdm];
 
-        addView(FImage._id, res.locals.user._id);
+        console.log(media)
 
-        return res.status(201).send(FImage);
+        addView(FMedia._id, res.locals.user._id);
+
+        return res.status(201).send(FMedia);
 
     } catch (error) {
         // TODO :

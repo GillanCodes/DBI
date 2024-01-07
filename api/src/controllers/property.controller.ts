@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import propertyModel from "../../models/property.model";
 import isEmpty from "../utils/isEmpty";
-import imageModel, { IImage } from "../../models/image.model";
+import mediaModel, { IMedia } from "../../models/media.model";
 import { isValidObjectId } from "mongoose";
 
 export const addProperty = (req: Request, res: Response) => {
 
     var results = {
         property : {},
-        images : [{}],
+        medias : [{}],
     }
 
     try {
@@ -24,19 +24,19 @@ export const addProperty = (req: Request, res: Response) => {
             }).then(async (data) => {
                 results.property = data;
 
-                const images = await imageModel.find();
-                for (let i = 0; i < images.length; i++) {
-                    imageModel.findByIdAndUpdate(images[i]._id, {
+                const medias = await mediaModel.find();
+                for (let i = 0; i < medias.length; i++) {
+                    mediaModel.findByIdAndUpdate(medias[i]._id, {
                         $addToSet : {
                             properties: data
                         }
                     }, {upsert: true, new: true}).then((res) => {
-                        results.images.push(res);
+                        results.medias.push(res);
                     });
                 }
 
                 return res.status(201).send(results);
-                //TODO : Fix images not on results 
+                //TODO : Fix medias not on results 
 
             }).catch((err) => {
                 console.log(err)
@@ -54,7 +54,7 @@ export const addProperty = (req: Request, res: Response) => {
 
 export const deleteProperty = async (req: Request, res: Response) => {
 
-    var results:IImage[] = [];
+    var results:IMedia[] = [];
 
     try {
         const { id } = req.params;
@@ -62,9 +62,9 @@ export const deleteProperty = async (req: Request, res: Response) => {
 
         const prop = await propertyModel.findByIdAndDelete(id);
 
-        const images = await imageModel.find();
-        for (let i = 0; i < images.length; i++) {
-            await imageModel.findByIdAndUpdate(images[i]._id, {
+        const medias = await mediaModel.find();
+        for (let i = 0; i < medias.length; i++) {
+            await mediaModel.findByIdAndUpdate(medias[i]._id, {
                 $pull: {
                     properties: {
                         _id: id
@@ -95,7 +95,7 @@ export const updateValue = async (req: Request, res: Response) => {
         if (!isValidObjectId(pid)) throw Error('Invalid ID `pid`')
         if (!isValidObjectId(iid)) throw Error('Invalid ID `iid`')
 
-        imageModel.updateOne({_id: iid, "properties._id": pid}, {
+        mediaModel.updateOne({_id: iid, "properties._id": pid}, {
             $set: {
                 "properties.$.value": value
             }

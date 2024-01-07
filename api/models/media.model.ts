@@ -6,7 +6,7 @@ export interface IView {
     viewer: string | ObjectId
 }
 
-export interface IImage extends Document
+export interface IMedia extends Document
 {
     _id: string | ObjectId,
     folderId: string,
@@ -20,7 +20,7 @@ export interface IImage extends Document
     updatedAt: Date | string,
 }
 
-const imageSchema = new Schema<IImage>({
+const mediaSchema = new Schema<IMedia>({
     folderId:   {type:String, required:true},
     filePath:   {type:String, required:true},
     tags:       {type:[String]},
@@ -33,5 +33,5 @@ const imageSchema = new Schema<IImage>({
     }]}
 }, {timestamps: true});
 
-const imageModel = model<IImage>('image', imageSchema);
-export default imageModel;
+const mediaModel = model<IMedia>('medias', mediaSchema);
+export default mediaModel;
