@@ -27,7 +27,7 @@ export default function MediaGrid({media} : {media:IMedia}) {
                     className='media'
                     onClick={() => window.location.assign(`/i/${media._id}`)}
                 />
-                <FontAwesomeIcon icon={faVideo} style={{position:"relative", marginLeft: "-240px", bottom: 10, fontSize: "24px"}} />
+                <FontAwesomeIcon icon={faVideo} style={{position:"relative", marginLeft: "-240px", bottom: 10, fontSize: "22px", background:"rgba(0,0,0,0.6)", padding:"5px", borderRadius:"7px"}} />
                 </div>
             )}
         </>
