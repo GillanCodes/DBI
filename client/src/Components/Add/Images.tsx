@@ -53,7 +53,7 @@ export default function Images() {
                 <div className="head-content">
                     
                     <div className="input">
-                        <input type="file" name="files" id="files" multiple accept="image/*,.jpg,.jpeg,.png,.gif" onChange={(e) => setFiles(e.target.files)}  />
+                        <input type="file" name="files" id="files" multiple accept="image/*,.jpg,.jpeg,.png,.gif,video/*,.mp4,.ogg,.avi,.mpeg" onChange={(e) => setFiles(e.target.files)}  />
                     </div>
                     <div className="folderSelect">
                         {load && (
@@ -74,7 +74,14 @@ export default function Images() {
                 <div className="images-display">
                     {!isEmpty(files) && Array.from(files).map((file:any) => {
                         var url = URL.createObjectURL(file);
-                        return <img className="img-preview" src={url} alt="img" />
+                        if (file.type.includes("video"))
+                        {
+                            return <video className="img-preview" src={url} muted autoPlay loop />
+                        }
+                        else 
+                        {
+                            return <img className="img-preview" src={url} alt="img" />
+                        }
                     })}
                 </div>
                 
