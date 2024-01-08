@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { isEmpty } from "../../Utils";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import MediaGrid from "../Utils/MediaGrid";
 
 export default function Folder() {
 
@@ -71,7 +72,8 @@ export default function Folder() {
                         <div className="medias" >
                             {loadedImg!.map((media:IMedia) => {
                                 return (
-                                    <img className="media" src={`${process.env.REACT_APP_CDN_URL}/uploads/${media.filePath}`} alt="" onClick={() => window.location.assign(`/i/${media._id}`)}/>
+                                    <MediaGrid media={media} />
+                                    //<img className="media" src={`${process.env.REACT_APP_CDN_URL}/uploads/${media.filePath}`} alt="" onClick={() => window.location.assign(`/i/${media._id}`)}/>
                                 )
                             })}
                         </div>

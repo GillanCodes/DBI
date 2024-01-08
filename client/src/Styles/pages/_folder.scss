@@ -25,14 +25,9 @@
             align-items: center;
             flex-wrap: wrap;
 
-            .media
-            {
-                width: 300px;
-                height: 300px;
-                object-fit: cover;
-                margin: .5em;
-                
-            }
+            column-gap: .5em;
+            row-gap: .5em;
+
         }
         
         
