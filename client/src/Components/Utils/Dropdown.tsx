@@ -15,6 +15,7 @@ export default function Dropdown({id, title, items, currentValue, setCurrentValu
     const selection = (item:IItem) => {
         setCurrentValue(item.value);
         setSelect(item.name);
+        setOpen(false);
     }
 
     return (
