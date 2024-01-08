@@ -18,7 +18,7 @@ export default function Random() {
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
-    const [params, setParams] = useState({category: "", tags: ""});
+    const [params, setParams] = useState({category: "", tags: "", type: ""});
     
 
     //Store all the previus pic
@@ -35,7 +35,7 @@ export default function Random() {
     const getMedia = () => {
         axios({
             method: "GET",
-            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}`,
+            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}&type=${params.type}`,
             withCredentials:true
         }).then((res) => {
             setImgData(res.data);
@@ -87,6 +87,7 @@ export default function Random() {
                             <Dropdown id="his" title="history" setCurrentValue={setImg} currentValue={img} items={history} />
                         )}
                         <input type="text" className="input" placeholder="Category" onChange={(e) => setParams({...params, category:e.target.value})}  />
+                        <input type="text" className="input" placeholder="type" onChange={(e) => setParams({...params, type:e.target.value})}  />
                         <p className="button" onClick={() => setTagModal(!tagModal)}>Tag</p>
                     </div>
 

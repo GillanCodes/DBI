@@ -17,11 +17,12 @@ export const getRandomMedia = async (req:Request, res:Response) => {
 
 export const getRandomWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags } = req.query;
+        const { category, tags, type } = req.query;
         const tagsArr = tags?.toLocaleString().split(',');
         var query:any = {}
 
         if (!isEmpty(category)) query.category = category!.toLocaleString().toLowerCase();
+        if(!isEmpty(type)) query.type = type
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
         }
