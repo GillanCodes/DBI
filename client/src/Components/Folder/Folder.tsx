@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { IFolder, IMedia, IState } from "../../types"
 import { useEffect, useState } from "react";
 import { isEmpty } from "../../Utils";
@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import MediaGrid from "../Utils/MediaGrid";
 
 export default function Folder() {
+
+    const dispatch:any = useDispatch();
 
     const params = useParams();
 
@@ -61,6 +63,22 @@ export default function Folder() {
         }
     }
 
+    const deleteHandle = () => {
+        axios({
+            method: "delete",
+            url: `${process.env.REACT_APP_API_URL}/folder/${current?._id}`,
+            withCredentials: true,
+        }).then(() => {
+            const timer = setTimeout(() => {
+                window.location.assign('/');
+            }, 1500)
+
+            return () => {
+                clearTimeout(timer);
+            }
+        })
+    }
+
     return (
         <div className='container'>
             {load && (
@@ -68,6 +86,7 @@ export default function Folder() {
                     <div className="content">
                         <div className="head">
                             <h1>{current?.name}</h1>
+                            <p className="button" onClick={deleteHandle}>Delete</p>
                         </div>
                         <div className="medias" >
                             {loadedImg!.map((media:IMedia) => {
