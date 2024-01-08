@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {createFolder, editFolder, editFolderIcon, getAllFolders, getFolder} from "../controllers/folder.controller";
+import {createFolder, deleteFolder, editFolder, editFolderIcon, getAllFolders, getFolder} from "../controllers/folder.controller";
 
 import multer = require("multer");
 const upload = multer();
@@ -13,5 +13,7 @@ router.get('/:id', getFolder);
 
 router.patch('/icon/:id', upload.single('file') ,editFolderIcon);
 router.patch('/:id', editFolder);
+
+router.delete('/:id', deleteFolder)
 
 export default router;

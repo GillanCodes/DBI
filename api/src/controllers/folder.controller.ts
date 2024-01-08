@@ -5,6 +5,7 @@ import { isValidObjectId } from "mongoose";
 import isEmpty from "../utils/isEmpty";
 import * as fs from "fs";
 import sanitizedConfig from "../../config/config";
+import mediaModel from "../../models/media.model";
 
 export const createFolder = (req: Request, res: Response) => {
     try {
@@ -105,6 +106,40 @@ export const editFolderIcon = async (req:Request, res:Response) => {
         })
 
     } catch (error) {
-        // TODO : 
+        // ! TODO : 
     }
+}
+
+export const deleteFolder = async (req:Request, res:Response) => {
+
+    try {
+    
+        const { id } = req.params;
+        if (!isValidObjectId(id)) log('error: Not Valid property `ID` at deleteFolder', 0);
+
+        var folder = await folderModel.findById(id);
+        if(isEmpty(folder)) throw Error('folder not found');
+
+        var medias = await mediaModel.find({folderId: id});
+        if(!isEmpty(medias))
+        {
+            for (let i = 0; i < medias.length; i++) {
+                var media = medias[i];
+
+                await fs.unlink(`${sanitizedConfig.CDN_PATH}/uploads/${media.filePath}`, (err) => {
+                    if (err) console.log(err);
+                });               
+                        
+                await mediaModel.findByIdAndDelete(media._id);
+            }
+        }
+
+        await folderModel.findByIdAndDelete(folder!._id);
+        return res.status(201).send(folder);
+
+    } catch (error) {
+        console.log(error);
+        // ! TODO    
+    }
+
 }
