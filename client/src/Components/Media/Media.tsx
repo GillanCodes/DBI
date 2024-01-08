@@ -36,11 +36,17 @@ export default function Media() {
             setMedia(mediaReducer[0])
             if(!isEmpty(media)) setLoad(true)
         }
-    }, [mediaReducer ,media])
+    }, [mediaReducer, media])
 
     const deleteHandle = () => {
         dispatch(deleteMedia(media!._id));
-        window.location.assign('/');
+        const timer = setTimeout(() => {
+            window.location.assign('/');
+        }, 1000);
+
+        return () => {
+            clearTimeout(timer);
+        }
     }
 
     return (

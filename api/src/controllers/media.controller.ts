@@ -189,10 +189,13 @@ export const deleteMedia = async (req:Request, res:Response) => {
         const { id } = req.params;
         if(!isValidObjectId) log("Error: deleteImage : Invalid `id`", 0);
 
-        const media:any = await mediaModel.findByIdAndDelete(id);
+        const media:any = await mediaModel.findById(id);
 
-        fs.unlink(`${config.CDN_PATH}/${media.filePath}`, (err) => {
+        fs.unlink(`${config.CDN_PATH}/uploads/${media.filePath}`, async (err) => {
             if (err) console.log(err);
+            else {
+                await mediaModel.findByIdAndDelete(id);
+            }
         });
 
         return res.status(201).send(media);
