@@ -44,10 +44,10 @@ function checkType(type:any) {
 export const createMedias = async (req: any, res: Response) => {
     const files = req.files;
     const { folderId } = req.body;
-
     var results:any = [];
 
     try {
+
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
@@ -83,12 +83,12 @@ export const createMedias = async (req: any, res: Response) => {
                 properties
             }).then((data) => {
                 results.push(data);
+                addView(data._id, res.locals.user._id);
             }).catch((err) => {
                 console.log(err);
             })   
         }
 
-        addView(results._id, res.locals.user._id);
         return res.status(201).send(results); 
         
     } catch (error) {
@@ -147,7 +147,6 @@ export const getMediasWithParams = async (req:Request, res:Response) => {
 export const getMediasFromFolder = async (req:Request, res:Response) => {
     try {
         const { folderId } = req.params;
-        console.log(folderId)
         if(isEmpty(folderId)) throw Error('id is invalid at getmediasfromfolder')
         
         const medias = await mediaModel.find({folderId: folderId}).sort({createdAt: -1});
