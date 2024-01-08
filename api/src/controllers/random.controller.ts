@@ -29,9 +29,7 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         
         const media = await mediaModel.find(query);
         var rdm = Math.floor(Math.random() * media.length);
-        var FMedia:IMedia = media[rdm];
-
-        console.log(media)
+        var FMedia:IMedia = media[rdm]
 
         addView(FMedia._id, res.locals.user._id);
 

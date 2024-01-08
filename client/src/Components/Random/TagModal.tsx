@@ -18,7 +18,6 @@ export default function TagModal({close, FTags, setFTags} : {close:any, FTags:an
         {
             var tagsArr = FTags!.split(','); //Array
             const index = tagsArr.findIndex((i:string) => i === tag._id)
-            console.log(index)
             if (index >= 0)
             {
                 var filtered = tagsArr.filter((t:string) => {
