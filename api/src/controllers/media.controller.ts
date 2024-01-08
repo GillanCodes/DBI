@@ -66,9 +66,9 @@ export const createMedias = async (req: any, res: Response) => {
                 file.mimetype !== "video/ogg")
 
                 throw Error('image_upload_invalid_type_file');
-            if (file.size > 5000000) throw Error('image_upload_file_max_size');
+            //if (file.size > 5000000) throw Error('image_upload_file_max_size');
 
-            var filename = `${genUId()}.png`;
+            var filename = `${genUId()}.${file.mimetype.split("/")[1]}`;
             fs.writeFile(`${config.CDN_PATH}/uploads/${filename}`, file.buffer, (err:any) => {
                 if (err) throw Error(err);
             });
