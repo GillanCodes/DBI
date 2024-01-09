@@ -43,6 +43,18 @@ export default function TagModal({close, FTags, setFTags} : {close:any, FTags:an
         return;
     }
 
+    //Shortcuts
+    useEffect(() => {
+        const keyDownHandler = (event:any) => {
+            var key = event.keyCode;
+            if (key === 27) close(false);
+        }
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        }
+    }, [])
+
     return (
         <div className='tag-modal modal-content'>
             <div className="head">
