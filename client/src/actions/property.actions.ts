@@ -36,3 +36,20 @@ export const getProperties = () => {
         });
     };
 };
+
+export const updateProerties = (mid:string, pid:string, value:string | number) => {
+    return (dispatch:any) => {
+        return axios({
+            method:"PATCH",
+            url:`${process.env.REACT_APP_API_URL}/property/${pid}/${mid}`,
+            withCredentials:true,
+            data: {
+                value
+            }
+        }).then((res) => {
+            dispatch({type: UPDATE_PROPERTY, payload: res.data});
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+}

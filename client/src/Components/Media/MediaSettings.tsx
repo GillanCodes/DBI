@@ -3,6 +3,7 @@ import { isEmpty } from "../../Utils";
 import { IFolder, IMedia, IProperty, IState, ITag } from "../../types";
 import { useEffect, useState } from "react";
 import { updateMedia } from "../../actions/media.actions";
+import { updateProerties } from "../../actions/property.actions";
 
 export default function MediaSettings({media, close}: {media:IMedia | undefined, close:any}) {
     
@@ -18,7 +19,7 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
     useEffect(() => {
         if(!isEmpty(media)) setImgState(media);
         if (!isEmpty(folders) && !isEmpty(media)) setLoad(true);
-    }, [folders])
+    }, [folders, media])
 
     const tagHandle = (tag:ITag) => {
         if (!isEmpty(imgState) && !isEmpty(imgState.tags)) {
@@ -41,6 +42,18 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
     const saveHandle = () => {
         dispatch(updateMedia(media!._id, imgState.tags.toLocaleString(), imgState.category));
     }    
+
+    const propertyChange = (value:string | number, prop:IProperty) => 
+    {
+        if (prop.type === "string") dispatch(updateProerties(imgState._id, prop._id, value));    
+        if (prop.type === "number") dispatch(updateProerties(imgState._id, prop._id, Number(value)));    
+    }
+
+    const countProperty = (prop:IProperty, op:string) =>
+    {
+        if (op === "+") dispatch(updateProerties(imgState._id, prop._id, Number(prop.value) + 1));
+        if (op === "-") dispatch(updateProerties(imgState._id, prop._id, Number(prop.value) - 1));
+    }
 
     return (
         <div className="media-settings">
@@ -96,21 +109,25 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
                                         return (
                                             <div className="property">
                                                 <p className="name">{prop.name}</p>
+                                                
                                                 {prop.type === "number" && (
-                                                    <input type="number" value={prop.value} />
+                                                    <input type="number" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
                                                 )}
+
                                                 {prop.type === "count" && (
                                                     <div>
                                                         <p>{prop.value}</p>
                                                         <div>
-                                                            <p>+</p>
-                                                            <p>-</p>
+                                                            <p onClick={() => countProperty(prop, "+")}>+</p>
+                                                            <p onClick={() => countProperty(prop, "-")}>-</p>
                                                         </div>
                                                     </div>
                                                 )}
-                                                {prop.type === "text" && (
-                                                    <input type="text" value={prop.value} />
+
+                                                {prop.type === "string" && (
+                                                    <input type="text" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
                                                 )}
+
                                             </div>
                                         )
                                     })}

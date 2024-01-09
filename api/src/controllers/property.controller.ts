@@ -107,8 +107,14 @@ export const updateValue = async (req: Request, res: Response) => {
             $set: {
                 "properties.$.value": value
             }
-        }, {upsert: true, new:true}).then((data) => {
-            return res.status(201).send(data);
+        }, {upsert: true, new:true}).then( async (data) => {
+            if (data)
+            {
+                var media = await mediaModel.findById(iid);
+                return res.status(201).send(media);
+            }
+            // return res.status(201).send(data);
+            return
         }).catch((err) => {
             console.log(err);
             // TODO :

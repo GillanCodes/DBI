@@ -106,10 +106,34 @@
                     }
 
                 }
-            }
-        
 
-            
+                .properties
+                {
+
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+                    column-gap: 1em;
+                    row-gap: 1em;
+
+
+                    .property
+                    {
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        .name
+                        {
+
+                        }
+
+                    }
+                }
+            }
         }
 
     }

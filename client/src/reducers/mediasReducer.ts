@@ -1,4 +1,5 @@
 import { GET_MEDIAS, UPDATE_MEDIA } from "../actions/media.actions";
+import { UPDATE_PROPERTY } from "../actions/property.actions";
 import { IMedia } from "../types";
 
 const initialState:object = {};
@@ -13,7 +14,12 @@ export default function mediasReducer(state:any = initialState, action:any)
             return state.map((media:IMedia) => {
                 if (media._id === action.payload._id) return action.payload;
                 else return media;
-            })
+            });
+        case UPDATE_PROPERTY:
+            return state.map((media:IMedia) => {
+                if (media._id === action.payload._id) return action.payload;
+                else return media;
+            });
         default:
             return state;
     }
