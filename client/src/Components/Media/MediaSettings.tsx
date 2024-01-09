@@ -16,6 +16,18 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
 
     const [imgState, setImgState]:any = useState();
 
+    //Shortcuts
+    useEffect(() => {
+        const keyDownHandler = (event:any) => {
+            var key = event.keyCode;
+            if (key === 27) close(false);
+        }
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        }
+    }, [])
+
     useEffect(() => {
         if(!isEmpty(media)) setImgState(media);
         if (!isEmpty(folders) && !isEmpty(media)) setLoad(true);
