@@ -26,6 +26,7 @@ export default function Discover() {
     }
 
     const dispatch:any = useDispatch();
+    const [load, setLoad] = useState(false);
     const [loadImg, setLoadImg] = useState(true);
     const [count, setCount] = useState(20)
 
@@ -40,13 +41,13 @@ export default function Discover() {
             setLoadImg(true);
         }
     }
-
+  
     useEffect(() => {
         if (!isEmpty(medias)) shuffleArr(medias);
     }, [medias])
 
     useEffect(() => {
-        if(loadImg && !isEmpty(suffle)) 
+        if(load && loadImg && !isEmpty(suffle)) 
         {
             setLoadImg(false);
             setImgs(suffle!.slice(0, count));
@@ -55,10 +56,17 @@ export default function Discover() {
 
         window.addEventListener('scroll', loadMore);
         return () => window.removeEventListener('scroll', loadMore);
-    }, [loadImg, count, imgs, suffle])
+    }, [load, loadImg, count, imgs, suffle])
 
     useEffect(() =>{
         dispatch(getAllMedias());
+        const timer = setTimeout(() => {
+            setLoad(true);
+        }, 1000) 
+
+        return () => {
+            clearTimeout(timer)
+        }
     }, [])
 
     return (
