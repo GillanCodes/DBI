@@ -82,6 +82,22 @@ export default function Random() {
         setParams({...params, tags:FTags});
     }, [FTags]);
 
+    //Shortcuts
+    useEffect(() => {
+        const keyDownHandler = (event:any) => {
+            var key = event.keyCode;
+            console.log(event.keyCode);
+
+            if (key === 39) getMedia(); //next media right arrow
+        }
+
+        document.addEventListener('keydown', keyDownHandler);
+
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        }
+    }, [])
+
     return (
         <div className="container">
             <>
