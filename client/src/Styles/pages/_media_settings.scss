@@ -113,6 +113,7 @@
                     display: flex;
                     justify-content: space-evenly;
                     align-items: center;
+                    flex-wrap: wrap;
 
                     column-gap: 1em;
                     row-gap: 1em;
@@ -123,11 +124,91 @@
 
                         display: flex;
                         flex-direction: column;
-                        justify-content: center;
                         align-items: center;
+
+                        height: 150px;
+                        width: 300px;
+                        overflow: hidden;
 
                         .name
                         {
+                            font-size: 18px;
+                            text-transform: uppercase;
+                            text-decoration: underline;
+                            font-weight: 500;
+                        }
+
+                        .inputs 
+                        {
+                            flex-grow: 1;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+
+                            .counter
+                            {
+
+                                display: flex;
+                                align-items: center;
+
+                                .value
+                                {
+                                    border: 2px $secondary solid;
+                                    border-radius: 10px 0px 0px 10px;
+                                    padding: 5px;
+                                    width: 50px;
+                                    height: 50px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+
+                                .buttons 
+                                {
+                                    height: 50px;
+                                    padding: 5px;
+                                    width: 30px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    border: 2px $secondary solid;
+                                    border-radius: 0px 10px 10px 0px;
+
+                                    .counter-button
+                                    {
+                                        font-size: 24px;
+                                        font-weight: 500;
+                                        cursor: pointer;
+                                        width: 30px;
+                                        height: 30px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+
+                                        &:hover
+                                        {
+                                            color: $accent;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            .textarea 
+                            {
+                                border-radius: 10px;
+                                border: 3px solid $secondary;
+                                background-color: $background;
+                                color: $text;
+
+                                resize: none;
+                                height: 100px;
+                                width: 290px;
+                            }
 
                         }
 

@@ -110,23 +110,25 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
                                             <div className="property">
                                                 <p className="name">{prop.name}</p>
                                                 
-                                                {prop.type === "number" && (
-                                                    <input type="number" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
-                                                )}
+                                                <div className="inputs">
+                                                    {prop.type === "number" && (
+                                                        <input className="number input" type="number" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
+                                                    )}
 
-                                                {prop.type === "count" && (
-                                                    <div>
-                                                        <p>{prop.value}</p>
-                                                        <div>
-                                                            <p onClick={() => countProperty(prop, "+")}>+</p>
-                                                            <p onClick={() => countProperty(prop, "-")}>-</p>
+                                                    {prop.type === "count" && (
+                                                        <div className="counter">
+                                                            <p className="value">{prop.value}</p>
+                                                            <div className="buttons">
+                                                                <p className="counter-button" onClick={() => countProperty(prop, "+")}>+</p>
+                                                                <p className="counter-button" onClick={() => countProperty(prop, "-")}>-</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )}
 
-                                                {prop.type === "string" && (
-                                                    <input type="text" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
-                                                )}
+                                                    {prop.type === "string" && (
+                                                        <textarea className="textarea" value={prop.value} onChange={(e) => propertyChange(e.target.value, prop)} />
+                                                    )}
+                                                </div>
 
                                             </div>
                                         )
