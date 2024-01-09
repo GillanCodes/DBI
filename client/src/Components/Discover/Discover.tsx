@@ -1,11 +1,24 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux";
-import { IMedia, IState } from "../../types";
-import { isEmpty } from "../../Utils";
-import { getAllMedias } from "../../actions/media.actions";
-import MediaGrid from "../Utils/MediaGrid";
+import React, { useEffect, useState } from 'react'
+import Tag from '../Add/Tag'
+import TagModal from '../Random/TagModal';
+import axios from 'axios';
+import { IMedia } from '../../types';
+import { isEmpty } from '../../Utils';
+import MediaGrid from '../Utils/MediaGrid';
+import Dropdown from '../Utils/Dropdown';
 
 export default function Discover() {
+
+    const [modal, setModal] = useState<boolean>(false);
+    const [tags, setTags] = useState<string[]>([]);
+    const [category, setCategory] = useState<string>("");
+    const [type, setType] = useState<string>("");
+    
+    const [count, setCount]     = useState(24);
+    const [loadImg, setLoadImg] = useState(true);
+
+    const [query, setQuery] = useState<IMedia[]>();
+    const [medias, setMedias] = useState<IMedia[]>();
 
     function shuffleArr(array:any[]) {
         let currentIndex = array.length,  randomIndex;
@@ -22,18 +35,22 @@ export default function Discover() {
             array[randomIndex], array[currentIndex]];
         }
 
-        setShuffle(array);
+        return array;
     }
 
-    const dispatch:any = useDispatch();
-    const [load, setLoad] = useState(false);
-    const [loadImg, setLoadImg] = useState(true);
-    const [count, setCount] = useState(20)
+    useEffect(() => {
+        axios({
+            method: "GET",
+            url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&category=${category}&type=${type}`,
+            withCredentials: true
+        }).then(async (res) => {
+            setCount(24);
+            var shuffle = await shuffleArr(res.data)
+            setQuery(shuffle)
+            setMedias(shuffle.slice(0,count))
+        })
+    }, [tags, category, type]);
 
-    const [imgs, setImgs]     = useState<IMedia[]>();
-    const [suffle, setShuffle]= useState<IMedia[]>();
-
-    const medias = useSelector((state:IState) => state.mediasReducer);    
 
     const loadMore = () => {
         if (window.innerHeight + document.documentElement.scrollTop + 1 > document.scrollingElement!.scrollHeight) 
@@ -41,46 +58,47 @@ export default function Discover() {
             setLoadImg(true);
         }
     }
-  
-    useEffect(() => {
-        if (!isEmpty(medias)) shuffleArr(medias);
-    }, [medias])
 
     useEffect(() => {
-        if(load && loadImg && !isEmpty(suffle)) 
+        if(loadImg && !isEmpty(query)) 
         {
             setLoadImg(false);
-            setImgs(suffle!.slice(0, count));
-            setCount(count + 10)
+            setMedias(query!.slice(0, count));
+            setCount(count + 12)
         }
 
         window.addEventListener('scroll', loadMore);
         return () => window.removeEventListener('scroll', loadMore);
-    }, [load, loadImg, count, imgs, suffle])
-
-    useEffect(() =>{
-        dispatch(getAllMedias());
-        const timer = setTimeout(() => {
-            setLoad(true);
-        }, 1000) 
-
-        return () => {
-            clearTimeout(timer)
-        }
-    }, [])
+    }, [loadImg, count, medias, query])
 
     return (
-        <div className="container">
-            <div className="discover">
-                <div className="medias">
-                    {!isEmpty(imgs) && imgs!.map((media:IMedia) => {
-                        return (
-                            <MediaGrid media={media} />
-                        ) 
-                    })}
+        <div className='container'>
+            <div className="research">
+                <div className="head">
+                    <input type="text" className='input' onChange={(e) => setCategory(e.target.value)} placeholder='Category' />
+                    <input type='text' className='input' list='type' placeholder='Type' onChange={(e) => setType(e.target.value)} />
+                    <datalist id='type'>
+                        <option value="">Tous</option>
+                        <option value="video">Videos</option>
+                        <option value="img">Images</option>
+                    </datalist>
+                    <p className='button' onClick={() => setModal(!modal)}>Tags</p>
+                </div>
+                <div className="body">
+                    <div className="medias">
+                        {!isEmpty(medias) && medias!.map((media:IMedia) => {
+                            return (
+                                <MediaGrid media={media} />
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
-
+            {modal && (
+                <div className="modal">
+                    <TagModal close={setModal} FTags={tags} setFTags={setTags} />
+                </div>
+            )}
         </div>
     )
 }

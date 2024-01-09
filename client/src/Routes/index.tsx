@@ -6,10 +6,9 @@ import Navbar from "../Components/Navbar/Navbar";
 import Add from "../Components/Add/Add";
 import Random from "../Components/Random/Random";
 import Image from "../Components/Media/Media";
-import Discover from "../Components/Discover/Discover";
 import Explore from "../Components/Explore/Explore";
 import Folder from "../Components/Folder/Folder";
-import Research from "../Components/Research/Research";
+import Discover from "../Components/Discover/Discover";
 
 export default function index()
 {
@@ -41,12 +40,6 @@ export default function index()
                 <Route path="/explore" element={
                     <ProtectedRoute>
                         <Explore />
-                    </ProtectedRoute>
-                } />
-
-                <Route path="/research" element={
-                    <ProtectedRoute>
-                        <Research />
                     </ProtectedRoute>
                 } />
 
