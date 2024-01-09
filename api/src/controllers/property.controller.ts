@@ -11,16 +11,24 @@ export const addProperty = (req: Request, res: Response) => {
         medias : [{}],
     }
 
+    function defaultValue(type:string)
+    {
+        if (type === "string") return "defaut string";
+        if (type === "count") return 0;
+        if (type === "number") return 0;
+    }
+
     try {
         
         const { name, type } = req.body;
 
         if (isEmpty(name) && isEmpty(type)) throw Error("missing args") // TODO : ERROR
-        if (type === "count" || type === "string" || type === "rate")
+        if (type === "count" || type === "string" || type === "number")
         {
             propertyModel.create({
                 name,
-                type
+                type,
+                value: defaultValue(type)
             }).then(async (data) => {
                 results.property = data;
 
