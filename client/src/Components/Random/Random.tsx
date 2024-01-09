@@ -2,12 +2,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { isEmpty } from "../../Utils";
 import Dropdown from "../Utils/Dropdown";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IFolder, IMedia, IState } from "../../types";
 import MediaSettings from "../Media/MediaSettings";
 import TagModal from "./TagModal";
+import { getRandomMedias } from "../../actions/media.actions";
+import mediasReducer from "../../reducers/mediasReducer";
 
 export default function Random() {
+
+    const dispatch:any = useDispatch();
+    const mediaData = useSelector((state:any) => state.mediasReducer);
 
     //load state
     const [load, setLoad] = useState(false);
@@ -33,16 +38,18 @@ export default function Random() {
 
     //to get a pic
     const getMedia = () => {
-        axios({
-            method: "GET",
-            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}&type=${params.type}`,
-            withCredentials:true
-        }).then((res) => {
-            setImgData(res.data);
-            setImg(res.data.filePath);
-            setHistory([{name: folders.find((folder:IFolder) => folder._id === res.data.folderId)?.name, value: res.data.filePath}, ...history]);
-        })
+        dispatch(getRandomMedias(params));
     }
+
+    useEffect(() => {
+        if(!isEmpty(mediaData))
+        {
+            var media:IMedia = mediaData[0];
+            setImgData(media);
+            setImg(media.filePath);
+            setHistory([{name: folders.find((folder:IFolder) => folder._id === media.folderId)?.name, value: media.filePath}, ...history]);   
+        }
+    }, [mediaData]);
 
     //To call next pic
     const nextHandle = () => {
@@ -101,7 +108,6 @@ export default function Random() {
                                     <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
                                 )}
                             </>
-                            // <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="media"></img>
                         )}
                         
                     </div>

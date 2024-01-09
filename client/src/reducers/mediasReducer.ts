@@ -1,4 +1,4 @@
-import { GET_MEDIAS, UPDATE_MEDIA } from "../actions/media.actions";
+import { GET_MEDIAS, GET_RANDOM_MEDIAS, UPDATE_MEDIA } from "../actions/media.actions";
 import { UPDATE_PROPERTY } from "../actions/property.actions";
 import { IMedia } from "../types";
 
@@ -10,6 +10,8 @@ export default function mediasReducer(state:any = initialState, action:any)
     {
         case GET_MEDIAS:
             return action.payload
+        case GET_RANDOM_MEDIAS:
+            return [action.payload]
         case UPDATE_MEDIA:
             return state.map((media:IMedia) => {
                 if (media._id === action.payload._id) return action.payload;
