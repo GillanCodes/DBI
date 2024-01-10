@@ -3,6 +3,7 @@ export interface IUser extends Document {
     username: string,
     password: string,
     email: string,
+    likes: [string],
     createdAt: Date | string,
     updatedAt: Date | string
 }
@@ -50,6 +51,7 @@ export interface IMedia
     type: string,
     properties: [IProperty],
     views: [string],
+    likes: [string],
     createdAt: string,
     updatedAt:  string,
 }

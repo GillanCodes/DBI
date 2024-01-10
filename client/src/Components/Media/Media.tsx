@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import MediaSettings from './MediaSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedia, getMedia } from '../../actions/media.actions';
+import LikeButton from '../Utils/LikeButton';
 
 export default function Media() {
 
@@ -59,6 +60,7 @@ export default function Media() {
                             <p className='button' onClick={deleteHandle}>DELETE</p>
                             <p className="button" onClick={() => window.location.assign(`/f/${media?.folderId}`)}>View Folder</p>
                             <p>{media?.views.length} views</p>
+                            <LikeButton media={media} />
                         </div>
                         <div className="single-view">
                             {media?.type === "img" && (
