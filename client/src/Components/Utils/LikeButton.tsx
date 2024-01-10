@@ -3,6 +3,9 @@ import { IMedia, IState } from '../../types'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../../Utils';
 import { likeMedia } from '../../actions/media.actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import {faHeart as faHeartReg} from '@fortawesome/free-regular-svg-icons';
 
 export default function LikeButton({media} : {media:IMedia | undefined}) {
 
@@ -26,9 +29,9 @@ export default function LikeButton({media} : {media:IMedia | undefined}) {
             {load && (
                 <>
                     {media!.likes.includes(user._id) ? (
-                        <p>liked</p>
+                        <FontAwesomeIcon icon={faHeart} />
                     ) : (
-                        <p>not liked</p>
+                        <FontAwesomeIcon icon={faHeartReg} />
                     )}
                 </>
             )}
