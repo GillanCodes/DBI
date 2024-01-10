@@ -16,6 +16,7 @@ export interface IMedia extends Document
     type:string,
     properties: [IProperty],
     views: [string],
+    likes: [string],
     createdAt: Date | string,
     updatedAt: Date | string,
 }
@@ -30,7 +31,8 @@ const mediaSchema = new Schema<IMedia>({
     views:      {type: [{
         date:   {type: String, required:true},
         viewer: {type: String, required:true}
-    }]}
+    }]},
+    likes: {type: [String]},
 }, {timestamps: true});
 
 const mediaModel = model<IMedia>('medias', mediaSchema);

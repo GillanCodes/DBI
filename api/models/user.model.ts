@@ -9,6 +9,7 @@ export interface IUser extends Document {
     username:   string,
     password:   string,
     email:      string,
+    likes:      [string],
     createdAt:  Date | string,
     updatedAt:  Date | string
 }
@@ -22,7 +23,8 @@ export interface UserModel extends Model<IUser> {
 const userSchema = new Schema<IUser>({
     username: {type: String, required:true, unique:true, maxlength:24, minlength:3},
     email: {type: String, required: true, validate: isEmail},
-    password: {type: String, required: true, minlength:5,maxlength:255}
+    password: {type: String, required: true, minlength:5,maxlength:255},
+    likes: {type: [String]}
 }, {timestamps:true});
 
 // Before create account, we hash the password

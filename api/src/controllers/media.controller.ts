@@ -7,6 +7,7 @@ import log from "../../log";
 import genUId from "../utils/genUID";
 import isEmpty from "../utils/isEmpty";
 import propertyModel from "../../models/property.model";
+import userModel from "../../models/user.model";
 
 export function addView(id:string | ObjectId, userId:string)
 {
@@ -176,6 +177,63 @@ export const updateMedia = (req:Request, res:Response) => {
         }).catch((err) => {
             console.log(err);
         })
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+export const likeMedia = async (req:Request, res:Response) => {
+
+    try {
+        const { id } = req.params;
+        if(!isValidObjectId) log("Error: likeMedia : Invalid `id`", 0);
+
+        const media = await mediaModel.findById(id)
+
+        if (media?.likes.includes(res.locals.user._id)){
+
+            mediaModel.findByIdAndUpdate(id,  {
+                $pull: {
+                    likes: res.locals.user._id
+                }
+            }, {upsert: true, new: true}).then((mData) => {
+                
+                userModel.findByIdAndUpdate(res.locals.user._id, {
+                    $pull: {
+                        likes: id,
+                    }
+                }, {new:true, upsert:true}).then((uData) => {
+                    return res.status(201).send({mData, uData});
+                });
+
+            }).catch((err) => {
+                console.log(err);
+            })
+
+        } else {
+
+            mediaModel.findByIdAndUpdate(id,  {
+                $addToSet: {
+                    likes: res.locals.user._id
+                }
+            }, {upsert: true, new: true}).then((mData) => {
+                
+                userModel.findByIdAndUpdate(res.locals.user._id, {
+                    $addToSet: {
+                        likes: id,
+                    }
+                }, {new:true, upsert:true}).then((uData) => {
+                    return res.status(201).send({mData, uData});
+                })
+            }).catch((err) => {
+                console.log(err);
+            })
+
+        }
+
+       
 
     } catch (error) {
         console.log(error)

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createMedias, deleteMedia, getMedia, getMedias, getMediasFromFolder, getMediasWithParams, updateMedia } from "../controllers/media.controller";
+import { createMedias, deleteMedia, getMedia, getMedias, getMediasFromFolder, getMediasWithParams, likeMedia, updateMedia } from "../controllers/media.controller";
 
 import multer = require('multer');
 const upload = multer();
@@ -15,6 +15,7 @@ router.get('/:id', getMedia);
 
 
 router.patch('/:id', updateMedia);
+router.patch('/like/:id', likeMedia);
 
 router.delete('/:id', deleteMedia);
 
