@@ -9,6 +9,7 @@ import TagModal from "./TagModal";
 import { getRandomMedias } from "../../actions/media.actions";
 import SidePanel from "../Utils/SidePanel";
 import SideFilter from "./SideFilter";
+import SideSettings from "./SideSettings";
 
 export default function Random() {
 
@@ -97,23 +98,28 @@ export default function Random() {
         }
     }, [])
 
-    function setSetting (field:string, value:string | number)
-    {
-        
-    }
-
     return (
         <div className={sidePanel.open ? "container has-side-bar" : "container"}>
             <>
                 <div className="random">
                     <div className="top-bar">
-                        <p className="button" onClick={prevHandle}>Prev</p>
-                        <p className="button" onClick={nextHandle}>Next</p>
-                        <p className="button" onClick={() => setModal(!modal)}>Settings</p>
-                        <p className="button" onClick={() => setSidePanel({content:"filter", open:!sidePanel.open})}>Filter</p>
-                        {!isEmpty(history) && (
-                            <Dropdown id="his" title="history" setCurrentValue={setImg} currentValue={img} items={history} />
-                        )}
+                        <div className="left group">
+                            <p className="button" onClick={prevHandle}>Prev</p>
+                            <p className="button" onClick={nextHandle}>Next</p>
+                        </div>
+                        <div className="right group">
+                            {sidePanel.open ? (
+                                <>
+                                    <p className="button" onClick={() => setSidePanel({content:"", open:false})}>Close</p>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="button" onClick={() => setSidePanel({content:"filter", open:!sidePanel.open})}>Filter</p>
+                                    <p className="button" onClick={() => setSidePanel({content:"settings", open:!sidePanel.open})}>Settings</p>
+                                </>
+                            )}
+                            
+                        </div>
                     </div>
 
                     <div className="display">
@@ -148,6 +154,11 @@ export default function Random() {
                     </SidePanel>
                 )} 
 
+                {sidePanel.open && sidePanel.content === "settings" && (
+                    <SidePanel>
+                        <SideSettings settingsModal={modal} setSettingsModal={setModal} history={history} img={img} setImg={setImg} />
+                    </SidePanel>
+                )}
             </>
 
         </div>

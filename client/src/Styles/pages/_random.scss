@@ -13,20 +13,29 @@ $top-bar-height: 70px;
 
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
-        .button
-        {
-            height: 48px;
+        .group {
+
             display: flex;
-            justify-content: center;
             align-items: center;
-            background-color: $secondary;
 
-            &:hover
+            .button
             {
-                background-color: $accent;
+                height: 48px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $secondary;
+
+                &:hover
+                {
+                    background-color: $accent;
+                }
             }
         }
+
+       
         
 
     }
