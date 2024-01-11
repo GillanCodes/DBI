@@ -114,9 +114,6 @@ export default function Random() {
                         {!isEmpty(history) && (
                             <Dropdown id="his" title="history" setCurrentValue={setImg} currentValue={img} items={history} />
                         )}
-                        <input type="text" className="input" placeholder="Category" onChange={(e) => setParams({...params, category:e.target.value})}  />
-                        <input type="text" className="input" placeholder="type" onChange={(e) => setParams({...params, type:e.target.value})}  />
-                        <p className="button" onClick={() => setTagModal(!tagModal)}>Tag</p>
                     </div>
 
                     <div className="display">
@@ -147,7 +144,7 @@ export default function Random() {
 
                 {sidePanel.open && sidePanel.content === "filter" && (
                     <SidePanel>
-                        <SideFilter />
+                        <SideFilter fTags={FTags} setFtags={setFTags} params={params} setParams={setParams} tagModal={tagModal} setTagModal={setTagModal} />
                     </SidePanel>
                 )} 
 
