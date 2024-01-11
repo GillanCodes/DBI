@@ -7,7 +7,8 @@ import { IFolder, IMedia, IState } from "../../types";
 import MediaSettings from "../Media/MediaSettings";
 import TagModal from "./TagModal";
 import { getRandomMedias } from "../../actions/media.actions";
-import mediasReducer from "../../reducers/mediasReducer";
+import SidePanel from "../Utils/SidePanel";
+import SideFilter from "./SideFilter";
 
 export default function Random() {
 
@@ -32,6 +33,8 @@ export default function Random() {
     //Open modal
     const [modal, setModal] = useState(false);
     const [tagModal, setTagModal] = useState(false);
+    
+    const [sidePanel, setSidePanel] = useState({open:false, content:""});
 
     //folder selector
     const folders = useSelector((state:IState) => state.foldersReducer);
@@ -94,14 +97,20 @@ export default function Random() {
         }
     }, [])
 
+    function setSetting (field:string, value:string | number)
+    {
+        
+    }
+
     return (
-        <div className="container">
+        <div className={sidePanel.open ? "container has-side-bar" : "container"}>
             <>
                 <div className="random">
                     <div className="top-bar">
                         <p className="button" onClick={prevHandle}>Prev</p>
                         <p className="button" onClick={nextHandle}>Next</p>
                         <p className="button" onClick={() => setModal(!modal)}>Settings</p>
+                        <p className="button" onClick={() => setSidePanel({content:"filter", open:!sidePanel.open})}>Filter</p>
                         {!isEmpty(history) && (
                             <Dropdown id="his" title="history" setCurrentValue={setImg} currentValue={img} items={history} />
                         )}
@@ -136,7 +145,12 @@ export default function Random() {
                     </div>
                 )}
 
-                
+                {sidePanel.open && sidePanel.content === "filter" && (
+                    <SidePanel>
+                        <SideFilter />
+                    </SidePanel>
+                )} 
+
             </>
 
         </div>
