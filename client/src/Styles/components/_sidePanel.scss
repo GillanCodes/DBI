@@ -1,0 +1,11 @@
+.side-panel
+{
+    position: absolute;
+    height: 100dvh;
+    width: $nav-width;
+    right: 0;
+    top: 0;
+
+    border-left: 1px $secondary solid;
+    background-color: $background;
+}
