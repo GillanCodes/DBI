@@ -167,11 +167,13 @@ export const updateMedia = (req:Request, res:Response) => {
         const {tags, category} = req.body;
         const tagsArr = tags?.toLocaleString().split(',');
 
+        var query:any = {};
+
+        if (!isEmpty(category)) query.category = category.toLocaleString().toLocaleLowerCase()
+        if (!isEmpty(tagsArr)) query.tags = tagsArr
+
         mediaModel.findByIdAndUpdate(id,  {
-            $set: {
-                tags: tagsArr,
-                category: category.toLocaleString().toLocaleLowerCase()
-            }
+            $set: query
         }, {upsert: true, new: true}).then((data) => {
             return res.status(201).send(data);
         }).catch((err) => {
