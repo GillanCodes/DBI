@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import {faHeart as faHeartReg} from '@fortawesome/free-regular-svg-icons';
 
-export default function LikeButton({media} : {media:IMedia | undefined}) {
+export default function LikeButton({media, style} : {media:IMedia | undefined, style: string | null}) {
 
     const dispatch:any = useDispatch();
 
@@ -25,7 +25,7 @@ export default function LikeButton({media} : {media:IMedia | undefined}) {
     }
 
     return (
-        <div className='like-button button' onClick={unlikeHandle}>
+        <div className={style === "button" ? "like-button button" : "like-button"} onClick={unlikeHandle}>
             {load && (
                 <>
                     {media!.likes.includes(user._id) ? (
