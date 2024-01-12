@@ -9,24 +9,30 @@ import axios from "axios";
 export default function Feed() {
 
     const [loadImg, setLoadImg] = useState(true);
+    const [load, setLoad] = useState(false);
     const [count, setCount]     = useState(5);
     const dispatch:any = useDispatch();
-    // const medias = useSelector((state:IState) => state.mediasReducer);
-    const [medias , setMedias] = useState<IMedia[]>();
+    const medias = useSelector((state:IState) => state.mediasReducer);
+    // const [medias , setMedias] = useState<IMedia[]>();
 
-    function getMedias(count:number)
-    {
-        return axios({
-            method:"get",
-            url:`${process.env.REACT_APP_API_URL}/media/`,
-            withCredentials:true
-        }).then((res) => {
-            const array = res.data.slice(0, count)
-            setMedias(array);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
+
+    useEffect(() => {
+        dispatch(getMedias(count)).then(() => { setLoad(true) });
+    }, [count])
+
+    // function getMedias(count:number)
+    // {
+    //     return axios({
+    //         method:"get",
+    //         url:`${process.env.REACT_APP_API_URL}/media/`,
+    //         withCredentials:true
+    //     }).then((res) => {
+    //         const array = res.data.slice(0, count)
+    //         setMedias(array);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }
 
 
     const loadMore = () => {
@@ -39,7 +45,7 @@ export default function Feed() {
     useEffect(() => {
         if(loadImg)
         {
-            getMedias(count)
+            // getMedias(count)
             setLoadImg(false);
             setCount(count + 5);
         }
@@ -51,7 +57,7 @@ export default function Feed() {
     return (
       <div className="feed">
         <div className="cards">
-            {!isEmpty(medias) && medias!.map((media:IMedia) => {
+            {load && !isEmpty(medias) && medias!.map((media:IMedia) => {
                 return <Card media={media} key={media._id} />
             })}
         </div>

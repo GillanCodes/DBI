@@ -42,7 +42,9 @@ export default function Random() {
 
     //to get a pic
     const getMedia = () => {
-        dispatch(getRandomMedias(params));
+        dispatch(getRandomMedias(params)).then(() => {
+            setLoad(true);
+        });
     }
 
     useEffect(() => {
@@ -66,21 +68,11 @@ export default function Random() {
         setImg(previus)
     }
 
-    //Check if all page is load    
-    useEffect(() => {
-        if (!isEmpty(folders)){
-            setLoad(true);
-        }
-    }, [folders])
-
     //Set up page
     useEffect(() =>{
-        if (load)
-        {
-            getMedia();
-            setPrevius(img);
-        }
-    }, [load])
+        getMedia();
+        setPrevius(img);
+    }, [])
 
     useEffect(() => {
         setParams({...params, tags:FTags});
@@ -123,7 +115,7 @@ export default function Random() {
                     </div>
 
                     <div className="display">
-                        {!isEmpty(img) && !isEmpty(imgData) && (
+                        {load && !isEmpty(img) && !isEmpty(imgData) && (
                             <>
                                 {imgData?.type === "img" && (
                                     <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="img" />
