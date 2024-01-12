@@ -51,7 +51,7 @@ export default function Random() {
             var media:IMedia = mediaData[0];
             setImgData(media);
             setImg(media.filePath);
-            setHistory([{name: folders.find((folder:IFolder) => folder._id === media.folderId)?.name, value: media.filePath}, ...history]);   
+            if (media._id !== imgData?._id) setHistory([{name: folders.find((folder:IFolder) => folder._id === media.folderId)?.name, value: media.filePath}, ...history]);   
         }
     }, [mediaData]);
 
@@ -156,7 +156,7 @@ export default function Random() {
 
                 {sidePanel.open && sidePanel.content === "settings" && (
                     <SidePanel>
-                        <SideSettings settingsModal={modal} setSettingsModal={setModal} history={history} img={img} setImg={setImg} />
+                        <SideSettings settingsModal={modal} setSettingsModal={setModal} history={history} img={img} setImg={setImg} imgData={imgData} />
                     </SidePanel>
                 )}
             </>
