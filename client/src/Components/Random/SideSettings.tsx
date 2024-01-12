@@ -26,7 +26,7 @@ export default function SideSettings({settingsModal, setSettingsModal, history, 
 
             <div className="fields">
                 <p className="button" onClick={() => setSettingsModal(!settingsModal)}>Settings</p>
-                <LikeButton media={imgData} />
+                <LikeButton media={imgData} style={"button"} />
             </div>
 
             <div className="spacer"></div>

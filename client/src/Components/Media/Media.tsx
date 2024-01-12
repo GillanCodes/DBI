@@ -60,7 +60,7 @@ export default function Media() {
                             <p className='button' onClick={deleteHandle}>DELETE</p>
                             <p className="button" onClick={() => window.location.assign(`/f/${media?.folderId}`)}>View Folder</p>
                             <p>{media?.views.length} views</p>
-                            <LikeButton media={media} />
+                            <LikeButton media={media} style={"button"} />
                         </div>
                         <div className="single-view">
                             {media?.type === "img" && (

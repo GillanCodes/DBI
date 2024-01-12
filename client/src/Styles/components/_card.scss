@@ -22,23 +22,33 @@ $card-footer: 50px;
 
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
-        .icon
+        .folder
         {
-            height: 48px;
-            width: 48px;
-            border-radius: 100%;
 
-            object-fit: cover;
-            margin: 0 .5em;
+            display: flex;
+            align-items: center;
+
+            .icon
+            {
+                height: 48px;
+                width: 48px;
+                border-radius: 100%;
+
+                object-fit: cover;
+                margin: 0 .5em;
+            }
+
+            .folder_name
+            {
+                font-size: 20px;
+                font-weight: 600;
+                
+            }
         }
 
-        .folder_name
-        {
-            font-size: 20px;
-            font-weight: 600;
-            
-        }
+        
     }
 
     .card-body
@@ -70,5 +80,19 @@ $card-footer: 50px;
     .card-footer
     {
         height: $card-footer;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .view
+        {
+
+        }
+
+        .date
+        {
+
+        }
+
     }
 }
