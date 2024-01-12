@@ -28,6 +28,25 @@
 
         height: 400px;
         overflow: scroll;
+        width: 170px;
+      
+        .history-list{
+
+            list-style: none;
+            padding: 0;
+
+            .history-item
+            {
+                cursor: pointer;
+                margin: .5em;
+
+                &:hover
+                {
+                    text-decoration: underline;
+                }
+            }
+        }
+        
     }
     
 
