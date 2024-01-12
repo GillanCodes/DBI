@@ -23,6 +23,35 @@
         width: 80%;
     }
 
+
+    .fields
+    {
+        .field
+        {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .field-text
+            {
+                margin: .5em 0;
+                text-transform: capitalize;
+                text-decoration: underline;
+            }
+
+            .field-input
+            {
+                border: 2px solid $accent;
+                border-radius: 8px;
+                padding: .3em;
+                font-size: 16px;
+            }
+
+        }
+    }
+
     .history
     {
 

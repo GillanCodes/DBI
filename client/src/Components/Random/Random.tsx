@@ -150,13 +150,28 @@ export default function Random() {
 
                 {sidePanel.open && sidePanel.content === "filter" && (
                     <SidePanel>
-                        <SideFilter fTags={FTags} setFtags={setFTags} params={params} setParams={setParams} tagModal={tagModal} setTagModal={setTagModal} />
+                        <SideFilter 
+                            fTags={FTags} 
+                            setFtags={setFTags} 
+                            params={params} 
+                            setParams={setParams} 
+                            tagModal={tagModal} 
+                            setTagModal={setTagModal}
+                        />
                     </SidePanel>
                 )} 
 
                 {sidePanel.open && sidePanel.content === "settings" && (
                     <SidePanel>
-                        <SideSettings settingsModal={modal} setSettingsModal={setModal} history={history} img={img} setImg={setImg} imgData={imgData} />
+                        <SideSettings 
+                            settingsModal={modal} 
+                            setSettingsModal={setModal} 
+                            history={history} 
+                            img={img} 
+                            setImg={setImg} 
+                            imgData={imgData}
+                            getMedia={getMedia}
+                        />
                     </SidePanel>
                 )}
             </>
