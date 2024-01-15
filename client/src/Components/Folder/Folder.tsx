@@ -92,7 +92,6 @@ export default function Folder() {
                             {loadedImg!.map((media:IMedia) => {
                                 return (
                                     <MediaGrid media={media} />
-                                    //<img className="media" src={`${process.env.REACT_APP_CDN_URL}/uploads/${media.filePath}`} alt="" onClick={() => window.location.assign(`/i/${media._id}`)}/>
                                 )
                             })}
                         </div>

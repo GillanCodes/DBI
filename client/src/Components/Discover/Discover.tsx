@@ -5,7 +5,6 @@ import axios from 'axios';
 import { IMedia } from '../../types';
 import { isEmpty } from '../../Utils';
 import MediaGrid from '../Utils/MediaGrid';
-import Dropdown from '../Utils/Dropdown';
 
 export default function Discover() {
 
