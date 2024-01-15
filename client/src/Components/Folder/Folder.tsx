@@ -5,6 +5,9 @@ import { isEmpty } from "../../Utils";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import MediaGrid from "../Utils/MediaGrid";
+import SidePanel from "../Utils/SidePanel";
+import SideFilter from "../Random/SideFilter";
+import TagModal from "../Random/TagModal";
 
 export default function Folder() {
 
@@ -18,31 +21,44 @@ export default function Folder() {
 
     const [load, setLoad] = useState<boolean>(false);
     const [medias, setMedias] = useState<IMedia[]>();
-    
+
+    const [sidePan, setSidePan] = useState<boolean>(false);
+    const [tagModal, setTagModal] = useState<boolean>(false);
+
+    const [tags, setTags] = useState([]);
+    const [oParams, setParams] = useState({type: "", category: ""});
+
     const [current, setCurrent] = useState<IFolder>();
 
     const folders = useSelector((state:IState) => state.foldersReducer);
 
     useEffect(() => {
-        if (!isEmpty(folders)) {
+        if (!isEmpty(folders))
+        {
             folders.map((folder:IFolder) => {
-                if (folder._id === params.id){
-                    return setCurrent(folder)
+                if (folder._id === params.id)
+                {
+                    return setCurrent(folder);
                 }
             })
-            if (!isEmpty(current)){
-               axios({
-                    method:"GET",
-                    withCredentials:true,
-                    url: `${process.env.REACT_APP_API_URL}/media/folder/${current?._id}`
-                }).then((res) => {
-                    setMedias(res.data);
-                }).catch((err) => console.log(err));
-            }
         }
+    }, [folders]);
 
-        if (!isEmpty(loadedImg)) setLoad(true);
-    }, [folders, current, loadedImg])
+    useEffect(() => {
+        if (!isEmpty(current))
+        {
+            axios({
+                method: "GET",
+                url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&category=${oParams.category}&type=${oParams.type}&folderId=${current?._id}`,
+                withCredentials: true
+            }).then(async (res) => {
+                setCount(20);
+                setMedias(res.data);
+                setLoadedImg(res.data.slice(0, count));
+                setLoad(true);
+            })
+        }
+    }, [current, tags, oParams]);
 
     useEffect(() => {
         if(loadImg && !isEmpty(medias)) 
@@ -80,13 +96,14 @@ export default function Folder() {
     }
 
     return (
-        <div className='container'>
+        <div className={sidePan ? "container has-side-bar" : "container"}>
             {load && (
                 <div className="folder">
                     <div className="content">
                         <div className="head">
                             <h1>{current?.name}</h1>
                             <p className="button" onClick={deleteHandle}>Delete</p>
+                            <p className="button" onClick={() => setSidePan(!sidePan)}>Filters</p>
                         </div>
                         <div className="medias" >
                             {loadedImg!.map((media:IMedia) => {
@@ -100,6 +117,19 @@ export default function Folder() {
                     
                 </div>
             )}
+
+            <>
+                {sidePan && (
+                    <SidePanel>
+                        <SideFilter fTags={tags} setFtags={setTags} params={oParams} setParams={setParams} tagModal={tagModal} setTagModal={setTagModal} />
+                    </SidePanel>
+                )}
+                {tagModal && (
+                    <div className="modal">
+                        <TagModal close={setTagModal} FTags={tags} setFTags={setTags} />
+                    </div>
+                )}
+            </>
         </div>
     )
 }
