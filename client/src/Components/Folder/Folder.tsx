@@ -101,9 +101,9 @@ export default function Folder() {
                 <div className="folder">
                     <div className="content">
                         <div className="head">
-                            <h1>{current?.name}</h1>
                             <p className="button" onClick={deleteHandle}>Delete</p>
-                            <p className="button" onClick={() => setSidePan(!sidePan)}>Filters</p>
+                            <h1>{current?.name}</h1>
+                            <p className="button" onClick={() => setSidePan(!sidePan)}>{sidePan ? "Close" : "Filters"}</p>
                         </div>
                         <div className="medias" >
                             {loadedImg!.map((media:IMedia) => {
