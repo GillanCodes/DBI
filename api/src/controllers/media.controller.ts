@@ -125,7 +125,7 @@ export const getMedia = async (req:Request, res:Response) => {
 
 export const getMediasWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags, folderId, type} = req.query;
+        const { category, tags, folderId, type, like} = req.query;
         const tagsArr = tags?.toLocaleString().split(',');
         var query:any = {}
 
@@ -134,6 +134,9 @@ export const getMediasWithParams = async (req:Request, res:Response) => {
         if (!isEmpty(category)) query.category = category?.toLocaleString().toLocaleLowerCase();
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
+        }
+        if (!isEmpty(like)) query.likes = {
+            "$all" : res.locals.user._id
         }
         
         
