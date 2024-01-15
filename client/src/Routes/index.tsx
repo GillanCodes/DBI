@@ -9,6 +9,7 @@ import Image from "../Components/Media/Media";
 import Explore from "../Components/Explore/Explore";
 import Folder from "../Components/Folder/Folder";
 import Discover from "../Components/Discover/Discover";
+import Profile from "../Components/Profile/Profile";
 
 export default function index()
 {
@@ -53,7 +54,11 @@ export default function index()
                         <Folder />
                     </ProtectedRoute>
                 } />
-                    
+                <Route path="/profile" element={
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                } />   
             </Routes>
         </BrowserRouter>
     ) 
