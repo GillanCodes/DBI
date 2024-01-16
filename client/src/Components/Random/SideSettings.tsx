@@ -2,23 +2,7 @@ import { useEffect, useState } from "react";
 import { isEmpty } from "../../Utils";
 import LikeButton from "../Utils/LikeButton";
 
-export default function SideSettings({settingsModal, setSettingsModal, history, img, setImg, imgData, getMedia} : {settingsModal:any, setSettingsModal:any, history:any, img:any, setImg:any, imgData:any, getMedia:any}) {
-
-    const [auto, setAuto] = useState<boolean>(false);
-    const [time, setTime] = useState(1);
-
-    useEffect(() => {
-        if (auto)
-        {
-            var IAuto = setInterval(() => {
-                getMedia();
-            }, time * 1000);
-
-            return () => {
-                clearInterval(IAuto);
-            }
-        }
-    }, [auto, time]);
+export default function SideSettings({settingsModal, setSettingsModal, history, img, setImg, imgData, getMedia, auto, setAuto, time, setTime} : {settingsModal:any, setSettingsModal:any, history:any, img:any, setImg:any, imgData:any, getMedia:any, auto:any, setAuto:any, time:any, setTime:any}) {
 
     return (
         <div className="settings-panel">

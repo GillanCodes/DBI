@@ -25,11 +25,14 @@ export default function Random() {
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
-    const [params, setParams] = useState({category: "", tags: "", type: "", like:"true"});
+    const [params, setParams] = useState({category: "", tags: "", type: "", like:"false"});
     
 
     //Store all the previus pic
-    const [history, setHistory]:any = useState([]);
+    const [history, setHistory]:any = useState([]);    
+    
+    const [auto, setAuto] = useState<boolean>(false);
+    const [time, setTime] = useState(1);
 
     //Open modal
     const [modal, setModal] = useState(false);
@@ -46,6 +49,20 @@ export default function Random() {
             setLoad(true);
         });
     }
+
+
+    useEffect(() => {
+        if (auto)
+        {
+            var IAuto = setInterval(() => {
+                getMedia();
+            }, time * 1000);
+
+            return () => {
+                clearInterval(IAuto);
+            }
+        }
+    }, [auto, time]);
 
     useEffect(() => {
         if(!isEmpty(mediaData))
@@ -163,6 +180,10 @@ export default function Random() {
                             setImg={setImg} 
                             imgData={imgData}
                             getMedia={getMedia}
+                            auto={auto}
+                            setAuto={setAuto}
+                            time={time}
+                            setTime={setTime}
                         />
                     </SidePanel>
                 )}
