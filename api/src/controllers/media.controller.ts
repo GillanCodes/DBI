@@ -135,7 +135,7 @@ export const getMediasWithParams = async (req:Request, res:Response) => {
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
         }
-        if (!isEmpty(like)) query.likes = {
+        if (like === "true") query.likes = {
             "$all" : res.locals.user._id
         }
         
