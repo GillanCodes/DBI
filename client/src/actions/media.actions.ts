@@ -10,7 +10,8 @@ export const DELETE_MEDIA = "DELETE_MEDIA";
 type TParams = {
     tags: string,
     category:string,
-    type:string
+    type:string,
+    like:string,
 }
 
 export const getMedias = (count:number) => {
@@ -32,7 +33,7 @@ export const getRandomMedias = (params:TParams) => {
     return (dispatch:any) => {
         return axios({
             method:"get",
-            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}&type=${params.type}`,
+            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}&type=${params.type}&like=${params.like}`,
             withCredentials:true
         }).then((res) => {
             dispatch({type: GET_RANDOM_MEDIAS, payload: res.data});

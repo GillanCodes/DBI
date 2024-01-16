@@ -4,6 +4,11 @@ import { isEmpty } from "../../Utils";
 
 export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any}) {
   
+    const likedHandle = () => {
+        if (params.like === "true") setParams({...params, like: "false"});
+        else setParams({...params, like: "true"});
+    }
+
     return (
         <div className="filter-panel">
                 <h2 className="panel-title">Filters</h2>
@@ -24,6 +29,11 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                             <option value="video">Videos</option>
                             <option value="img">Images</option>
                         </datalist>
+                    </div>
+
+                    <div className="field">
+                        <div className="field-text">Liked</div>
+                        <p className="button" onClick={likedHandle}>{params.like === "true" ? "On" : "Off"}</p>
                     </div>
                 </div>
                 
