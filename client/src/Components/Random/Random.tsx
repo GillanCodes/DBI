@@ -25,7 +25,7 @@ export default function Random() {
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
-    const [params, setParams] = useState({category: "", tags: "", type: "", like:"false"});
+    const [params, setParams] = useState({category: "", tags: "", type: "", like:"false", folderId:""});
     
 
     //Store all the previus pic

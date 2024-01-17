@@ -1,13 +1,38 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TagModal from "./TagModal";
 import { isEmpty } from "../../Utils";
+import Dropdown from "../Utils/Dropdown";
+import { useSelector } from "react-redux";
+import { IFolder, IState } from "../../types";
+
+var foldersItem:any[] = [];
 
 export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any}) {
   
+    const folders = useSelector((state:IState) => state.foldersReducer);
+
+    const [load, setLoad] = useState(false);
+    const [value, setValue] = useState('');
+
     const likedHandle = () => {
         if (params.like === "true") setParams({...params, like: "false"});
         else setParams({...params, like: "true"});
     }
+    
+    useEffect(() => {
+        if (!isEmpty(folders)) {
+            foldersItem = [];
+            foldersItem.push({name: "None", value:""});
+            folders.map((folder:IFolder) => {
+                return foldersItem.push({name: folder.name, value:folder._id});
+            });
+            setLoad(true);
+        }
+    }, [folders]);
+
+    useEffect(() => {
+        setParams({...params, folderId: value});
+    }, [value]);
 
     return (
         <div className="filter-panel">
@@ -29,6 +54,13 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                             <option value="video">Videos</option>
                             <option value="img">Images</option>
                         </datalist>
+                    </div>
+                    
+                    <div className="field">
+                        <p className="field-text">Folder</p>
+                        {load && (
+                            <Dropdown id="folderDd" title="Folder" items={foldersItem} currentValue={value} setCurrentValue={setValue} />
+                        )}
                     </div>
 
                     <div className="field">
