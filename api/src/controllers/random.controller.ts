@@ -17,7 +17,7 @@ export const getRandomMedia = async (req:Request, res:Response) => {
 
 export const getRandomWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags, type, like } = req.query;
+        const { category, tags, type, like, folderId } = req.query;
         const tagsArr = tags?.toLocaleString().split(',');
         var query:any = {}
 
@@ -29,6 +29,7 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         if (like === "true") query.likes = {
             "$all" : res.locals.user._id
         }
+        if (!isEmpty(folderId)) query.folderId = folderId;
         
         const media = await mediaModel.find(query);
         var rdm = Math.floor(Math.random() * media.length);
