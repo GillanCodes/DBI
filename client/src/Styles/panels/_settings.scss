@@ -56,13 +56,21 @@
     {
 
         height: 400px;
-        overflow: scroll;
         width: 170px;
+
+        .history-size
+        {
+            text-align: center;
+            margin: .5em;
+            text-decoration: underline;
+        }
       
         .history-list{
 
             list-style: none;
             padding: 0;
+            overflow: scroll;
+            height: 100%;
 
             .history-item
             {

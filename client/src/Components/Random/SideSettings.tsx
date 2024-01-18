@@ -30,6 +30,8 @@ export default function SideSettings({settingsModal, setSettingsModal, history, 
 
             <div className="history">
 
+                <p className="history-size">{history.length} view{history.length < 2 ? "" : "s" } this session.</p>
+
                 <ul className="history-list">
                     {!isEmpty(history) && history.map((item:any) => {
                         return(                    
