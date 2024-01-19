@@ -99,7 +99,7 @@ export default function Random() {
     useEffect(() => {
         const keyDownHandler = (event:any) => {
             var key = event.keyCode;
-            if (key === 39) getMedia(); //next media right arrow
+            if (key === 39) nextHandle(); //next media right arrow
         }
         document.addEventListener('keydown', keyDownHandler);
         return () => {
