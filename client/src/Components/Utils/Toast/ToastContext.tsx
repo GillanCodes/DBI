@@ -1,7 +1,7 @@
 import { ComponentProps, PropsWithChildren, createContext, useCallback, useContext, useRef, useState } from "react";
 import Toast from "./Toast";
 
-type Params = ComponentProps<typeof Toast>
+type Params = ComponentProps<typeof Toast> & {duration?: number}
 
 const defaultPush = (toast: Params) => {}
 
@@ -37,8 +37,14 @@ function Toasts()
 {
     const [toasts, setToasts] = useState([] as Params[]);
     const { pushToastRef } = useContext(ToastContext);
-    pushToastRef.current = (toast: Params) => {
+    pushToastRef.current = ({duration, ...toast}: Params) => {
         setToasts(v => [...v, toast]);
+        if (duration)
+        {
+            setTimeout(() => {
+                setToasts((v) => v.filter(t => t!== toast));
+            }, duration * 1000);
+        }
     }
     return <div className="toast-container">
         {toasts.map((toast, k) => {

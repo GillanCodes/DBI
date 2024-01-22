@@ -113,7 +113,8 @@ export default function Random() {
     const test = () => {
         pushToast({
             'title' : "TEst",
-            "content" : "SUPER :"
+            "content" : "SUPER :",
+            duration: 1
         })
     }
 
