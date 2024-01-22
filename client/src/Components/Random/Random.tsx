@@ -10,6 +10,7 @@ import { getRandomMedias } from "../../actions/media.actions";
 import SidePanel from "../Utils/SidePanel";
 import SideFilter from "./SideFilter";
 import SideSettings from "./SideSettings";
+import { useToasts } from "../Utils/Toast/ToastContext";
 
 export default function Random() {
 
@@ -105,7 +106,16 @@ export default function Random() {
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
         }
-    }, [])
+    }, []);
+
+    const { pushToast } = useToasts();
+
+    const test = () => {
+        pushToast({
+            'title' : "TEst",
+            "content" : "SUPER :"
+        })
+    }
 
     return (
         <div className={sidePanel.open ? "container has-side-bar" : "container"}>
@@ -115,6 +125,8 @@ export default function Random() {
                         <div className="left group">
                             <p className="button" onClick={prevHandle}>Prev</p>
                             <p className="button" onClick={nextHandle}>Next</p>
+                            <p className="button" onClick={test}>Toast</p>
+
                         </div>
                         <div className="right group">
                             {sidePanel.open ? (

@@ -36,10 +36,13 @@ export default function Medias() {
         }
         data.append("folderId", useFolder)
 
-        dispatch(uploadMedias(data));
+        dispatch(uploadMedias(data)).then(() => {
+            // console.log("complete");
+            setUseFolder("");
+            setFiles();
+        });
 
-        setUseFolder("");
-        setFiles();
+        
         return;
     }
 
@@ -53,7 +56,7 @@ export default function Medias() {
                 <div className="head-content">
                     
                     <div className="input">
-                        <input type="file" name="files" id="files" multiple accept="image/*,.jpg,.jpeg,.png,.gif,video/*,.mp4,.ogg,.avi,.mpeg" onChange={(e) => setFiles(e.target.files)}  />
+                        <input type="file" name="files" id="files" multiple accept="image/*,.jpg,.jpeg,.png,.gif,video/*,.mp4,.ogg,.avi,.mpeg" onChange={(e) => setFiles(e.target.files)} />
                     </div>
                     <div className="folderSelect">
                         {load && (

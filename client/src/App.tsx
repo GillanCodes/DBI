@@ -8,6 +8,7 @@ import { UIdContext } from "./App.context";
 import { getFolders } from "./actions/folder.actions";
 import { getTags } from "./actions/tag.actions";
 import { getProperties } from "./actions/property.actions";
+import { ToastContextProvider } from "./Components/Utils/Toast/ToastContext";
 
 function App() {
 
@@ -36,9 +37,11 @@ function App() {
 
   return (
     <UIdContext.Provider value={UId}>
-      <div className="App">
-        <Routes />
-      </div>
+      <ToastContextProvider>
+        <div className="App">
+          <Routes />
+        </div>
+      </ToastContextProvider>
     </UIdContext.Provider>
   );
 }
