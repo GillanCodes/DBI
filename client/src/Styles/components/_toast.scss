@@ -1,0 +1,38 @@
+.toasts-container.none {
+    display: none;
+}
+
+.toasts-container
+{
+    position: fixed;
+    top: 50px;
+    right: 100px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+
+    z-index: 9;
+
+
+    .toast
+    {
+        color: white;
+        background-color: rgba($color: #2A2A2A61, $alpha: .4);
+
+        backdrop-filter: blur(8px);
+
+        border-radius: 10px;
+
+        height: 75px;
+        width: 250px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .toast--danger { background-color: rgba($color: #AA1A1A61, $alpha: .4) }
+    .toast--success { background-color: rgba($color: #1aaa2161, $alpha: .4) }
+    .toast--warning { background-color: rgba($color: #c4aa1761, $alpha: .4) }
+}

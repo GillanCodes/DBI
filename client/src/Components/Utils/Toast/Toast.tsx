@@ -1,7 +1,7 @@
 type Props = {
     title?: string;
     content: string;
-    type?: "success" | "danger" | "default";
+    type?: "success" | "danger" | "default" | "warning";
 };
 
 export default function Toast({title, content, type = "default"}: Props) {

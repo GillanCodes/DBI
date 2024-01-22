@@ -108,16 +108,6 @@ export default function Random() {
         }
     }, []);
 
-    const { pushToast } = useToasts();
-
-    const test = () => {
-        pushToast({
-            'title' : "TEst",
-            "content" : "SUPER :",
-            duration: 1
-        })
-    }
-
     return (
         <div className={sidePanel.open ? "container has-side-bar" : "container"}>
             <>
@@ -126,8 +116,6 @@ export default function Random() {
                         <div className="left group">
                             <p className="button" onClick={prevHandle}>Prev</p>
                             <p className="button" onClick={nextHandle}>Next</p>
-                            <p className="button" onClick={test}>Toast</p>
-
                         </div>
                         <div className="right group">
                             {sidePanel.open ? (

@@ -46,7 +46,7 @@ function Toasts()
             }, duration * 1000);
         }
     }
-    return <div className="toast-container">
+    return <div className={`toasts-container ${toasts.length > 0 ? "" : "none"}`}>
         {toasts.map((toast, k) => {
             return <Toast {...toast} key={k} />
         })}
