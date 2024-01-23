@@ -117,7 +117,7 @@ export default function Random() {
         return () => {
             document.removeEventListener('keydown', keyDownHandler);
         }
-    }, []);
+    }, [imgData]);
 
     useEffect(() => {
         console.log(folderModal);
