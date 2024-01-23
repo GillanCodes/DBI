@@ -18,9 +18,12 @@ export const getRandomMedia = async (req:Request, res:Response) => {
 export const getRandomWithParams = async (req:Request, res:Response) => {
     try {
         const { category, tags, type, like, folderIds } = req.query;
-        const tagsArr = tags?.toLocaleString().split(',');
-        const folderIdArr = folderIds?.toLocaleString().split(',');
+        var tagsArr:string[] = [] 
+        var folderIdArr:string[] = []
         var query:any = {}
+
+        if (!isEmpty(folderIds)) folderIdArr = folderIds!.toLocaleString().split(',');
+        if (!isEmpty(tags)) tagsArr = tags!.toLocaleString().split(',');
 
         if (!isEmpty(category)) query.category = category!.toLocaleString().toLowerCase();
         if(!isEmpty(type)) query.type = type
@@ -33,17 +36,16 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         if (!isEmpty(folderIdArr)) query.folderId = {
             "$in" : folderIdArr
         }
-        // if (!isEmpty(folderId)) query.folderId = folderId;
-        
+                
         const media = await mediaModel.find(query);
         var rdm = Math.floor(Math.random() * media.length);
         var FMedia:IMedia = media[rdm]
 
-        addView(FMedia._id, res.locals.user._id);
+        if (!isEmpty(FMedia)) addView(FMedia._id, res.locals.user._id);
 
         return res.status(201).send(FMedia);
 
     } catch (error) {
-        // TODO :
+        console.log(error)
     }
 }
