@@ -67,7 +67,7 @@ export default function Media() {
                                 <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${media?.filePath}`} alt="image" />
                             )}
                             {media?.type === "video" && (
-                                <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${media?.filePath}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
+                                <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${media?.filePath}`} loop muted controls autoPlay />
                             )}
                         </div>
                     </div>
