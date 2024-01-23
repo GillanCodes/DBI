@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IFolder, IMedia, IState } from "../../types";
 import MediaSettings from "../Media/MediaSettings";
 import TagModal from "./TagModal";
-import { getRandomMedias } from "../../actions/media.actions";
+import { getMedia, getRandomMedias } from "../../actions/media.actions";
 import SidePanel from "../Utils/SidePanel";
 import SideFilter from "./SideFilter";
 import SideSettings from "./SideSettings";
@@ -45,7 +45,7 @@ export default function Random() {
     const folders = useSelector((state:IState) => state.foldersReducer);
 
     //to get a pic
-    const getMedia = () => {
+    const getRdmMedia = () => {
         dispatch(getRandomMedias(params)).then(() => {
             setLoad(true);
         });
@@ -56,7 +56,7 @@ export default function Random() {
         if (auto)
         {
             var IAuto = setInterval(() => {
-                getMedia();
+                getRdmMedia();
             }, time * 1000);
 
             return () => {
@@ -77,19 +77,21 @@ export default function Random() {
 
     //To call next pic
     const nextHandle = () => {
-        setPrevius(img);
-        getMedia();
+        setPrevius(imgData!._id);
+        getRdmMedia();
     }
 
     //Handle previus pic
     const prevHandle = () => {
-        setImg(previus)
+        dispatch(getMedia(previus))
+        setImg(mediaData[0]._id);
+        // setImg(previus)
     }
 
     //Set up page
     useEffect(() =>{
-        getMedia();
-        setPrevius(img);
+        getRdmMedia();
+        setPrevius(imgData!._id);
     }, [])
 
     useEffect(() => {
@@ -180,7 +182,7 @@ export default function Random() {
                             img={img} 
                             setImg={setImg} 
                             imgData={imgData}
-                            getMedia={getMedia}
+                            getMedia={getRdmMedia}
                             auto={auto}
                             setAuto={setAuto}
                             time={time}
