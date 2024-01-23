@@ -71,9 +71,14 @@ export default function Random() {
             var media:IMedia = mediaData[0];
             setImgData(media);
             setImg(media.filePath);
-            if (media._id !== imgData?._id) setHistory([{name: folders.find((folder:IFolder) => folder._id === media.folderId)?.name, value: media.filePath}, ...history]);   
+            if (media._id !== imgData?._id) setHistory([{name: folders.find((folder:IFolder) => folder._id === media.folderId)?.name, value: media._id}, ...history]);   
         }
     }, [mediaData]);
+
+    const getMediaById = (id:string) => {
+        dispatch(getMedia(id));
+        setImg(mediaData[0]._id);
+    }
 
     //To call next pic
     const nextHandle = () => {
@@ -83,15 +88,13 @@ export default function Random() {
 
     //Handle previus pic
     const prevHandle = () => {
-        dispatch(getMedia(previus))
-        setImg(mediaData[0]._id);
-        // setImg(previus)
+        getMediaById(previus)
     }
 
     //Set up page
     useEffect(() =>{
         getRdmMedia();
-        setPrevius(imgData!._id);
+        if (!isEmpty(imgData)) setPrevius(imgData!._id);
     }, [])
 
     useEffect(() => {
@@ -179,8 +182,7 @@ export default function Random() {
                             settingsModal={modal} 
                             setSettingsModal={setModal} 
                             history={history} 
-                            img={img} 
-                            setImg={setImg} 
+                            getMediaById={getMediaById} 
                             imgData={imgData}
                             getMedia={getRdmMedia}
                             auto={auto}

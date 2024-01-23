@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { isEmpty } from "../../Utils";
 import LikeButton from "../Utils/LikeButton";
 
-export default function SideSettings({settingsModal, setSettingsModal, history, img, setImg, imgData, getMedia, auto, setAuto, time, setTime} : {settingsModal:any, setSettingsModal:any, history:any, img:any, setImg:any, imgData:any, getMedia:any, auto:any, setAuto:any, time:any, setTime:any}) {
+export default function SideSettings({settingsModal, setSettingsModal, history, getMediaById, imgData, getMedia, auto, setAuto, time, setTime} : {settingsModal:any, setSettingsModal:any, history:any, getMediaById:any, imgData:any, getMedia:any, auto:any, setAuto:any, time:any, setTime:any}) {
 
     return (
         <div className="settings-panel">
@@ -36,7 +36,7 @@ export default function SideSettings({settingsModal, setSettingsModal, history, 
                     {!isEmpty(history) && history.map((item:any) => {
                         return(                    
                             <li className="history-item">
-                                <p onClick={() => setImg(item.value)}>{item.name}</p>
+                                <p onClick={() => getMediaById(item.value)}>{item.name}</p>
                             </li>
                         )
                     })}
