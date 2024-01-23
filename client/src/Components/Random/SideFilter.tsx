@@ -7,7 +7,7 @@ import { IFolder, IState } from "../../types";
 
 var foldersItem:any[] = [];
 
-export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any}) {
+export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal, folderModal, setFolderModal, FFolders}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any, folderModal?:any, setFolderModal?:any, FFolders?:any}) {
   
     const folders = useSelector((state:IState) => state.foldersReducer);
 
@@ -56,12 +56,12 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                         </datalist>
                     </div>
                     
-                    <div className="field">
+                    {/* <div className="field">
                         <p className="field-text">Folder</p>
                         {load && (
                             <Dropdown id="folderDd" title="Folder" items={foldersItem} currentValue={value} setCurrentValue={setValue} />
                         )}
-                    </div>
+                    </div> */}
 
                     <div className="field">
                         <div className="field-text">Liked</div>
@@ -70,11 +70,16 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                 </div>
                 
                 <div className="spacer"></div>
-
+                
+                {!isEmpty(folderModal) && (
+                    <div className="fields">
+                        <p className="button" onClick={() => setFolderModal(!folderModal)}>Folders ({!isEmpty(FFolders) ? FFolders.split(',').length : 0})</p>
+                    </div> 
+                )}
+                
+                
                 <div className="fields">
-
                     <p className="button" onClick={() => setTagModal(!tagModal)}>Tags ({!isEmpty(fTags) ? fTags.split(",").length : 0})</p>
-
                 </div>   
 
             </div>

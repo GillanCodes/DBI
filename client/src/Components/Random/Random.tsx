@@ -11,6 +11,7 @@ import SidePanel from "../Utils/SidePanel";
 import SideFilter from "./SideFilter";
 import SideSettings from "./SideSettings";
 import { useToasts } from "../Utils/Toast/ToastContext";
+import FolderModal from "./FolderModal";
 
 export default function Random() {
 
@@ -26,7 +27,8 @@ export default function Random() {
     const [previus, setPrevius] = useState('');
 
     const [FTags, setFTags] = useState<string>("");
-    const [params, setParams] = useState({category: "", tags: "", type: "", like:"false", folderId:""});
+    const [FFolders, setFFolders] = useState<string>("");
+    const [params, setParams] = useState({category: "", tags: "", type: "", like:"false", folderIds:""});
     
 
     //Store all the previus pic
@@ -38,6 +40,7 @@ export default function Random() {
     //Open modal
     const [modal, setModal] = useState(false);
     const [tagModal, setTagModal] = useState(false);
+    const [folderModal, setFolderModal] = useState(false);
     
     const [sidePanel, setSidePanel] = useState({open:false, content:""});
 
@@ -50,7 +53,6 @@ export default function Random() {
             setLoad(true);
         });
     }
-
 
     useEffect(() => {
         if (auto)
@@ -101,6 +103,10 @@ export default function Random() {
         setParams({...params, tags:FTags});
     }, [FTags]);
 
+    useEffect(() => {
+        setParams({...params, folderIds:FFolders})
+    }, [FFolders])
+
     //Shortcuts
     useEffect(() => {
         const keyDownHandler = (event:any) => {
@@ -112,6 +118,10 @@ export default function Random() {
             document.removeEventListener('keydown', keyDownHandler);
         }
     }, []);
+
+    useEffect(() => {
+        console.log(folderModal);
+    }, [folderModal])
 
     return (
         <div className={sidePanel.open ? "container has-side-bar" : "container"}>
@@ -162,6 +172,12 @@ export default function Random() {
                         <TagModal close={setTagModal} FTags={FTags} setFTags={setFTags} />
                     </div>
                 )}
+                
+                {folderModal && (
+                    <div className="modal">
+                        <FolderModal close={setFolderModal} FFolders={FFolders} setFFolders={setFFolders} />
+                    </div>
+                )}
 
                 {sidePanel.open && sidePanel.content === "filter" && (
                     <SidePanel>
@@ -172,6 +188,9 @@ export default function Random() {
                             setParams={setParams} 
                             tagModal={tagModal} 
                             setTagModal={setTagModal}
+                            FFolders={FFolders}
+                            setFolderModal={setFolderModal}
+                            folderModal={folderModal}
                         />
                     </SidePanel>
                 )} 
