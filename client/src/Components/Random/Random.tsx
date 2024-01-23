@@ -139,7 +139,7 @@ export default function Random() {
                                     <img src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} alt="img" />
                                 )}
                                 {imgData?.type === "video" && (
-                                    <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} loop muted onMouseEnter={(e) => e.currentTarget.play()} onMouseLeave={(e) => e.currentTarget.pause()} />
+                                    <video src={`${process.env.REACT_APP_CDN_URL}/uploads/${img}`} loop muted autoPlay controls />
                                 )}
                             </>
                         )}
