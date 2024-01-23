@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { IFolder, IState } from "../../types";
 import Dropdown from "../Utils/Dropdown";
 import { uploadMedias } from "../../actions/media.actions";
+import { useToasts } from "../Utils/Toast/ToastContext";
 
 var foldersItem:any[] = [];
 
 export default function Medias() {
 
     const dispatch:any = useDispatch()
+
+    const { pushToast } = useToasts();
 
     const [files, setFiles]:any = useState();
     const [useFolder, setUseFolder] = useState("");
@@ -36,13 +39,25 @@ export default function Medias() {
         }
         data.append("folderId", useFolder)
 
+        pushToast({
+            title: "Save in Progress",
+            content: "Your files are uploading please wait ...",
+            type: "default",
+            duration: 5
+        })
+
         dispatch(uploadMedias(data)).then(() => {
-            // console.log("complete");
+            pushToast({
+                title: "Upload Success",
+                content: "All your files has been upload !",
+                type: "success",
+                duration: 5
+            });
             setUseFolder("");
             setFiles();
-        });
-
-        
+        }).catch((err:any) => {
+            console.log(err);
+        });        
         return;
     }
 
