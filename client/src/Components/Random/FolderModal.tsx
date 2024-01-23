@@ -43,6 +43,24 @@ export default function FolderModal({close, FFolders, setFFolders} : {close:any,
         return;
     }
 
+    const allHandle = () => {
+        var foldersArr:string[] = [];
+        
+        if (folders.length === FFolders.split(',').length)
+        {
+            setFFolders('');
+        }
+        else
+        {
+            folders.map((f:IFolder) => {
+                foldersArr.push(f._id)
+            });
+
+            var foldersStr = foldersArr!.join(',');
+            setFFolders(foldersStr)
+        }     
+    }
+
     //Shortcuts
     useEffect(() => {
         const keyDownHandler = (event:any) => {
@@ -59,6 +77,7 @@ export default function FolderModal({close, FFolders, setFFolders} : {close:any,
         <div className='tag-modal modal-content'>
             <div className="head">
                 <h2 className="title">Tags Filter</h2>
+                <p className='button' onClick={allHandle}>Un/Check All</p>
                 {!isEmpty(close) && (
                     <p className="close" onClick={() => close(false)}>X</p>
                 )}
