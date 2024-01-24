@@ -5,11 +5,14 @@ import axios from 'axios';
 import { IMedia } from '../../types';
 import { isEmpty } from '../../Utils';
 import MediaGrid from '../Utils/MediaGrid';
+import FolderModal from '../Random/FolderModal';
 
 export default function Discover() {
 
     const [modal, setModal] = useState<boolean>(false);
+    const [modalFolder, setModalFolder] = useState<boolean>(false);
     const [tags, setTags] = useState<string[]>([]);
+    const [folders, setFolders] = useState<string[]>([]);
     const [category, setCategory] = useState<string>("");
     const [type, setType] = useState<string>("");
     
@@ -40,7 +43,7 @@ export default function Discover() {
     useEffect(() => {
         axios({
             method: "GET",
-            url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&category=${category}&type=${type}`,
+            url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&category=${category}&type=${type}&folderIds=${folders}`,
             withCredentials: true
         }).then(async (res) => {
             setCount(24);
@@ -48,7 +51,7 @@ export default function Discover() {
             setQuery(shuffle)
             setMedias(shuffle.slice(0,count))
         })
-    }, [tags, category, type]);
+    }, [tags, category, type, folders]);
 
 
     const loadMore = () => {
@@ -82,6 +85,7 @@ export default function Discover() {
                         <option value="img">Images</option>
                     </datalist>
                     <p className='button' onClick={() => setModal(!modal)}>Tags</p>
+                    <p className='button' onClick={() => setModalFolder(!modalFolder)}>Folders</p>
                 </div>
                 <div className="body">
                     <div className="medias">
@@ -96,6 +100,12 @@ export default function Discover() {
             {modal && (
                 <div className="modal">
                     <TagModal close={setModal} FTags={tags} setFTags={setTags} />
+                </div>
+            )}
+            
+            {modalFolder && (
+                <div className="modal">
+                    <FolderModal close={setModalFolder} FFolders={folders} setFFolders={setFolders} />
                 </div>
             )}
         </div>
