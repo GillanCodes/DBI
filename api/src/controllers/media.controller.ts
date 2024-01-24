@@ -125,9 +125,13 @@ export const getMedia = async (req:Request, res:Response) => {
 
 export const getMediasWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags, folderId, type, like} = req.query;
-        const tagsArr = tags?.toLocaleString().split(',');
+        const { category, tags, folderId, type, like, folderIds} = req.query;
+        var tagsArr:string[] = [] 
+        var folderIdArr:string[] = []
         var query:any = {}
+        
+        if (!isEmpty(folderIds)) folderIdArr = folderIds!.toLocaleString().split(',');
+        if (!isEmpty(tags)) tagsArr = tags!.toLocaleString().split(',');
 
         if (!isEmpty(folderId)) query.folderId = folderId;
         if (!isEmpty(type)) query.type = type;
@@ -137,6 +141,9 @@ export const getMediasWithParams = async (req:Request, res:Response) => {
         }
         if (like === "true") query.likes = {
             "$all" : res.locals.user._id
+        }
+        if (!isEmpty(folderIdArr)) query.folderId = {
+            "$in" : folderIdArr
         }
         
         
