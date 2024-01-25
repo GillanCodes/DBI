@@ -66,7 +66,7 @@ export default function TagModal({close, FTags, setFTags} : {close:any, FTags:an
 
             <div className="body">
                 <div className="tags">
-                    {load && tags.map((tag:ITag) => {
+                    {load && tags.sort((a:any,b:any) => a.name.localeCompare(b.name)).map((tag:ITag) => {
                         return (
                             <div className="tag" onClick={() => tagHandle(tag)}>
                                 <input type="checkbox" checked={FTags.includes(tag._id)} />

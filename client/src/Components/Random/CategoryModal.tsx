@@ -84,7 +84,7 @@ export default function CategoryModal({close, FCategories, setFCategories} : {cl
 
             <div className="body">
                 <div className="tags">
-                    {load && categories.map((category:ICategory) => {
+                    {load && categories.sort((a:any,b:any) => a.name.localeCompare(b.name)).map((category:ICategory) => {
                         return (
                             <div className="tag" onClick={() => categoryHandle(category)}>
                                 <input type="checkbox" checked={FCategories.includes(category._id)} />

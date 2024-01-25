@@ -85,7 +85,7 @@ export default function FolderModal({close, FFolders, setFFolders} : {close:any,
 
             <div className="body">
                 <div className="tags">
-                    {load && folders.map((folder:IFolder) => {
+                    {load && folders.sort((a:any,b:any) => a.name.localeCompare(b.name)).map((folder:IFolder) => {
                         return (
                             <div className="tag" onClick={() => folderHandle(folder)}>
                                 <input type="checkbox" checked={FFolders.includes(folder._id)} />
