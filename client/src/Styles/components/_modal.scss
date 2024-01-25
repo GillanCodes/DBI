@@ -125,25 +125,34 @@
             
         }
 
-
         .tags 
         {
             width: 100%;
             display: flex;
             flex-wrap: wrap;
             overflow: scroll;
+            margin-top: 20px;
 
             .tag
             {
                 display: flex;
-                // justify-content: space-between;
                 align-items: center;
-                width: 150px;
-                margin: .5em;
+                width: 300px;
+                padding: .5em;
+                text-transform: uppercase;
+                font-size: 18px;
+                
+                &:hover
+                    {
+                        text-decoration: underline;
+                        cursor: pointer;
+                    }
 
                 p
                 {
-                    margin-left: 5px;
+                    margin-left: 10px;
+
+                    
                 }
 
                 -webkit-user-select: none; /* Safari */
