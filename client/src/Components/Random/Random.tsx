@@ -12,6 +12,7 @@ import SideFilter from "./SideFilter";
 import SideSettings from "./SideSettings";
 import { useToasts } from "../Utils/Toast/ToastContext";
 import FolderModal from "./FolderModal";
+import CategoryModal from "./CategoryModal";
 
 export default function Random() {
 
@@ -28,6 +29,7 @@ export default function Random() {
 
     const [FTags, setFTags] = useState<string>("");
     const [FFolders, setFFolders] = useState<string>("");
+    const [FCategories, setFCategories] = useState<string>("");
     const [params, setParams] = useState({category: "", tags: "", type: "", like:"false", folderIds:""});
     
 
@@ -41,6 +43,7 @@ export default function Random() {
     const [modal, setModal] = useState(false);
     const [tagModal, setTagModal] = useState(false);
     const [folderModal, setFolderModal] = useState(false);
+    const [catModal, setCatModal] = useState(false);
     
     const [sidePanel, setSidePanel] = useState({open:false, content:""});
 
@@ -106,6 +109,10 @@ export default function Random() {
     useEffect(() => {
         setParams({...params, folderIds:FFolders})
     }, [FFolders])
+
+    useEffect(() => {
+        setParams({...params, category:FCategories})
+    }, [FCategories])
 
     //Shortcuts
     useEffect(() => {
@@ -179,6 +186,12 @@ export default function Random() {
                     </div>
                 )}
 
+                {catModal && (
+                    <div className="modal">
+                        <CategoryModal close={setCatModal} FCategories={FCategories} setFCategories={setFCategories} />
+                    </div>
+                )}
+
                 {sidePanel.open && sidePanel.content === "filter" && (
                     <SidePanel>
                         <SideFilter 
@@ -191,6 +204,9 @@ export default function Random() {
                             FFolders={FFolders}
                             setFolderModal={setFolderModal}
                             folderModal={folderModal}
+                            setCatModal={setCatModal}
+                            catModal={catModal}
+                            fCat={FCategories}
                         />
                     </SidePanel>
                 )} 

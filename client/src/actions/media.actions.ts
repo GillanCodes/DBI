@@ -34,7 +34,7 @@ export const getRandomMedias = (params:TParams) => {
     return (dispatch:any) => {
         return axios({
             method:"get",
-            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&category=${params.category}&type=${params.type}&like=${params.like}&folderIds=${params.folderIds}`,
+            url: `${process.env.REACT_APP_API_URL}/random?tags=${params.tags}&categories=${params.category}&type=${params.type}&like=${params.like}&folderIds=${params.folderIds}`,
             withCredentials:true
         }).then((res) => {
             dispatch({type: GET_RANDOM_MEDIAS, payload: res.data});

@@ -8,6 +8,7 @@ import MediaGrid from "../Utils/MediaGrid";
 import SidePanel from "../Utils/SidePanel";
 import SideFilter from "../Random/SideFilter";
 import TagModal from "../Random/TagModal";
+import CategoryModal from "../Random/CategoryModal";
 
 export default function Folder() {
 
@@ -24,8 +25,10 @@ export default function Folder() {
 
     const [sidePan, setSidePan] = useState<boolean>(false);
     const [tagModal, setTagModal] = useState<boolean>(false);
+    const [catModal, setCatModal] = useState<boolean>(false);
 
     const [tags, setTags] = useState([]);
+    const [cat, setCat] = useState([]);
     const [oParams, setParams] = useState({type: "", category: ""});
 
     const [current, setCurrent] = useState<IFolder>();
@@ -49,7 +52,7 @@ export default function Folder() {
         {
             axios({
                 method: "GET",
-                url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&category=${oParams.category}&type=${oParams.type}&folderId=${current?._id}`,
+                url: `${process.env.REACT_APP_API_URL}/media/params?tags=${tags}&categories=${cat}&type=${oParams.type}&folderId=${current?._id}`,
                 withCredentials: true
             }).then(async (res) => {
                 setCount(20);
@@ -58,7 +61,7 @@ export default function Folder() {
                 setLoad(true);
             })
         }
-    }, [current, tags, oParams]);
+    }, [current, tags, oParams, cat]);
 
     useEffect(() => {
         if(loadImg && !isEmpty(medias)) 
@@ -121,12 +124,27 @@ export default function Folder() {
             <>
                 {sidePan && (
                     <SidePanel>
-                        <SideFilter fTags={tags} setFtags={setTags} params={oParams} setParams={setParams} tagModal={tagModal} setTagModal={setTagModal} />
+                        <SideFilter 
+                            fTags={tags} 
+                            setFtags={setTags} 
+                            params={oParams} 
+                            setParams={setParams} 
+                            tagModal={tagModal} 
+                            setTagModal={setTagModal} 
+                            setCatModal={setCatModal} 
+                            catModal={catModal} 
+                            fCat={cat} 
+                        />
                     </SidePanel>
                 )}
                 {tagModal && (
                     <div className="modal">
                         <TagModal close={setTagModal} FTags={tags} setFTags={setTags} />
+                    </div>
+                )}
+                {catModal && (
+                    <div className="modal">
+                        <CategoryModal close={setCatModal} FCategories={cat} setFCategories={setCat} />
                     </div>
                 )}
             </>

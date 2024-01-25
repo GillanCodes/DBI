@@ -7,7 +7,7 @@ import { IFolder, IState } from "../../types";
 
 var foldersItem:any[] = [];
 
-export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal, folderModal, setFolderModal, FFolders}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any, folderModal?:any, setFolderModal?:any, FFolders?:any}) {
+export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal, folderModal, setFolderModal, FFolders, catModal, setCatModal, fCat}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any, folderModal?:any, setFolderModal?:any, FFolders?:any, catModal:any, setCatModal:any, fCat:any}) {
   
     const folders = useSelector((state:IState) => state.foldersReducer);
 
@@ -46,11 +46,7 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
 
                 <div className="fields">
 
-                    <div className="field">
-                        <p className="field-text">Category</p>
-                        
-                        {/* <input type="text" className="field-input" onChange={(e) => setParams({...params, category:e.target.value})} /> */}
-                    </div>
+                    
 
                     <div className="field">
                         <p className="field-text">Type</p>
@@ -86,6 +82,10 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                 <div className="fields">
                     <p className="button" onClick={() => setTagModal(!tagModal)}>Tags ({!isEmpty(fTags) ? fTags.split(",").length : 0})</p>
                 </div>   
+                
+                <div className="field">
+                    <p className="button" onClick={() => setCatModal(!catModal)}>Category ({!isEmpty(fCat) ? fCat.split(",").length : 0})</p>
+                </div>
 
             </div>
     )
