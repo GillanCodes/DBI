@@ -27,7 +27,7 @@ export const getRandomWithParams = async (req:Request, res:Response) => {
         if (!isEmpty(tags)) tagsArr = tags!.toLocaleString().split(',');
         if (!isEmpty(categories)) catArr = categories!.toLocaleString().split(',');
 
-        if (!isEmpty(catArr)) query.categories = {
+        if (!isEmpty(catArr)) query.category = {
             "$in": catArr
         }
         if(!isEmpty(type)) query.type = type
