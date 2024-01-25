@@ -55,6 +55,7 @@ import randomRoutes from "./src/routes/random.routes";
 
 import tagRoutes from "./src/routes/tag.routes";
 import propertyRoutes from "./src/routes/property.routes";
+import categoryRoutes from "./src/routes/categorty.routes";
 
 //Routes init
 app.use("/api/auth", authRoutes);
@@ -65,6 +66,7 @@ app.use("/api/random", requireAuth, randomRoutes);
 
 app.use("/api/tag", requireAuth, tagRoutes);
 app.use("/api/property", requireAuth, propertyRoutes);
+app.use("/api/category", requireAuth, categoryRoutes);
 
 //Set up server listen
 app.listen(config.PORT, () : void => {

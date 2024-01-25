@@ -179,7 +179,7 @@ export const updateMedia = (req:Request, res:Response) => {
 
         var query:any = {};
 
-        if (!isEmpty(category)) query.category = category.toLocaleString().toLocaleLowerCase()
+        if (!isEmpty(category) && isValidObjectId(category)) query.category = category.toLocaleString().toLocaleLowerCase()
         if (!isEmpty(tagsArr)) query.tags = tagsArr
 
         mediaModel.findByIdAndUpdate(id,  {
