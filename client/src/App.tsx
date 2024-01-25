@@ -9,6 +9,7 @@ import { getFolders } from "./actions/folder.actions";
 import { getTags } from "./actions/tag.actions";
 import { getProperties } from "./actions/property.actions";
 import { ToastContextProvider } from "./Components/Utils/Toast/ToastContext";
+import { getCategories } from "./actions/category.action";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
       dispatch(getFolders());
       dispatch(getTags());
       dispatch(getProperties());
+      dispatch(getCategories());
     }
   }, [UId, dispatch]);
 

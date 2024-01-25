@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "../../Utils";
-import { IFolder, IMedia, IProperty, IState, ITag } from "../../types";
+import { ICategory, IFolder, IMedia, IProperty, IState, ITag } from "../../types";
 import { useEffect, useState } from "react";
 import { updateMedia } from "../../actions/media.actions";
 import { updateProerties } from "../../actions/property.actions";
+import Dropdown from "../Utils/Dropdown";
+
+var CatItems:any[] = [];
 
 export default function MediaSettings({media, close}: {media:IMedia | undefined, close:any}) {
     
@@ -11,10 +14,15 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
 
     const folders = useSelector((state:IState) => state.foldersReducer);
     const tags = useSelector((state:IState) => state.tagsReducer);
+    const categories = useSelector((state:IState) => state.categoryReducer);
 
     const [load, setLoad] = useState(false);
 
     const [imgState, setImgState]:any = useState();
+
+    const setCurrentValue = (cat:string) => {
+        setImgState({...imgState, category: cat});
+    }
 
     //Shortcuts
     useEffect(() => {
@@ -27,6 +35,16 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
             document.removeEventListener('keydown', keyDownHandler);
         }
     }, [])
+
+    useEffect(() => {
+        if (!isEmpty(categories)) {
+            CatItems = [];
+            categories.map((category:ICategory) => {
+                return CatItems.push({name: category.name, value:category._id});
+            });
+            setLoad(true);
+        }
+    }, [categories]);
 
     useEffect(() => {
         if(!isEmpty(media)) setImgState(media);
@@ -94,7 +112,7 @@ export default function MediaSettings({media, close}: {media:IMedia | undefined,
                         <div className="fields inline">
                             <div className="field">
                                 <span>Category</span>
-                                <input className="input" type="text" value={imgState.category} onChange={(e) => setImgState({...imgState, category:e.target.value})} />
+                                <Dropdown title={imgState.category ? imgState.category : "Set Cat"} items={CatItems} id="cat" currentValue={imgState.categories} setCurrentValue={setCurrentValue} />
                             </div>
                         </div>
 

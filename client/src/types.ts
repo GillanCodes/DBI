@@ -41,6 +41,13 @@ export interface ITag
     updatedAt:  Date | string
 }
 
+export interface ICategory
+{
+    _id:        string,
+    name:       string,
+    createdAt:  Date | string,
+    updatedAt:  Date | string
+}
 export interface IMedia
 {
     _id: string,
@@ -63,4 +70,5 @@ export interface IState
     foldersReducer: IFolder[]
     tagsReducer: ITag[]
     propertiesReducer: IProperty[]
+    categoryReducer: ICategory[]
 }

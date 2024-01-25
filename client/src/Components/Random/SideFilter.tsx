@@ -34,6 +34,10 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
         setParams({...params, folderId: value});
     }, [value]);
 
+    const setCurrentValue = (cat:string) => {
+        setParams({...params, category:cat});
+    }
+
     return (
         <div className="filter-panel">
                 <h2 className="panel-title">Filters</h2>
@@ -44,7 +48,8 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
 
                     <div className="field">
                         <p className="field-text">Category</p>
-                        <input type="text" className="field-input" onChange={(e) => setParams({...params, category:e.target.value})} />
+                        
+                        {/* <input type="text" className="field-input" onChange={(e) => setParams({...params, category:e.target.value})} /> */}
                     </div>
 
                     <div className="field">
