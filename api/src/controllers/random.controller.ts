@@ -17,15 +17,19 @@ export const getRandomMedia = async (req:Request, res:Response) => {
 
 export const getRandomWithParams = async (req:Request, res:Response) => {
     try {
-        const { category, tags, type, like, folderIds } = req.query;
-        var tagsArr:string[] = [] 
-        var folderIdArr:string[] = []
+        const { categories, tags, type, like, folderIds } = req.query;
+        var tagsArr:string[] = [];
+        var folderIdArr:string[] = [];
+        var catArr:string[] = [];
         var query:any = {}
 
         if (!isEmpty(folderIds)) folderIdArr = folderIds!.toLocaleString().split(',');
         if (!isEmpty(tags)) tagsArr = tags!.toLocaleString().split(',');
+        if (!isEmpty(categories)) catArr = categories!.toLocaleString().split(',');
 
-        if (!isEmpty(category)) query.category = category!.toLocaleString().toLowerCase();
+        if (!isEmpty(catArr)) query.categories = {
+            "$in": catArr
+        }
         if(!isEmpty(type)) query.type = type
         if (!isEmpty(tagsArr)) query.tags = {
             "$all" : tagsArr
