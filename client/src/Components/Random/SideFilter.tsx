@@ -7,7 +7,45 @@ import { IFolder, IState } from "../../types";
 
 var foldersItem:any[] = [];
 
-export default function SideFilter({fTags, setFtags, params, setParams, tagModal, setTagModal, folderModal, setFolderModal, FFolders, catModal, setCatModal, fCat}: {fTags:any, setFtags:any, params:any, setParams:any, tagModal:any, setTagModal:any, folderModal?:any, setFolderModal?:any, FFolders?:any, catModal:any, setCatModal:any, fCat:any}) {
+export default function SideFilter({
+    fTags, 
+    setFtags, 
+    params, 
+    setParams,
+    tagModal, 
+    setTagModal, 
+    folderModal, 
+    setFolderModal, 
+    FFolders, 
+    catModal, 
+    setCatModal, 
+    fCat,
+    auto,
+    setAuto,
+    time,
+    setTime,
+    history,
+    getMediaById
+} : {
+    fTags:any, 
+    setFtags:any, 
+    params:any, 
+    setParams:any, 
+    tagModal:any, 
+    setTagModal:any, 
+    folderModal?:any, 
+    setFolderModal?:any, 
+    FFolders?:any, 
+    catModal:any, 
+    setCatModal:any, 
+    fCat:any,
+    auto?: any,
+    setAuto?: any,
+    time?: any,
+    setTime?: any,
+    history?: any,
+    getMediaById?:any
+}) {
   
     const folders = useSelector((state:IState) => state.foldersReducer);
 
@@ -57,20 +95,11 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                         </datalist>
                     </div>
                     
-                    {/* <div className="field">
-                        <p className="field-text">Folder</p>
-                        {load && (
-                            <Dropdown id="folderDd" title="Folder" items={foldersItem} currentValue={value} setCurrentValue={setValue} />
-                        )}
-                    </div> */}
-
                     <div className="field">
                         <div className="field-text">Liked</div>
                         <p className="button" onClick={likedHandle}>{params.like === "true" ? "On" : "Off"}</p>
                     </div>
                 </div>
-                
-                <div className="spacer"></div>
                 
                 {!isEmpty(folderModal) && (
                     <div className="fields">
@@ -86,6 +115,48 @@ export default function SideFilter({fTags, setFtags, params, setParams, tagModal
                 <div className="field">
                     <p className="button" onClick={() => setCatModal(!catModal)}>Category ({!isEmpty(fCat) ? fCat.split(",").length : 0})</p>
                 </div>
+
+
+                
+
+                {setAuto && setTime && (
+                    <>
+                        <div className="spacer"></div>
+                        <div className="fields">
+                            <div className="field">
+                                <div className="field-text">Auto</div>
+                                <p className="button" onClick={() => setAuto(!auto)}>{auto ? "On" : "Off"}</p>
+                                <input type="number" min={1} max={120} className="input" value={time} onChange={(e) => setTime(e.target.value)} />
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                
+
+                {history && getMediaById && (
+                    <>
+                        <div className="spacer"></div>
+
+                        <div className="history">
+
+                        <p className="history-size">{history.length} view{history.length < 2 ? "" : "s" } this session.</p>
+
+                            <ul className="history-list">
+                                {!isEmpty(history) && history.map((item:any) => {
+                                    return(                    
+                                        <li className="history-item">
+                                            <p onClick={() => getMediaById(item.value)}>{item.name}</p>
+                                        </li>
+                                    )
+                                })}
+
+                            </ul>
+
+                        </div>
+                    </>
+                )}
+                
 
             </div>
     )

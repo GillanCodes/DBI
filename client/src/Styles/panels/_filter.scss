@@ -52,4 +52,38 @@
         }
 
     }
+    
+    .history
+    {
+
+        height: 200px;
+        width: 200px;
+
+        .history-size
+        {
+            text-align: center;
+            margin: .5em;
+            text-decoration: underline;
+        }
+      
+        .history-list{
+
+            list-style: none;
+            padding: 0;
+            overflow: scroll;
+            height: 100%;
+
+            .history-item
+            {
+                cursor: pointer;
+                margin: .5em;
+
+                &:hover
+                {
+                    text-decoration: underline;
+                }
+            }
+        }
+        
+    }
 }

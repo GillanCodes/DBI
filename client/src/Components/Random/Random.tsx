@@ -146,7 +146,7 @@ export default function Random() {
                             ) : (
                                 <>
                                     <p className="button" onClick={() => setSidePanel({content:"filter", open:!sidePanel.open})}>Filter</p>
-                                    <p className="button" onClick={() => setSidePanel({content:"settings", open:!sidePanel.open})}>Settings</p>
+                                    {load && (<p className="button" onClick={() => setSidePanel({content:"settings", open:!sidePanel.open})}>Settings</p>)}
                                 </>
                             )}
                             
@@ -201,11 +201,17 @@ export default function Random() {
                             setCatModal={setCatModal}
                             catModal={catModal}
                             fCat={FCategories}
+                            auto={auto}
+                            setAuto={setAuto}
+                            time={time}
+                            setTime={setTime}
+                            history={history}
+                            getMediaById={getMediaById}
                         />
                     </SidePanel>
                 )} 
 
-                {sidePanel.open && sidePanel.content === "settings" && (
+                {sidePanel.open && sidePanel.content === "settings" && load && (
                     <SidePanel>
                         <SideSettings 
                             imgData={imgData}
