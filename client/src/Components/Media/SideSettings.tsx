@@ -8,12 +8,14 @@ import { updateProerties } from "../../actions/property.actions";
 import TagModal from "../Random/TagModal";
 import { updateMedia } from "../../actions/media.actions";
 import DeleteBtn from "../Utils/DeleteBtn";
+import { useToasts } from "../Utils/Toast/ToastContext";
 
 var CatItems:any[] = [];
 
 export default function SideSettings({ imgData } : { imgData:any }) {
     
     const dispatch:any = useDispatch();
+    const { pushToast } = useToasts();
 
     const folders = useSelector((state:IState) => state.foldersReducer);
     const categories = useSelector((state:IState) => state.categoryReducer);
@@ -64,7 +66,21 @@ export default function SideSettings({ imgData } : { imgData:any }) {
     }
 
     const saveHandle = () => {
-        dispatch(updateMedia(imgState!._id, imgState.tags.toLocaleString(), imgState.category));
+        dispatch(updateMedia(imgState!._id, imgState.tags.toLocaleString(), imgState.category)).then(() => {
+            pushToast({
+                title: "Media Saved",
+                content: "Medias data saved !",
+                type: "success",
+                duration: 5
+            })
+        }).catch(() => {
+            pushToast({
+                title: "ERROR : Media Saved",
+                content: "Medias data saving error",
+                type: "danger",
+                duration: 5
+            })
+        });
     }
 
     return (
