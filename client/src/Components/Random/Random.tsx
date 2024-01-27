@@ -4,7 +4,6 @@ import { isEmpty } from "../../Utils";
 import Dropdown from "../Utils/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { IFolder, IMedia, IState } from "../../types";
-import MediaSettings from "../Media/MediaSettings";
 import TagModal from "./TagModal";
 import { getMedia, getRandomMedias } from "../../actions/media.actions";
 import SidePanel from "../Utils/SidePanel";
@@ -168,11 +167,6 @@ export default function Random() {
                         
                     </div>
                 </div>
-                {modal && (
-                    <div className="modal">
-                        <MediaSettings media={imgData} close={setModal} />
-                    </div>
-                )}
 
                 {tagModal && (
                     <div className="modal">

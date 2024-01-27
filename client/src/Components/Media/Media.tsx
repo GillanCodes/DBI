@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { IMedia, IState } from '../../types';
 import { isEmpty } from '../../Utils';
 import { useParams } from 'react-router-dom';
-import MediaSettings from './MediaSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedia, getMedia } from '../../actions/media.actions';
 import SidePanel from '../Utils/SidePanel';
@@ -18,8 +17,6 @@ export default function Media() {
     const [media, setMedia] = useState<IMedia>();
     const [load, setLoad] = useState(false);
 
-    const [modal, setModal] = useState(false);
-    
     const [sidePanel, setSidePanel] = useState({open:false, content:""});
 
     const callMedia = (id:any) => {
@@ -61,11 +58,6 @@ export default function Media() {
                             )}
                         </div>
                     </div>
-                    {modal && (
-                        <div className="modal">
-                            <MediaSettings media={media} close={setModal} />
-                        </div>
-                    )}
                     
                     {sidePanel.open && sidePanel.content === "settings" && (
                         <SidePanel>

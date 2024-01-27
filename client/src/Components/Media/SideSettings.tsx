@@ -76,7 +76,7 @@ export default function SideSettings({ imgData } : { imgData:any }) {
                     <div className="spacer"></div>
 
                     <div className="fields">
-                        <p className="button" onClick={saveHandle}>Save</p>
+                        <p className={imgState === imgData ? "button" : "button error"} onClick={saveHandle}>Save</p>
                         <LikeButton media={imgState} style={"button"} />
                     </div>
 
