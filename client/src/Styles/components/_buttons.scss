@@ -10,6 +10,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &.error {
+        background-color: red;
+    }
 }
 
 .button:hover
