@@ -8,6 +8,7 @@ export default function TagModal({close, FTags, setFTags} : {close:any, FTags:an
     const tags = useSelector((state:IState) => state.tagsReducer);
 
     const [load, setLoad] = useState<Boolean>(false);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (!isEmpty(tags)) setLoad(true)
@@ -65,14 +66,29 @@ export default function TagModal({close, FTags, setFTags} : {close:any, FTags:an
             </div>
 
             <div className="body">
+                <div className="search" style={{width:"100%", display:"flex", justifyContent:"center"}}>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className='input' placeholder='Search' />
+                </div>
                 <div className="tags">
                     {load && tags.sort((a:any,b:any) => a.name.localeCompare(b.name)).map((tag:ITag) => {
-                        return (
-                            <div className="tag" onClick={() => tagHandle(tag)}>
-                                <input type="checkbox" checked={FTags.includes(tag._id)} />
-                                <p>{tag.name}</p>
-                            </div>
-                        )
+                        if (name.length >= 2){
+                            if (tag.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())){
+                                return (
+                                    <div className="tag" onClick={() => tagHandle(tag)}>
+                                        <input type="checkbox" checked={FTags.includes(tag._id)} />
+                                        <p>{tag.name}</p>
+                                    </div>
+                                )
+                            }
+                        } else {
+                            return (
+                                <div className="tag" onClick={() => tagHandle(tag)}>
+                                    <input type="checkbox" checked={FTags.includes(tag._id)} />
+                                    <p>{tag.name}</p>
+                                </div>
+                            )
+                        }
+                        
                     })}
                 </div>
                 

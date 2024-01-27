@@ -8,6 +8,7 @@ export default function FolderModal({close, FFolders, setFFolders} : {close:any,
     const folders = useSelector((state:IState) => state.foldersReducer);
 
     const [load, setLoad] = useState<Boolean>(false);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (!isEmpty(folders)) setLoad(true)
@@ -84,14 +85,29 @@ export default function FolderModal({close, FFolders, setFFolders} : {close:any,
             </div>
 
             <div className="body">
+                <div className="search" style={{width:"100%", display:"flex", justifyContent:"center"}}>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className='input' placeholder='Search' />
+                </div>
                 <div className="tags">
                     {load && folders.sort((a:any,b:any) => a.name.localeCompare(b.name)).map((folder:IFolder) => {
-                        return (
-                            <div className="tag" onClick={() => folderHandle(folder)}>
-                                <input type="checkbox" checked={FFolders.includes(folder._id)} />
-                                <p>{folder.name}</p>
-                            </div>
-                        )
+                        if (name.length >= 2){
+                            if (folder.name.toLocaleLowerCase().includes(name.toLocaleLowerCase())){
+                                return (
+                                    <div className="tag" onClick={() => folderHandle(folder)}>
+                                        <input type="checkbox" checked={FFolders.includes(folder._id)} />
+                                        <p>{folder.name}</p>
+                                    </div>
+                                )
+                            }
+                        } else {
+                            return (
+                                <div className="tag" onClick={() => folderHandle(folder)}>
+                                    <input type="checkbox" checked={FFolders.includes(folder._id)} />
+                                    <p>{folder.name}</p>
+                                </div>
+                            )
+                        }
+                        
                     })}
                 </div>
                 
