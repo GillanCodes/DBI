@@ -9,7 +9,7 @@ import TagModal from "./TagModal";
 import { getMedia, getRandomMedias } from "../../actions/media.actions";
 import SidePanel from "../Utils/SidePanel";
 import SideFilter from "./SideFilter";
-import SideSettings from "./SideSettings";
+import SideSettings from "../Media/SideSettings";
 import { useToasts } from "../Utils/Toast/ToastContext";
 import FolderModal from "./FolderModal";
 import CategoryModal from "./CategoryModal";
@@ -214,16 +214,7 @@ export default function Random() {
                 {sidePanel.open && sidePanel.content === "settings" && (
                     <SidePanel>
                         <SideSettings 
-                            settingsModal={modal} 
-                            setSettingsModal={setModal} 
-                            history={history} 
-                            getMediaById={getMediaById} 
                             imgData={imgData}
-                            getMedia={getRdmMedia}
-                            auto={auto}
-                            setAuto={setAuto}
-                            time={time}
-                            setTime={setTime}
                         />
                     </SidePanel>
                 )}

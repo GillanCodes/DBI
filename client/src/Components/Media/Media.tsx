@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { IMedia, IState } from '../../types';
 import { isEmpty } from '../../Utils';
@@ -6,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import MediaSettings from './MediaSettings';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedia, getMedia } from '../../actions/media.actions';
-import LikeButton from '../Utils/LikeButton';
+import SidePanel from '../Utils/SidePanel';
+import SideSettings from './SideSettings';
 
 export default function Media() {
 
@@ -19,6 +19,8 @@ export default function Media() {
     const [load, setLoad] = useState(false);
 
     const [modal, setModal] = useState(false);
+    
+    const [sidePanel, setSidePanel] = useState({open:false, content:""});
 
     const callMedia = (id:any) => {
         dispatch(getMedia(id));
@@ -39,28 +41,16 @@ export default function Media() {
         }
     }, [mediaReducer, media])
 
-    const deleteHandle = () => {
-        dispatch(deleteMedia(media!._id));
-        const timer = setTimeout(() => {
-            window.location.assign('/');
-        }, 1000);
-
-        return () => {
-            clearTimeout(timer);
-        }
-    }
-
     return (
-        <div className='container'>
+        <div className={sidePanel.open ? "container has-side-bar" : "container"}>
             {load && (
                 <>
                     <div className="media-content">
                         <div className="top-bar">
-                            <p className='button' onClick={() => setModal(!modal)}>Settings</p>
-                            <p className='button' onClick={deleteHandle}>DELETE</p>
+                            <p className="button" onClick={() => setSidePanel({content:"settings", open:true})}>Settings</p>
+                            
                             <p className="button" onClick={() => window.location.assign(`/f/${media?.folderId}`)}>View Folder</p>
                             <p>{media?.views.length} views</p>
-                            <LikeButton media={media} style={"button"} />
                         </div>
                         <div className="single-view">
                             {media?.type === "img" && (
@@ -76,6 +66,14 @@ export default function Media() {
                             <MediaSettings media={media} close={setModal} />
                         </div>
                     )}
+                    
+                    {sidePanel.open && sidePanel.content === "settings" && (
+                        <SidePanel>
+                            <SideSettings
+                                imgData={media}
+                            />
+                        </SidePanel>
+                    )} 
                 </>
             )}
             
