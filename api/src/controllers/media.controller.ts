@@ -58,6 +58,8 @@ export const createMedias = async (req: any, res: Response) => {
                 file.mimetype !== "image/png" &&
                 file.mimetype !== "image/jpeg" &&
                 file.mimetype !== "image/gif" &&
+                file.mimetype !== "image/webm" &&
+                file.mimetype !== "image/webp" &&
                 file.mimetype !== "image/x-icon" &&
                 file.mimetype !== "video/webm" &&
                 file.mimetype !== "video/webp" &&
