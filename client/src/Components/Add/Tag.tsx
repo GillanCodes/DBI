@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IState, ITag } from '../../types'
 import { isEmpty } from '../../Utils';
@@ -35,7 +35,7 @@ export default function Tag() {
 
             <div className="body">
                 <div className="tags">
-                    {!isEmpty(tags) && Array.from(tags).map((tag:ITag) => {
+                    {!isEmpty(tags) && Array.from(tags).sort((a:any,b:any) => a.name.localeCompare(b.name)).map((tag:ITag) => {
                         return <div className='tag'>
                             <p>{tag.name}</p>
                             <div className="buttons">
