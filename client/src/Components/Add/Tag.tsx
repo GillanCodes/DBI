@@ -11,6 +11,7 @@ export default function Tag() {
     const tags = useSelector((state:IState) => state.tagsReducer)
 
     const [tag, setTag] = useState("");
+    const [search, setSearch] = useState("");
 
     const addTag = () => {
         dispatch(createTag(tag))
@@ -34,14 +35,28 @@ export default function Tag() {
             </div>
 
             <div className="body">
+                <input type="text" className="input" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='Search a tag' />
                 <div className="tags">
-                    {!isEmpty(tags) && Array.from(tags).sort((a:any,b:any) => a.name.localeCompare(b.name)).map((tag:ITag) => {
-                        return <div className='tag'>
-                            <p>{tag.name}</p>
-                            <div className="buttons">
-                                <p className="button" onClick={() => dispatch(deleteTag(tag._id))}>Delete</p>
+                    {!isEmpty(tags) && Array.from(tags).sort((a:any,b:any) => a.name.localeCompare(b.name)).map((tag:ITag, key:number) => {
+                        if (!isEmpty(search)) {
+                            if(tag.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+                                return <div className='tag' key={key}>
+                                    <p>{tag.name.toLocaleLowerCase()}</p>
+                                    <div className="buttons">
+                                        <p className="button" onClick={() => dispatch(deleteTag(tag._id))}>Delete</p>
+                                    </div>
+                                </div>
+                            } else {
+                                return
+                            }
+                        } else {
+                            return <div className='tag' key={key}>
+                                <p>{tag.name}</p>
+                                <div className="buttons">
+                                    <p className="button" onClick={() => dispatch(deleteTag(tag._id))}>Delete</p>
+                                </div>
                             </div>
-                        </div>
+                        }
                     })}
                 </div>
             </div>
