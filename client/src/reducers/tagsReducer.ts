@@ -17,9 +17,7 @@ export default function tagsReducer(state:any = initialState, action:any)
                 else return tag;
             });
         case DELETE_TAG:
-            return state.map((tag:ITag) => {
-                if (tag._id != action.payload._id) return tag; 
-            });
+            return state.filter((tag:ITag) => tag._id !== action.payload._id);
         default:
             return state;
     }
