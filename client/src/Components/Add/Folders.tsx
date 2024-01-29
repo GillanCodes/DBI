@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IFolder, IState } from '../../types'
 import { isEmpty } from '../../Utils';
@@ -66,8 +66,15 @@ export default function Folders() {
                             
                         </div>
                         <div className="buttons">
-                            <button className='button' onClick={() => editHandle(folder)}>Edit</button>
-                            <button className='button' onClick={() => saveHandle(folder._id)}>Save</button>
+                            {edit === folder._id ? (
+                                <>
+                                    <button className='button' onClick={() => editHandle(folder)}>Cancel</button>
+                                    <button className='button' onClick={() => saveHandle(folder._id)}>Save</button>
+                                </>
+                            ) : (
+                                <button className='button' onClick={() => editHandle(folder)}>Edit</button>
+                            )}
+                            
                         </div>
                     </div>
                 )
