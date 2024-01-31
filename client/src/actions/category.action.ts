@@ -29,7 +29,7 @@ export const createCategories = (name:string) => {
                 name
             }
         }).then((res) => {
-            dispatch({type: GET_CATEGORIES, payload: res.data});
+            dispatch({type: CREATE_CATEGORIES, payload: res.data});
         }).catch((err) => {
             console.log(err);
         });
@@ -46,7 +46,7 @@ export const updateCategories = (name:string, id:string) => {
                 name
             }
         }).then((res) => {
-            dispatch({type: GET_CATEGORIES, payload: res.data});
+            dispatch({type: UPDATE_CATEGORIES, payload: res.data});
         }).catch((err) => {
             console.log(err);
         });
@@ -60,7 +60,7 @@ export const deleteCategories = (id:string) => {
             url:`${process.env.REACT_APP_API_URL}/category/${id}`,
             withCredentials:true
         }).then((res) => {
-            dispatch({type: GET_CATEGORIES, payload: res.data});
+            dispatch({type: DELETE_CATEGORIES, payload: res.data});
         }).catch((err) => {
             console.log(err);
         });
