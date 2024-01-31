@@ -3,6 +3,7 @@ import Folders from './Folders'
 import Images from './Medias'
 import Tag from './Tag'
 import Properties from './Properties'
+import Categories from './Categories'
 
 export default function Add() {
 
@@ -26,6 +27,9 @@ export default function Add() {
                         <div className={tab === 3 ? "tab active" : "tab"} onClick={() => setTab(3)}>
                             <p>Properties</p>
                         </div>
+                        <div className={tab === 4 ? "tab active" : "tab"} onClick={() => setTab(4)}>
+                            <p>Categories</p>
+                        </div>
                     </div>
                 </div>
 
@@ -44,6 +48,10 @@ export default function Add() {
                     
                     {tab === 3 && (
                         <Properties />
+                    )}
+                    
+                    {tab === 4 && (
+                        <Categories />
                     )}
                 </div>
 
