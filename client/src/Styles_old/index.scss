@@ -6,8 +6,25 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+:root
+{
+    @import "./colors/default.scss";
+}
+
+
 .App
 {
+    
+    @import './components/components.scss';
+    @import './pages/page.scss';
+    @import './panels/panels.scss';
+
+    color: $text;
+    background-color: $background;
+    
+    p{ color: $text; }
+
+    a{ color: $text; }
     min-height: 100dvh;
     width: 100dvw;
     display: flex;
@@ -30,22 +47,12 @@
 
 }
 
-.App {
+// .App {
 
-    @import "./colors/default.scss";
 
-    @import './components/components.scss';
-    @import './pages/page.scss';
-    @import './panels/panels.scss';
-
-    color: $text;
-    background-color: $background;
     
-    p{ color: $text; }
-
-    a{ color: $text; }
     
-}
+// }
 
 // .App.theme-pink {
 

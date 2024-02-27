@@ -1,0 +1,10 @@
+:root
+{
+    --margin: 1em;
+    --default-space: 2em;
+}
+
+* {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}

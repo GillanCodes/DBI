@@ -1,0 +1,7 @@
+@import "./settings.css";
+@import "./Themes/themes.css";
+
+.App
+{
+    background-color: var(--default);
+}
