@@ -6,14 +6,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-:root
-{
-    @import "./colors/default.scss";
-}
-
-
 .App
 {
+    @import "./colors/default.scss";
     
     @import './components/components.scss';
     @import './pages/page.scss';
