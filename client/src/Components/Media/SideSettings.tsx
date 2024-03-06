@@ -27,6 +27,8 @@ export default function SideSettings({ imgData } : { imgData:any }) {
 
     const [modal, setModal] = useState(false);
 
+    const [cName, setCName] = useState('');
+
 
     const propertyChange = (value:string | number, prop:IProperty) => 
     {
@@ -60,6 +62,9 @@ export default function SideSettings({ imgData } : { imgData:any }) {
         }
     }, [categories]);
 
+    useEffect(() => {
+        if (!isEmpty(imgState)) idToName(imgState.category);
+    }, [imgState])
 
     const setCurrentValue = (cat:string) => {
         setImgState({...imgState, category: cat});
@@ -83,6 +88,14 @@ export default function SideSettings({ imgData } : { imgData:any }) {
         });
     }
 
+    function idToName (id:string) {
+        categories.map((cat:ICategory) => {
+            if (id === cat._id){
+                setCName(cat.name);
+            }
+        })
+    }
+
     return (
         <div className="settings-panel">
             {load && (
@@ -102,7 +115,7 @@ export default function SideSettings({ imgData } : { imgData:any }) {
 
                         <div className="field">
                             <p className="field-text">Category</p>
-                            <Dropdown title={imgState.category ? imgState.category : "Set Cat"} items={CatItems} id="cat" currentValue={imgState.categories} setCurrentValue={setCurrentValue} />
+                            <Dropdown title={imgState.category ? cName : "Set Cat"} items={CatItems} id="cat" currentValue={imgState.categories} setCurrentValue={setCurrentValue} />
                         </div>
 
                         <div className="field">

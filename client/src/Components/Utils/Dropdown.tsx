@@ -7,7 +7,7 @@ export interface IItem
     value:string
 }
 
-export default function Dropdown({id, title, items, currentValue, setCurrentValue} : {id:string, title:string, items:IItem[], currentValue:any, setCurrentValue:any}) {
+export default function Dropdown({id, title, items, currentValue, setCurrentValue} : {id:string, title:any, items:IItem[], currentValue:any, setCurrentValue:any}) {
 
     const [open, setOpen] = useState(false);
     const [select, setSelect] = useState("");
@@ -17,6 +17,10 @@ export default function Dropdown({id, title, items, currentValue, setCurrentValu
         setSelect(item.name);
         setOpen(false);
     }
+
+    useEffect(() => {
+        setSelect(title)
+    }, [title])
 
     return (
         <div className="dropdown">
