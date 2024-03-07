@@ -118,6 +118,7 @@ export default function Random() {
         const keyDownHandler = (event:any) => {
             var key = event.keyCode;
             if (key === 39) nextHandle(); //next media right arrow
+            if (key === 37) prevHandle(); //prev media left arrow
         }
         document.addEventListener('keydown', keyDownHandler);
         return () => {
@@ -153,7 +154,7 @@ export default function Random() {
                         </div>
                     </div>
 
-                    <div className="display">
+                    <div className="display" id='display'>
                         {load && !isEmpty(img) && !isEmpty(imgData) && (
                             <>
                                 {imgData?.type === "img" && (

@@ -96,6 +96,20 @@ export default function SideSettings({ imgData } : { imgData:any }) {
         })
     }
 
+    //Shortcuts
+    useEffect(() => {
+        const keyDownHandler = (event:any) => {
+            var key = event.keyCode;
+            if (key === 13) saveHandle(); //prev media left arrow
+        }
+        document.addEventListener('keydown', keyDownHandler);
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        }
+    }, [imgState]);
+
+
+
     return (
         <div className="settings-panel">
             {load && (
