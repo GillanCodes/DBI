@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Routes from "./Routes";
-import './Styles_old/index.scss';
-// import './Styles/index.css';
+import './Styles/index.scss';
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { getUser } from "./actions/user.actions";
